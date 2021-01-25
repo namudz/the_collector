@@ -1,7 +1,7 @@
 # ZeptoLab Test
 ## Main menu:
-- [ ] The main menu is an entry point to the game
-- [ ] The main menu has a play button that redirects a user to the game scene
+- [x] The main menu is an entry point to the game
+- [x] The main menu has a play button that redirects a user to the game scene
 ## Game scene:
 - [ ] the game scene represents a maze with square blocks
 - [ ] the left-bottom cell is always free
