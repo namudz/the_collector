@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Maze
+  - Hero
+  - Collectible
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Maze
+    uniqueID: 2469898885
+    locked: 0
+  - name: Hero
+    uniqueID: 3339953091
+    locked: 0
+  - name: Collectible
+    uniqueID: 4207543053
     locked: 0
