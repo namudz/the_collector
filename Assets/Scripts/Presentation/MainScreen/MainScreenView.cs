@@ -1,4 +1,5 @@
 ﻿using SceneLoader;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ namespace Presentation.MainScreen
     {
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _rankingButton;
+        [SerializeField] private TextMeshProUGUI _versionText;
 
         private ISceneLoader _sceneLoader;
 
@@ -15,6 +17,7 @@ namespace Presentation.MainScreen
         {
             _playButton.onClick.AddListener(PlayGame);
             _rankingButton.onClick.AddListener(ShowRankingPopup);
+            SetGameVersion();
         }
 
         public void InjectDependencies(ISceneLoader sceneLoader)
@@ -30,6 +33,11 @@ namespace Presentation.MainScreen
         private void ShowRankingPopup()
         {
             Debug.LogError("TODO - Ranking System");
+        }
+
+        private void SetGameVersion()
+        {
+            _versionText.SetText($"v{Application.version}");
         }
     }
 }
