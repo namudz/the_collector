@@ -5,11 +5,17 @@ namespace Installers
 {
     public class MainInstaller
     {
+        public static MainInstaller Instance => _instance ?? (_instance = new MainInstaller());
+        public ISceneLoader SceneLoader { get; private set; }
+        public IEventDispatcher EventDispatcher { get; private set; }
+        
+        private static MainInstaller _instance;
         private readonly MainViews _mainViews;
-        private ISceneLoader _sceneLoader;
-        private IEventDispatcher _eventDispatcher;
 
-        public MainInstaller(MainViews mainViews)
+        private MainInstaller()
+        {
+        }
+        public MainInstaller(MainViews mainViews): this()
         {
             _mainViews = mainViews;
         }
@@ -17,13 +23,13 @@ namespace Installers
         public void InjectDependencies()
         {
             InitializeDependencies();
-            _mainViews.MainScreenView.InjectDependencies(_sceneLoader);
+            _mainViews.MainScreenView.InjectDependencies(SceneLoader);
         }
 
         private void InitializeDependencies()
         {
-            _eventDispatcher = new EventDispatcher.EventDispatcher();
-            _sceneLoader = new SceneLoader.SceneLoader(_eventDispatcher);
+            EventDispatcher = new EventDispatcher.EventDispatcher();
+            SceneLoader = new SceneLoader.SceneLoader(EventDispatcher);
         }
     }
 }
