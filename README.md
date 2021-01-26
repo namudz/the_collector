@@ -3,10 +3,10 @@
 - [x] The main menu is an entry point to the game
 - [x] The main menu has a play button that redirects a user to the game scene
 ## Game scene:
-- [ ] the game scene represents a maze with square blocks
-- [ ] the left-bottom cell is always free
-- [ ] the hero spawns at the center of the left-bottom cell
-- [ ] the hero collides with floors and walls
+- [x] the game scene represents a maze with square blocks
+- [x] the left-bottom cell is always free
+- [x] the hero spawns at the center of the left-bottom cell
+- [x] the hero collides with floors and walls
 - [ ] the hero runs in the right direction by default
 - [ ] a tap will force the hero to jump; a tap is possible only if the hero has at least one contact with a floor or a wall
 - [ ] the hero stops running when they push against a wall
@@ -20,8 +20,8 @@
 - [ ] you could improve any aspect of the game to increase the user experience of players
 - [ ] efficiency will undoubtedly add competitiveness, but it is better to remain satisfied with your work than just be the first
 ## REQUIREMENTS:
-- [ ] the project should be open via the Unity 2019.2.x+
-- [ ] the project should be written with C#
+- [x] the project should be open via the Unity 2019.2.x+
+- [x] the project should be written with C#
 - [ ] there is the possibility of using free assets but not paid
 - [ ] any external module/plugin/library/resource should be in the project
 - [ ] the game should be launchable either for iOS or Android
