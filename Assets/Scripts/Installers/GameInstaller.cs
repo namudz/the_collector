@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace Installers
+﻿namespace Installers
 {
     public class GameInstaller
     {
         public IGame Game { get; private set; }
 
-        private GameInstaller()
+        public GameInstaller()
         {
             InitializeGame();
-        }
-        public GameInstaller(ISpawner heroSpawner, IEnumerable<ISpawner> collectibleSpawners): this()
-        {
-            Game.InjectSpawners(heroSpawner, collectibleSpawners);
         }
 
         public void LoadGame()

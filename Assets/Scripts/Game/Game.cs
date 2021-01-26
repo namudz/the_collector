@@ -1,26 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using SceneLoader;
 using UnityEngine;
 
 public class Game : IGame
 {
     private readonly IMazeLoader _mazeLoader;
-    private ISpawner _heroSpawner;
-    private IEnumerable<ISpawner> _collectiblesSpawners;
+
+    public SceneConstants.Mazes CurrentLevel { get; private set; }
 
     public Game(IMazeLoader mazeLoader)
     {
         _mazeLoader = mazeLoader;
     }
-    
-    public void InjectSpawners(ISpawner heroSpawner, IEnumerable<ISpawner> collectibleSpawners)
-    {
-        _heroSpawner = heroSpawner;
-        _collectiblesSpawners = collectibleSpawners;
-    }
 
     public void Load()
     {
-        _mazeLoader.Load(Start);
+        CurrentLevel = SceneConstants.Mazes.Level_1;
+        _mazeLoader.Load(CurrentLevel, Start);
         // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
     }
     
@@ -37,12 +32,13 @@ public class Game : IGame
 
     private void SpawnHero()
     {
-        _heroSpawner.Spawn();
+        _mazeLoader.HeroSpawner.Spawn();
     }
 
     private void SpawnCollectibles()
     {
-        foreach (var spawner in _collectiblesSpawners)
+        return;
+        foreach (var spawner in _mazeLoader.CollectibleSpawners)
         {
             spawner.Spawn();
         }

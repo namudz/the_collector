@@ -15,7 +15,8 @@ namespace SceneLoader
         
         private readonly Dictionary<SceneConstants.Mazes, string> _mazes = new Dictionary<SceneConstants.Mazes,string>
         {
-            { SceneConstants.Mazes.Level_1, "Maze_1" }
+            { SceneConstants.Mazes.Level_1, "Maze_1" },
+            { SceneConstants.Mazes.Level_2, "Maze_2" }
         };
 
         private readonly IEventDispatcher _eventDispatcher;
