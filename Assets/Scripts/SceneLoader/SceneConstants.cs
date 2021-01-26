@@ -7,5 +7,10 @@
             MainMenu,
             Game
         }
+
+        public enum Mazes
+        {
+            Level_1
+        }
     }
 }
