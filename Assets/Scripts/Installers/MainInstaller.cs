@@ -14,7 +14,9 @@ namespace Installers
 
         private MainInstaller()
         {
+            _instance = this;
         }
+        
         public MainInstaller(MainViews mainViews): this()
         {
             _mainViews = mainViews;
