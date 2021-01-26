@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3954717819187462730}
   - component: {fileID: 2079778115697646026}
   m_Layer: 0
-  m_Name: Door_1
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 5301615125867141643}
   m_Layer: 0
   m_Name: HeroSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_TagString: HeroSpawner
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 5001274024662752532}
-  _hero: {fileID: 0}
+  _heroPrefab: {fileID: 3551949196338963708, guid: a9cbc271c9069884697b707223d78a87,
+    type: 3}
 --- !u!1 &7801896287100971334
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7801896287100971334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5301615125867141644}
