@@ -8,7 +8,7 @@ namespace Installers
 
         private GameInstaller()
         {
-            Game = new Game();
+            InitializeGame();
         }
         public GameInstaller(ISpawner heroSpawner, IEnumerable<ISpawner> collectibleSpawners): this()
         {
@@ -18,6 +18,12 @@ namespace Installers
         public void LoadGame()
         {
             Game.Load();
+        }
+
+        private void InitializeGame()
+        {
+            var mazeLoader = new MazeLoader(MainInstaller.Instance.SceneLoader);
+            Game = new Game(mazeLoader);
         }
     }
 }

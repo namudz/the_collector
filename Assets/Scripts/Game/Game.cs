@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : IGame
 {
+    private readonly IMazeLoader _mazeLoader;
     private ISpawner _heroSpawner;
     private IEnumerable<ISpawner> _collectiblesSpawners;
 
-    public Game()
+    public Game(IMazeLoader mazeLoader)
     {
+        _mazeLoader = mazeLoader;
     }
     
     public void InjectSpawners(ISpawner heroSpawner, IEnumerable<ISpawner> collectibleSpawners)
@@ -20,14 +20,12 @@ public class Game : IGame
 
     public void Load()
     {
-        Debug.LogError("TODO - Load game (maze from scriptable object / additive scene?)");
-        // TODO - Once finish, call to start
-        Debug.Log("Simulating loading the game 2s...");
+        _mazeLoader.Load(Start);
+        // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
     }
     
     public void Start()
     {
-        Debug.Log("Start the game!!!");
         SpawnCollectibles();
         SpawnHero();
     }

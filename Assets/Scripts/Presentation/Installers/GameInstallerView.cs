@@ -14,17 +14,11 @@ namespace Installers
         {
             // TODO - Fill collectible spawners
             _gameInstaller = new GameInstaller(_heroSpawner, new List<ISpawner>());
-            _gameInstaller.LoadGame();
         }
 
         private void Start()
         {
-            Invoke(nameof(FakeDelayedStart), 2);
-        }
-
-        private void FakeDelayedStart()
-        {
-            _gameInstaller.Game.Start();
+            _gameInstaller.LoadGame();
         }
     }
 }
