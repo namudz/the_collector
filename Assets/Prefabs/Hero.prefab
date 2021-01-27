@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7749637370534273412}
   - component: {fileID: 3269943223145688117}
-  - component: {fileID: 3269943223145688116}
+  - component: {fileID: 63625365026216106}
+  - component: {fileID: 6224100024378896545}
+  - component: {fileID: 4854992563043593168}
   m_Layer: 9
   m_Name: Hero
   m_TagString: Untagged
@@ -48,13 +50,13 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3269943223145688116
+--- !u!61 &63625365026216106
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78,8 +80,53 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.48}
+  m_Size: {x: 0.37, y: 0.48}
   m_EdgeRadius: 0
+--- !u!114 &6224100024378896545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551949196338963708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bcbff9735ad44fb9830bd0856c1f489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 3269943223145688117}
+  _speed: 4
+  _maxSpeed: 3.5
+--- !u!114 &4854992563043593168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551949196338963708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fde905a0e7a44fb9ca2ac7191db0965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 3269943223145688117}
+  _movementController: {fileID: 6224100024378896545}
+  _jumpForce: 6
+  _jumpForceGrindingMultiplier: 1.1
+  _jumpDelay: 0.1
+  _fallMultiplier: 3
+  _fallMultiplierGrindingWall: 0.33
+  _gravity: 1
+  _raycastGroundLength: 0.3
+  _raycastLateralLength: 0.2
+  _floorLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _groundColliderOffset: {x: 0.07, y: 0, z: 0}
+  _lateralTopColliderOffset: {x: 0, y: 0.21, z: 0}
+  _lateralBottomColliderOffset: {x: 0, y: 0.11, z: 0}
+  _isOnGround: 0
+  _isGrindingWall: 0
 --- !u!1 &8762977530497347881
 GameObject:
   m_ObjectHideFlags: 0
