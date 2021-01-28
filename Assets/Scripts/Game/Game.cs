@@ -37,7 +37,6 @@ public class Game : IGame
 
     private void SpawnCollectibles()
     {
-        return;
         foreach (var spawner in _mazeLoader.CollectibleSpawners)
         {
             spawner.Spawn();

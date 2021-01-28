@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class HeroSpawner : MonoBehaviour, ISpawner
+public class HeroSpawner : Spawner
 {
-    [SerializeField] private Transform _spawnPoint;
+    [Header("Components")]
     [SerializeField] private GameObject _heroPrefab;
 
-    public void Spawn()
+    public override void Spawn()
     {
         var instance = Instantiate(_heroPrefab, _spawnPoint.position, Quaternion.identity, transform);
         instance.SetActive(true);
