@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &63625365026216106
 BoxCollider2D:
@@ -118,7 +118,7 @@ MonoBehaviour:
   _fallMultiplierGrindingWall: 0.33
   _gravity: 1
   _raycastGroundLength: 0.3
-  _raycastLateralLength: 0.2
+  _raycastLateralLength: 0.22
   _floorLayerMask:
     serializedVersion: 2
     m_Bits: 256
