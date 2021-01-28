@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using InputHandler;
+using UnityEngine;
 
 namespace Hero.Movement
 {
     public class HeroJumpController : MonoBehaviour
     {
+        [Header("Dependencies")]
+        [SerializeField] private HeroCollisionsController _collisionsController;
+        
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private HeroMovement _movementController;
@@ -15,34 +19,22 @@ namespace Hero.Movement
         [SerializeField] private float _fallMultiplier = 3f;
         [SerializeField] private float _fallMultiplierGrindingWall = 0.33f;
         [SerializeField] private float _gravity = 1f;
-        
-        
-        [Header("Raycasts")]
-        [SerializeField] private float _raycastGroundLength = 0.3f;
-        [SerializeField] private float _raycastLateralLength = 0.2f;
-        
-        [Header("Collision")]
-        [SerializeField] private LayerMask _floorLayerMask;
 
-        [Header("Ground Collision")]
-        [SerializeField] private Vector3 _groundColliderOffset;
-        [SerializeField] private Vector3 _lateralTopColliderOffset;
-        [SerializeField] private Vector3 _lateralBottomColliderOffset;
-
-        public bool _isOnGround;
-        public bool _isGrindingWall;
         private float _jumpTimer;
+        private IInputHandler _inputHandler;
         private const float FallMultiplierHalfFactor = 2f;
 
-        private bool CanJumpGrindingWall => _isGrindingWall && !_isOnGround;
+        private bool CanJumpGrindingWall => _collisionsController.IsGrindingWall && !_collisionsController.IsOnGround;
 
+        public void InjectDependencies(IInputHandler inputHandler)
+        {
+            _inputHandler = inputHandler;
+            _inputHandler.OnTap += UpdateJumpTimer;
+        }
+        
         private void Update()
         {
-            CheckCanJump();
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                _jumpTimer = Time.time + _jumpDelay;
-            }
+            _inputHandler.HandleInput();
         }
 
         private void FixedUpdate()
@@ -53,20 +45,23 @@ namespace Hero.Movement
             }
 
             UpdatePhysics();
-            
-            Debug.DrawLine(transform.position, transform.position + (Vector3.up * 0.1f), Color.yellow, 2f);
+        }
+
+        private void UpdateJumpTimer()
+        {
+            _jumpTimer = Time.time + _jumpDelay;
         }
 
         private void UpdatePhysics()
         {
-            _rigidbody.gravityScale = _isOnGround ? 0f : _gravity;
-            if (!_isOnGround && !_isGrindingWall)
+            _rigidbody.gravityScale = _collisionsController.IsOnGround ? 0f : _gravity;
+            if (!_collisionsController.IsOnGround && !_collisionsController.IsGrindingWall)
             {
                 var fallMultiplier = _rigidbody.velocity.y < 0 ? _fallMultiplier : _fallMultiplier / FallMultiplierHalfFactor; 
                 _rigidbody.gravityScale = _gravity * fallMultiplier;
             }
 
-            if (_isGrindingWall)
+            if (_collisionsController.IsGrindingWall)
             {
                 _rigidbody.gravityScale = _rigidbody.velocity.y > 0 ? _gravity * _fallMultiplier / FallMultiplierHalfFactor : _gravity * _fallMultiplierGrindingWall;
             }
@@ -81,7 +76,7 @@ namespace Hero.Movement
                 return;
             }
 
-            if (_isOnGround)
+            if (_collisionsController.IsOnGround)
             {
                 ExecuteJump();
             }
@@ -94,48 +89,6 @@ namespace Hero.Movement
             _rigidbody.AddForce(Vector2.up * (_jumpForce * jumpMultiplier), ForceMode2D.Impulse);
             
             _jumpTimer = 0f;
-        }
-        
-        private void CheckCanJump()
-        {
-            CheckIsGrounded();
-            CheckIsGrindingWall();
-        }
-
-        private void CheckIsGrounded()
-        {
-            var myPosition = transform.position;
-            _isOnGround = Physics2D.Raycast(myPosition + _groundColliderOffset, Vector2.down, _raycastGroundLength, _floorLayerMask)
-                       || Physics2D.Raycast(myPosition - _groundColliderOffset, Vector2.down, _raycastGroundLength, _floorLayerMask);
-        }
-
-        private void CheckIsGrindingWall()
-        {
-            var myPosition = transform.position;
-            var isGrindingRight = Physics2D.Raycast(myPosition + _lateralTopColliderOffset , Vector2.right, _raycastLateralLength, _floorLayerMask)
-                              || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.right, _raycastLateralLength, _floorLayerMask);
-            
-            var isGrindingLeft = Physics2D.Raycast(myPosition + _lateralTopColliderOffset, Vector2.left, _raycastLateralLength, _floorLayerMask)
-                                 || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.left,
-                                     _raycastLateralLength, _floorLayerMask);
-
-            _isGrindingWall = isGrindingRight || isGrindingLeft;
-        }
-        
-        private void OnDrawGizmos()
-        {
-            // Ground raycast
-            Gizmos.color = Color.cyan;
-            var myPosition = transform.position;
-            Gizmos.DrawLine(myPosition + _groundColliderOffset, myPosition + _groundColliderOffset + Vector3.down * _raycastGroundLength);
-            Gizmos.DrawLine(myPosition - _groundColliderOffset, myPosition - _groundColliderOffset + Vector3.down * _raycastGroundLength);
-            
-            // Lateral raycast
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(myPosition + _lateralTopColliderOffset, myPosition + _lateralTopColliderOffset + Vector3.right * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition + _lateralTopColliderOffset, myPosition + _lateralTopColliderOffset + Vector3.left * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition - _lateralBottomColliderOffset, myPosition - _lateralBottomColliderOffset + Vector3.right * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition - _lateralBottomColliderOffset, myPosition - _lateralBottomColliderOffset + Vector3.left * _raycastLateralLength);
         }
     }
 }

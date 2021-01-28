@@ -14,19 +14,11 @@ namespace Hero.Movement
         private bool _canMoveForward = true;
         private Vector2 _direction = Vector2.right;
         
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-            {
-                InvertDirection();
-            }
-        }
-
         private void FixedUpdate()
         {
             Move();
         }
-
+        
         public void AccelerateOnJump()
         {
             InvertDirection();
