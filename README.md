@@ -7,10 +7,10 @@
 - [x] the left-bottom cell is always free
 - [x] the hero spawns at the center of the left-bottom cell
 - [x] the hero collides with floors and walls
-- [ ] the hero runs in the right direction by default
-- [ ] a tap will force the hero to jump; a tap is possible only if the hero has at least one contact with a floor or a wall
-- [ ] the hero stops running when they push against a wall
-- [ ] if the hero slides on a wall a tap will force the hero not only to jump but to change a running direction as well
+- [x] the hero runs in the right direction by default
+- [x] a tap will force the hero to jump; a tap is possible only if the hero has at least one contact with a floor or a wall
+- [x] the hero stops running when they push against a wall
+- [x] if the hero slides on a wall a tap will force the hero not only to jump but to change a running direction as well
 - [ ] each empty cell spawns a coin; there is a random spawn time after being collected
 - [ ] the hero collects coins by touching them
 - [ ] the game scene has a counter for collected coins
