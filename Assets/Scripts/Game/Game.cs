@@ -30,16 +30,16 @@ public class Game : IGame
         Debug.LogError("TODO - Implement IGame.Reset");
     }
 
-    private void SpawnHero()
-    {
-        _mazeLoader.HeroSpawner.Spawn();
-    }
-
     private void SpawnCollectibles()
     {
         foreach (var spawner in _mazeLoader.CollectibleSpawners)
         {
             spawner.Spawn();
         }
+    }
+    
+    private void SpawnHero()
+    {
+        _mazeLoader.HeroSpawner.Spawn();
     }
 }
