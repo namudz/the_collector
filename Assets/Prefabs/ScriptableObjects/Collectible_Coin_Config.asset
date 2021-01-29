@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collectible:
     Score: 1
+    RespawnTime:
+      MinTime: 3
+      MaxTime: 7
+    SpawnWeight: 0

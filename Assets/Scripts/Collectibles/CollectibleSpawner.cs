@@ -6,6 +6,8 @@ namespace Collectibles
     {
         [Header("Components")]
         [SerializeField] private GameObject _collectiblePrefab;
+
+        private ICollectible _collectible;
         
         public override void Spawn()
         {
