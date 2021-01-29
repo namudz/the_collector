@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SceneLoader;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class MazeLoader : IMazeLoader
 {
     private readonly ISceneLoader _sceneLoader;
     private const string TagHeroSpawner = "HeroSpawner";
+    private const string TagCollectibleSpawners = "CollectibleSpawners";
 
     public ISpawner HeroSpawner { get; private set; }
     public IEnumerable<ISpawner> CollectibleSpawners { get; private set; }
@@ -27,6 +29,10 @@ public class MazeLoader : IMazeLoader
     private void FindSpawners()
     {
         HeroSpawner = GameObject.FindWithTag(TagHeroSpawner)?.GetComponent<ISpawner>();
+        
+        var collectibleSpawnersParent = GameObject.FindWithTag(TagCollectibleSpawners);
+        CollectibleSpawners = collectibleSpawnersParent.GetComponentsInChildren<ISpawner>();
+        
         _onMazeLoaded?.Invoke();
     }
 }

@@ -11,12 +11,14 @@ namespace Hero
         [SerializeField] private HeroMovement _movementController;
         [SerializeField] private HeroJumpController _jumpController;
         [SerializeField] private HeroCollisionsController _collisionsController;
+        [SerializeField] private HeroCollector _collectorController;
         
         private void Awake()
         {
             var inputHandler = CreateHandler();
 
             _jumpController.InjectDependencies(inputHandler);
+            _collectorController.InjectDependencies(GameScoreboard.Instance);
         }
 
         private IInputHandler CreateHandler()
