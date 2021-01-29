@@ -11,9 +11,9 @@
 - [x] a tap will force the hero to jump; a tap is possible only if the hero has at least one contact with a floor or a wall
 - [x] the hero stops running when they push against a wall
 - [x] if the hero slides on a wall a tap will force the hero not only to jump but to change a running direction as well
-- [ ] each empty cell spawns a coin; there is a random spawn time after being collected
-- [ ] the hero collects coins by touching them
-- [ ] the game scene has a counter for collected coins
+- [x] each empty cell spawns a coin; there is a random spawn time after being collected
+- [x] the hero collects coins by touching them
+- [x] the game scene has a counter for collected coins
 - [ ] the game scene has a countdown timer for collecting; when time runs out the game is over
 ## Misc.:
 - [ ] the game supports just English localization
