@@ -23,6 +23,9 @@ public class Game : IGame
     {
         SpawnCollectibles();
         SpawnHero();
+        
+        var timer = GameObject.Find("GameInstaller").GetComponent<IGameCountdownTimer>();
+        timer?.StartCountdown();
     }
     
     public void Reset()
