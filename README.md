@@ -14,7 +14,7 @@
 - [x] each empty cell spawns a coin; there is a random spawn time after being collected
 - [x] the hero collects coins by touching them
 - [x] the game scene has a counter for collected coins
-- [ ] the game scene has a countdown timer for collecting; when time runs out the game is over
+- [x] the game scene has a countdown timer for collecting; when time runs out the game is over
 ## Misc.:
 - [ ] the game supports just English localization
 - [ ] you could improve any aspect of the game to increase the user experience of players
