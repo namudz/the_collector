@@ -1,5 +1,4 @@
-﻿using System;
-using Game.Level;
+﻿using Game.Level;
 using TMPro;
 using UnityEngine;
 
@@ -11,11 +10,14 @@ namespace Presentation.MainScreen
         [SerializeField] private TextMeshProUGUI _nameText;
         [SerializeField] private TextMeshProUGUI _scoreText;
 
+        private const string DefaultScoreValue = "-";
+        private const string DefaultUserName = "---";
+
         public void SetEntryData(LeaderboardEntry entry)
         {
             _positionText.SetText($"{entry.Position}.");
-            _nameText.SetText(entry.UserName);
-            _scoreText.SetText(entry.Score.ToString());
+            _nameText.SetText(string.IsNullOrEmpty(entry.UserName) ? DefaultUserName : entry.UserName);
+            _scoreText.SetText(entry.Score > 0 ? entry.Score.ToString() : DefaultScoreValue);
         }
     }
 }

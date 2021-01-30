@@ -20,10 +20,6 @@ namespace Presentation.MainScreen
             _playButton.onClick.AddListener(PlayLevel);
         }
 
-        private void Start()
-        {
-        }
-
         public void SetLevelData(Level level)
         {
             _levelNameText.SetText(level.DisplayName);

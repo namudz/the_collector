@@ -1,4 +1,5 @@
-﻿using DataPersistence;
+﻿using System.Collections.Generic;
+using DataPersistence;
 using EventDispatcher;
 using Game.Level;
 using SceneLoader;
@@ -36,6 +37,10 @@ namespace InterfaceAdapters.Installers
             var levelConfigs = Resources.LoadAll<LevelConfig>(LevelConfigsPath);
             foreach (var config in levelConfigs)
             {
+                if (config.Level.Leaderboard == null)
+                {
+                    config.Level.InitializeLevelLeaderboard();
+                }
                 _levelsRepository.AddLevel(config.Level);
             }
         }
