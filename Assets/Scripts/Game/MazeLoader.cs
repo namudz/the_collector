@@ -21,10 +21,10 @@ public class MazeLoader : IMazeLoader
         _sceneLoader = sceneLoader;
     }
 
-    public void Load(SceneConstants.Mazes mazeToLoad, Action onComplete)
+    public void Load(string mazeSceneName, Action onComplete)
     {
         _onMazeLoaded = onComplete;
-        _sceneLoader.LoadMazeScene(mazeToLoad, FindSpawners);
+        _sceneLoader.LoadMazeScene(mazeSceneName, FindSpawners);
     }
 
     private void FindSpawners()

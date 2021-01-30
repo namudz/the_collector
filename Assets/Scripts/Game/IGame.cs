@@ -2,10 +2,11 @@
 {
     public interface IGame
     {
-        string CurrentLevelIndex { get; }
+        string CurrentLevelId { get; }
         bool HasGameStarted { get; }
         bool IsGameOver { get; }
-    
+
+        void SetCurrentLevelData(Level.Level level);
         void Load();
         void Tick();
         void Start();

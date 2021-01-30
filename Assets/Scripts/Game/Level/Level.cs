@@ -8,6 +8,7 @@ namespace Game.Level
     {
         public string Id;
         public string DisplayName;
+        public string SceneName => $"Maze_{Id}";
         public float Countdown;
         public LevelLeaderboard Leaderboard { get; set; }
 
