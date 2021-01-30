@@ -9,7 +9,8 @@ namespace Presentation.Game
         
         private void Awake()
         {
-            GameScoreboard.Instance.OnScoreUpdated += UpdateScore;
+            var gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
+            gameScoreboard.OnScoreUpdated += UpdateScore;
         }
 
         private void UpdateScore(int score)
