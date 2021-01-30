@@ -17,9 +17,10 @@ public class ServiceLocator
     public void RegisterService<T>(T service)
     {
         var type = typeof(T);
-        Assert.IsFalse(_services.ContainsKey(type), $"Service {type} already registered");
-    
-        _services.Add(type, service);
+        if (!_services.ContainsKey(type))
+        {
+            _services.Add(type, service);
+        }
     }
 
     public T GetService<T>()
@@ -31,5 +32,10 @@ public class ServiceLocator
         }
 
         return (T) service;
+    }
+
+    public bool ServiceExist<T>()
+    {
+        return _services.ContainsKey(typeof(T));
     }
 }

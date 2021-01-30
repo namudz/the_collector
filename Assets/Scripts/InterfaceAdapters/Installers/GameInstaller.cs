@@ -1,30 +1,17 @@
 ﻿using EventDispatcher;
 using Game;
 using SceneLoader;
-using UnityEngine;
 
-namespace Presentation.Installers
+namespace InterfaceAdapters.Installers
 {
-    public class GameInstaller : MonoBehaviour
+    public class GameInstaller : IGameInstaller
     {
-        private IGame _game;
-
-        private void Awake()
+        public void Register()
         {
-            InitializeDependencies();
+            ServiceLocator.Instance.RegisterService(this);
         }
 
-        private void Start()
-        {
-            _game.Load();
-        }
-
-        private void Update()
-        {
-            _game.Tick();
-        }
-
-        private void InitializeDependencies()
+        public void InstallDependencies()
         {
             var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             
@@ -35,8 +22,8 @@ namespace Presentation.Installers
             ServiceLocator.Instance.RegisterService<IGameCountdownTimer>(gameCountdownTimer);
 
             var mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>());
-            _game = new global::Game.Game(mazeLoader, gameCountdownTimer, eventDispatcher);
-            ServiceLocator.Instance.RegisterService(_game);
+            var game = new global::Game.Game(mazeLoader, gameCountdownTimer, eventDispatcher);
+            ServiceLocator.Instance.RegisterService<IGame>(game);
         }
     }
 }
