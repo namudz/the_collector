@@ -43,8 +43,8 @@ namespace Game
         {
             SpawnCollectibles();
             SpawnHero();
-            _countdownTimer.StartCountdown();
             ResetComponents();
+            _countdownTimer.StartCountdown();
 
             _eventDispatcher.Dispatch(new GameStartedSignal());
         }
@@ -59,8 +59,7 @@ namespace Game
     
         public void Reset()
         {
-            ResetComponents();
-            Debug.LogError("TODO - Implement IGame.Reset");
+            Start();
         }
         
         private void ResetComponents()

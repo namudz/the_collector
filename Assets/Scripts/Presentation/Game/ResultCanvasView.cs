@@ -17,15 +17,17 @@ namespace Presentation.Game
         {
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(Show);
+            _eventDispatcher.Subscribe<GameStartedSignal>(Hide);
             Hide();
         }
 
         private void OnDestroy()
         {
             _eventDispatcher.Unsubscribe<GameOverSignal>(Show);
+            _eventDispatcher.Unsubscribe<GameStartedSignal>(Hide);
         }
 
-        private void Hide()
+        private void Hide(ISignal signal = null)
         {
             EnableCanvas(false);
         }
