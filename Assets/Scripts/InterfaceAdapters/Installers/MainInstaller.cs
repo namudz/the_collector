@@ -25,7 +25,6 @@ namespace InterfaceAdapters.Installers
             _levelsRepository = new LevelsRepository();
             var jsonParser = new JsonUtilityAdapter();
             _dataPersistence = new PlayerPrefsDataPersistence(jsonParser);
-            
 
             ServiceLocator.Instance.RegisterService<IEventDispatcher>(eventDispatcher);
             ServiceLocator.Instance.RegisterService<ISceneLoader>(sceneLoader);
@@ -39,9 +38,14 @@ namespace InterfaceAdapters.Installers
             var levelConfigs = Resources.LoadAll<LevelConfig>(LevelConfigsPath);
             foreach (var config in levelConfigs)
             {
-                if (config.Level.Leaderboard == null)
+                var leaderboard = _dataPersistence.GetLevelLeaderboard(config.Level.Id);
+                if (leaderboard == null)
                 {
                     config.Level.InitializeLevelLeaderboard(config.Level.Id);
+                }
+                else
+                {
+                    config.Level.Leaderboard = leaderboard;
                 }
                 _levelsRepository.AddLevel(config.Level);
             }

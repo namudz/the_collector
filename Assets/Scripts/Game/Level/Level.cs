@@ -9,7 +9,7 @@ namespace Game.Level
         public string Id;
         public string DisplayName;
         public float Countdown;
-        public LevelLeaderboard Leaderboard { get; private set; }
+        public LevelLeaderboard Leaderboard { get; set; }
 
         public void InitializeLevelLeaderboard(string levelId)
         {
