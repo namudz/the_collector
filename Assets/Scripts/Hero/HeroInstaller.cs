@@ -18,7 +18,6 @@ namespace Hero
             var inputHandler = CreateHandler();
 
             _jumpController.InjectDependencies(inputHandler, ServiceLocator.Instance.GetService<IGame>());
-            _collectorController.InjectDependencies(ServiceLocator.Instance.GetService<IGameScoreboard>());
         }
 
         private IInputHandler CreateHandler()

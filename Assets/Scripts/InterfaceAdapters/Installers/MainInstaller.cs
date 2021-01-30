@@ -1,17 +1,16 @@
 ﻿using EventDispatcher;
 using SceneLoader;
-using UnityEngine;
 
-namespace Presentation.Installers
+namespace InterfaceAdapters.Installers
 {
-    public class MainInstaller : MonoBehaviour
+    public class MainInstaller : IMainInstaller
     {
-        private void Awake()
+        public void Register()
         {
-            InitializeDependencies();
+            ServiceLocator.Instance.RegisterService(this);
         }
 
-        private static void InitializeDependencies()
+        public void InstallDependencies()
         {
             var eventDispatcher = new EventDispatcher.EventDispatcher();
             var sceneLoader = new SceneLoader.SceneLoader(eventDispatcher);
