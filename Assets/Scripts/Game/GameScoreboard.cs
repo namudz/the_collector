@@ -4,20 +4,6 @@ using UnityEngine;
 public class GameScoreboard : IGameScoreboard
 {
     public event Action<int> OnScoreUpdated;
-    
-    private static GameScoreboard _instance;
-
-    public static GameScoreboard Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new GameScoreboard();
-            }
-            return _instance;
-        }
-    }
     public int CurrentScore { get; private set; }
 
     public GameScoreboard()
