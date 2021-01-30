@@ -8,14 +8,12 @@ namespace Presentation.MainScreen
 {
     public class MainScreenView : MonoBehaviour
     {
-        [SerializeField] private Button _playButton;
         [SerializeField] private TextMeshProUGUI _versionText;
 
         private ISceneLoader _sceneLoader;
 
         private void Awake()
         {
-            _playButton.onClick.AddListener(PlayGame);
             SetGameVersion();
         }
 
