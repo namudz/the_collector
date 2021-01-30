@@ -1,5 +1,4 @@
-﻿using System;
-using Game;
+﻿using Game;
 using SceneLoader;
 using TMPro;
 using UnityEngine;
@@ -12,6 +11,7 @@ namespace Presentation.Game
         [Header("Components")]
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Button _saveScoreButton;
+        [SerializeField] private SaveScorePopupView _saveScoreView;
         [SerializeField] private Button _playAgainButton;
         [SerializeField] private Button _homeButton;
         
@@ -38,7 +38,7 @@ namespace Presentation.Game
         
         private void ShowSaveScorePopup()
         {
-            throw new NotImplementedException();
+            _saveScoreView.Show();
         }
 
         private void PlayAgain()
