@@ -6,4 +6,5 @@ public interface IGameScoreboard
     int CurrentScore { get; }
     void AddScore(int score);
     void AddScore(float percIncrement);
+    void Reset();
 }

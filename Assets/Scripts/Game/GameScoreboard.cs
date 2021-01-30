@@ -8,7 +8,7 @@ public class GameScoreboard : IGameScoreboard
 
     public GameScoreboard()
     {
-        CurrentScore = 0;
+        Reset();
     }
     
     public void AddScore(int score)
@@ -20,6 +20,11 @@ public class GameScoreboard : IGameScoreboard
     public void AddScore(float percIncrement)
     {
         CurrentScore += Mathf.RoundToInt(CurrentScore * percIncrement);
+    }
+
+    public void Reset()
+    {
+        CurrentScore = 0;
     }
 
     private void PrintScore()
