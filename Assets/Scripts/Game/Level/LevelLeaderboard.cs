@@ -15,20 +15,41 @@ namespace Game.Level
             {
                 var entry = new LeaderboardEntry
                 {
-                    Position = i + 1,
                     Score = -1,
                     UserName = string.Empty
                 };
                 Entries.Add(entry);
             }
         }
-    }
 
-    [Serializable]
-    public class LeaderboardEntry
-    {
-        public int Position;
-        public string UserName;
-        public int Score;
+        public void AddEntry(LeaderboardEntry newEntry, int newEntryIndex)
+        {
+            var newEntries = new List<LeaderboardEntry>();
+            
+            if (newEntryIndex == 0)
+            {
+                newEntries.Add(newEntry);
+                newEntries.AddRange(Entries);
+                newEntries.RemoveAt(newEntries.Count - 1);
+            }
+            else if (newEntryIndex == Entries.Count)
+            {
+                newEntries.AddRange(Entries);
+                newEntries.RemoveAt(Entries.Count);
+                newEntries.Add(newEntry);
+            }
+            else
+            {
+                newEntries.AddRange(Entries);
+                newEntries.RemoveRange(newEntryIndex, Entries.Count - newEntryIndex);
+                newEntries.Add(newEntry);
+                var currentEntriesCopy = new List<LeaderboardEntry>(Entries);
+                currentEntriesCopy.RemoveRange(0, newEntryIndex);
+                newEntries.AddRange(currentEntriesCopy);
+                newEntries.RemoveAt(newEntries.Count - 1);
+            }
+
+            Entries = newEntries;
+        }
     }
 }

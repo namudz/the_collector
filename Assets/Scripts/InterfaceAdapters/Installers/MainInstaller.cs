@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DataPersistence;
 using EventDispatcher;
 using Game.Level;
 using SceneLoader;
+using Services;
 using UnityEngine;
 
 namespace InterfaceAdapters.Installers
@@ -23,13 +23,15 @@ namespace InterfaceAdapters.Installers
             var eventDispatcher = new EventDispatcher.EventDispatcher();
             var sceneLoader = new SceneLoader.SceneLoader(eventDispatcher);
             _levelsRepository = new LevelsRepository();
-            _dataPersistence = new PlayerPrefsDataPersistence();
+            var jsonParser = new JsonUtilityAdapter();
+            _dataPersistence = new PlayerPrefsDataPersistence(jsonParser);
             
 
             ServiceLocator.Instance.RegisterService<IEventDispatcher>(eventDispatcher);
             ServiceLocator.Instance.RegisterService<ISceneLoader>(sceneLoader);
             ServiceLocator.Instance.RegisterService(_levelsRepository);
             ServiceLocator.Instance.RegisterService(_dataPersistence);
+            ServiceLocator.Instance.RegisterService<IJsonParser>(jsonParser);
         }
 
         public void LoadLevels()
@@ -39,7 +41,7 @@ namespace InterfaceAdapters.Installers
             {
                 if (config.Level.Leaderboard == null)
                 {
-                    config.Level.InitializeLevelLeaderboard();
+                    config.Level.InitializeLevelLeaderboard(config.Level.Id);
                 }
                 _levelsRepository.AddLevel(config.Level);
             }

@@ -13,9 +13,9 @@ namespace Presentation.MainScreen
         private const string DefaultScoreValue = "-";
         private const string DefaultUserName = "---";
 
-        public void SetEntryData(LeaderboardEntry entry)
+        public void SetEntryData(int index, LeaderboardEntry entry)
         {
-            _positionText.SetText($"{entry.Position}.");
+            _positionText.SetText($"{index + 1}.");
             _nameText.SetText(string.IsNullOrEmpty(entry.UserName) ? DefaultUserName : entry.UserName);
             _scoreText.SetText(entry.Score > 0 ? entry.Score.ToString() : DefaultScoreValue);
         }

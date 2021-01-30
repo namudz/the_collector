@@ -11,10 +11,11 @@ namespace Game.Level
         public float Countdown;
         public LevelLeaderboard Leaderboard { get; private set; }
 
-        public void InitializeLevelLeaderboard()
+        public void InitializeLevelLeaderboard(string levelId)
         {
             Leaderboard = new LevelLeaderboard
             {
+                LevelId = levelId,
                 Entries = new List<LeaderboardEntry>(10)
             };
             Leaderboard.InitializeEntries();

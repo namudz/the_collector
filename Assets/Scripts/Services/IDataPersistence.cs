@@ -1,11 +1,10 @@
 ﻿using Game.Level;
 
-namespace DataPersistence
+namespace Services
 {
     public interface IDataPersistence
     {
-        void SaveLevelLeaderboard();
         LevelLeaderboard GetLevelLeaderboard(string levelId);
-
+        void SaveLevelLeaderboard(LevelLeaderboard levelLeaderboard);
     }
 }
