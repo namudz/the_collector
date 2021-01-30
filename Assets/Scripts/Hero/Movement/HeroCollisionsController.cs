@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game;
+using UnityEngine;
 
 namespace Hero.Movement
 {
@@ -21,15 +22,25 @@ namespace Hero.Movement
 
         private Color _defaultPositionColor = Color.yellow;
         private Color _collidingColor = Color.red;
+        private IGame _iGame;
+
+        private void Awake()
+        {
+            _iGame = ServiceLocator.Instance.GetService<IGame>();
+        }
 
         private void Update()
         {
+            if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
+            
             CheckIsGrounded();
             CheckIsGrindingWall();
         }
 
         private void FixedUpdate()
         {
+            if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
+            
             var color = IsOnGround || IsGrindingWall ? _collidingColor : _defaultPositionColor;
             var myPosition = transform.position;
             Debug.DrawLine(myPosition, myPosition + Vector3.up * 0.1f, color, 2f);

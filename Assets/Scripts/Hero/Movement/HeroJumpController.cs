@@ -1,4 +1,5 @@
-﻿using InputHandler;
+﻿using Game;
+using InputHandler;
 using UnityEngine;
 
 namespace Hero.Movement
@@ -20,25 +21,34 @@ namespace Hero.Movement
         [SerializeField] private float _fallMultiplierGrindingWall = 0.33f;
         [SerializeField] private float _gravity = 1f;
 
-        private float _jumpTimer;
         private IInputHandler _inputHandler;
+        private IGame _iGame;
+        
+        private float _jumpTimer;
         private const float FallMultiplierHalfFactor = 2f;
 
         private bool CanJumpGrindingWall => _collisionsController.IsGrindingWall && !_collisionsController.IsOnGround;
 
-        public void InjectDependencies(IInputHandler inputHandler)
+        public void InjectDependencies(IInputHandler inputHandler, IGame game)
         {
             _inputHandler = inputHandler;
+            _iGame = game;
+            
             _inputHandler.OnTap += UpdateJumpTimer;
         }
         
         private void Update()
         {
-            _inputHandler.HandleInput();
+            if (_iGame.HasGameStarted && !_iGame.IsGameOver)
+            {
+                _inputHandler.HandleInput();
+            }
         }
 
         private void FixedUpdate()
         {
+            if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
+            
             if (_jumpTimer > Time.time)
             {
                 TryJump();

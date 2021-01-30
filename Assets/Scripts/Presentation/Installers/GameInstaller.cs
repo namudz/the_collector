@@ -1,4 +1,5 @@
 ﻿using EventDispatcher;
+using Game;
 using SceneLoader;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace Presentation.Installers
             ServiceLocator.Instance.RegisterService<IGameCountdownTimer>(gameCountdownTimer);
 
             var mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>());
-            _game = new global::Game(mazeLoader, gameCountdownTimer, eventDispatcher);
+            _game = new global::Game.Game(mazeLoader, gameCountdownTimer, eventDispatcher);
             ServiceLocator.Instance.RegisterService(_game);
         }
     }
