@@ -1,4 +1,5 @@
-﻿using EventDispatcher;
+﻿using System;
+using EventDispatcher;
 using Game.Signals;
 using UnityEngine;
 
@@ -9,13 +10,19 @@ namespace Presentation.Game
         [Header("Components")]
         [SerializeField] private Canvas _myCanvas;
         [SerializeField] private ResultPopupView _resultPopup;
+        
+        private IEventDispatcher _eventDispatcher;
 
         private void Awake()
         {
-            var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            eventDispatcher.Subscribe<GameOverSignal>(Show);
-            
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher.Subscribe<GameOverSignal>(Show);
             Hide();
+        }
+
+        private void OnDestroy()
+        {
+            _eventDispatcher.Unsubscribe<GameOverSignal>(Show);
         }
 
         private void Hide()

@@ -22,7 +22,12 @@ namespace InterfaceAdapters.Installers
             ServiceLocator.Instance.RegisterService<IGameCountdownTimer>(gameCountdownTimer);
 
             var mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>());
-            var game = new global::Game.Game(mazeLoader, gameCountdownTimer, eventDispatcher);
+            var game = new global::Game.Game(
+                mazeLoader, 
+                gameCountdownTimer,
+                gameScoreboard,
+                eventDispatcher
+            );
             ServiceLocator.Instance.RegisterService<IGame>(game);
         }
     }
