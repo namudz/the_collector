@@ -14,7 +14,7 @@ public class GameScoreboard : IGameScoreboard
     public void AddScore(int score)
     {
         CurrentScore += score;
-        PrintScore();
+        LaunchScoreUpdatedEvent();
     }
 
     public void AddScore(float percIncrement)
@@ -25,9 +25,10 @@ public class GameScoreboard : IGameScoreboard
     public void Reset()
     {
         CurrentScore = 0;
+        LaunchScoreUpdatedEvent();
     }
 
-    private void PrintScore()
+    private void LaunchScoreUpdatedEvent()
     {
         OnScoreUpdated?.Invoke(CurrentScore);
     }

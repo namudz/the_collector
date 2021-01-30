@@ -1,4 +1,5 @@
 ﻿using System;
+using Game;
 using SceneLoader;
 using TMPro;
 using UnityEngine;
@@ -42,7 +43,8 @@ namespace Presentation.Game
 
         private void PlayAgain()
         {
-            throw new NotImplementedException();
+            var iGame = ServiceLocator.Instance.GetService<IGame>();
+            iGame.Reset();
         }
 
         private void BackToHome()
