@@ -1,4 +1,8 @@
 ﻿using System;
+using Game;
+using Game.Level;
+using InterfaceAdapters;
+using Services;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,8 +32,15 @@ namespace Presentation.Game
 
         private void SaveScore()
         {
-            var gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
-            var playerName = _inputField.text;
+            var useCase = new SaveScoreUseCase(
+                ServiceLocator.Instance.GetService<IGame>(),
+                ServiceLocator.Instance.GetService<IGameScoreboard>(),
+                ServiceLocator.Instance.GetService<ILevelsRepository>(),
+                ServiceLocator.Instance.GetService<IDataPersistence>()
+            );
+            
+            useCase.SaveScore(_inputField.text);
+            
             EnableCanvas(false);
         }
 

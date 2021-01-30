@@ -7,7 +7,7 @@ namespace Game
 {
     public class Game : IGame
     {
-        public SceneConstants.Mazes CurrentLevel { get; private set; }
+        public string CurrentLevelIndex { get; private set; }
         public bool HasGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
     
@@ -34,8 +34,8 @@ namespace Game
 
         public void Load()
         {
-            CurrentLevel = SceneConstants.Mazes.Level_1;
-            _mazeLoader.Load(CurrentLevel, Start);
+            CurrentLevelIndex = "1";
+            _mazeLoader.Load(SceneConstants.Mazes.Level_1, Start);
             // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
         }
     

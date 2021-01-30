@@ -1,6 +1,7 @@
 ﻿using System;
 using Game;
 using Game.Level;
+using SceneLoader;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,14 +26,14 @@ namespace Presentation.MainScreen
             _levelNameText.SetText(level.DisplayName);
             for (var i = 0; i < _entries.Length; i++)
             {
-                _entries[i].SetEntryData(level.Leaderboard.Entries[i]);
+                _entries[i].SetEntryData(i, level.Leaderboard.Entries[i]);
             }
         }
         
         private void PlayLevel()
         {
-            throw new NotImplementedException();
+            var sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
+            sceneLoader.LoadScene(SceneConstants.Scene.Game);
         }
-
     }
 }

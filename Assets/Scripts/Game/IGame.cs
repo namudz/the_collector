@@ -1,10 +1,8 @@
-﻿using SceneLoader;
-
-namespace Game
+﻿namespace Game
 {
     public interface IGame
     {
-        SceneConstants.Mazes CurrentLevel { get; }
+        string CurrentLevelIndex { get; }
         bool HasGameStarted { get; }
         bool IsGameOver { get; }
     
