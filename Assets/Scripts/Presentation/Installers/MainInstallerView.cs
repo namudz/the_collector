@@ -12,6 +12,7 @@ namespace Presentation.Installers
             var installer = new MainInstaller();
             installer.Register();
             installer.InstallDependencies();
+            installer.LoadLevels();
         }
     }
 }
