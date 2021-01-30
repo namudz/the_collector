@@ -8,13 +8,13 @@ public class GameScoreboard : IGameScoreboard
 
     public GameScoreboard()
     {
-        CurrentScore = 0;
+        Reset();
     }
     
     public void AddScore(int score)
     {
         CurrentScore += score;
-        PrintScore();
+        LaunchScoreUpdatedEvent();
     }
 
     public void AddScore(float percIncrement)
@@ -22,7 +22,13 @@ public class GameScoreboard : IGameScoreboard
         CurrentScore += Mathf.RoundToInt(CurrentScore * percIncrement);
     }
 
-    private void PrintScore()
+    public void Reset()
+    {
+        CurrentScore = 0;
+        LaunchScoreUpdatedEvent();
+    }
+
+    private void LaunchScoreUpdatedEvent()
     {
         OnScoreUpdated?.Invoke(CurrentScore);
     }

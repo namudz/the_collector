@@ -21,10 +21,12 @@ namespace SceneLoader
 
         private readonly IEventDispatcher _eventDispatcher;
         private SceneConstants.Scene _sceneLoaded;
+        private Action _onSceneLoaded;
 
         public SceneLoader(IEventDispatcher eventDispatcher)
         {
             _eventDispatcher = eventDispatcher;
+            SceneManager.sceneLoaded += HandleSceneLoaded;
         }
         
         public void LoadScene(SceneConstants.Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
@@ -35,14 +37,19 @@ namespace SceneLoader
         
         public void LoadMazeScene(SceneConstants.Mazes mazeScene, Action onComplete)
         {
-            //_sceneLoaded = mazeScene;
             LoadUnityScene(_mazes[mazeScene], LoadSceneMode.Additive, onComplete);
         }
 
         private void LoadUnityScene(string sceneName, LoadSceneMode mode, Action onComplete)
         {
-            SceneManager.sceneLoaded += (arg0, sceneMode) => { onComplete?.Invoke(); };
+            _onSceneLoaded = onComplete;
+            
             SceneManager.LoadSceneAsync(sceneName, mode);
+        }
+        
+        private void HandleSceneLoaded(Scene arg0, LoadSceneMode loadSceneMode)
+        {
+            _onSceneLoaded?.Invoke();
         }
 
         private void DispatchSceneLoadedEvent()

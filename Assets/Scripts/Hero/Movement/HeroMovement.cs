@@ -1,4 +1,5 @@
-﻿using EventDispatcher;
+﻿using System;
+using EventDispatcher;
 using Game;
 using Game.Signals;
 using UnityEngine;
@@ -15,13 +16,19 @@ namespace Hero.Movement
         [SerializeField] private float _maxSpeed;
 
         private IGame _iGame;
+        private IEventDispatcher _eventDispatcher;
         private Vector2 _direction = Vector2.right;
 
         private void Awake()
         {
             _iGame = ServiceLocator.Instance.GetService<IGame>();
-            var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            eventDispatcher.Subscribe<GameOverSignal>(StopMoving);
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher.Subscribe<GameOverSignal>(StopMoving);
+        }
+
+        private void OnDestroy()
+        {
+            _eventDispatcher.Unsubscribe<GameOverSignal>(StopMoving);
         }
 
         private void FixedUpdate()
