@@ -1,15 +1,27 @@
-﻿using SceneLoader;
+﻿using EventDispatcher;
+using SceneLoader;
 using UnityEngine;
 
 public class Game : IGame
 {
-    private readonly IMazeLoader _mazeLoader;
-
     public SceneConstants.Mazes CurrentLevel { get; private set; }
+    
+    private readonly IMazeLoader _mazeLoader;
+    private readonly IGameCountdownTimer _countdownTimer;
+    private readonly IEventDispatcher _eventDispatcher;
 
-    public Game(IMazeLoader mazeLoader)
+    private bool _hasGameStarted;
+    private bool _isGameOver;
+
+    public Game(IMazeLoader mazeLoader, IGameCountdownTimer countdownTimer, IEventDispatcher eventDispatcher)
     {
         _mazeLoader = mazeLoader;
+        _countdownTimer = countdownTimer;
+        _eventDispatcher = eventDispatcher;
+        _hasGameStarted = false;
+        _isGameOver = false;
+
+        _countdownTimer.OnCountdownFinished += HandleGameOver;
     }
 
     public void Load()
@@ -23,9 +35,16 @@ public class Game : IGame
     {
         SpawnCollectibles();
         SpawnHero();
-        
-        var timer = GameObject.Find("GameInstaller").GetComponent<IGameCountdownTimer>();
-        timer?.StartCountdown();
+        _countdownTimer.StartCountdown();
+        _hasGameStarted = true;
+    }
+
+    public void Tick()
+    {
+        if (_hasGameStarted && !_isGameOver)
+        {
+            _countdownTimer.UpdateCountdown();
+        }
     }
     
     public void Reset()
@@ -44,5 +63,10 @@ public class Game : IGame
     private void SpawnHero()
     {
         _mazeLoader.HeroSpawner.Spawn();
+    }
+
+    private void HandleGameOver()
+    {
+        _isGameOver = true;
     }
 }
