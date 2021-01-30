@@ -1,45 +1,77 @@
-﻿using SceneLoader;
+﻿using EventDispatcher;
+using Game.Signals;
+using SceneLoader;
 using UnityEngine;
 
-public class Game : IGame
+namespace Game
 {
-    private readonly IMazeLoader _mazeLoader;
-
-    public SceneConstants.Mazes CurrentLevel { get; private set; }
-
-    public Game(IMazeLoader mazeLoader)
+    public class Game : IGame
     {
-        _mazeLoader = mazeLoader;
-    }
-
-    public void Load()
-    {
-        CurrentLevel = SceneConstants.Mazes.Level_1;
-        _mazeLoader.Load(CurrentLevel, Start);
-        // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
-    }
+        public SceneConstants.Mazes CurrentLevel { get; private set; }
+        public bool HasGameStarted { get; private set; }
+        public bool IsGameOver { get; private set; }
     
-    public void Start()
-    {
-        SpawnCollectibles();
-        SpawnHero();
-    }
-    
-    public void Reset()
-    {
-        Debug.LogError("TODO - Implement IGame.Reset");
-    }
+        private readonly IMazeLoader _mazeLoader;
+        private readonly IGameCountdownTimer _countdownTimer;
+        private readonly IEventDispatcher _eventDispatcher;
 
-    private void SpawnCollectibles()
-    {
-        foreach (var spawner in _mazeLoader.CollectibleSpawners)
+        public Game(IMazeLoader mazeLoader, IGameCountdownTimer countdownTimer, IEventDispatcher eventDispatcher)
         {
-            spawner.Spawn();
+            _mazeLoader = mazeLoader;
+            _countdownTimer = countdownTimer;
+            _eventDispatcher = eventDispatcher;
+            HasGameStarted = false;
+            IsGameOver = false;
+
+            _countdownTimer.OnCountdownFinished += HandleGameOver;
         }
-    }
+
+        public void Load()
+        {
+            CurrentLevel = SceneConstants.Mazes.Level_1;
+            _mazeLoader.Load(CurrentLevel, Start);
+            // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
+        }
     
-    private void SpawnHero()
-    {
-        _mazeLoader.HeroSpawner.Spawn();
+        public void Start()
+        {
+            SpawnCollectibles();
+            SpawnHero();
+            _countdownTimer.StartCountdown();
+            HasGameStarted = true;
+            _eventDispatcher.Dispatch(new GameStartedSignal());
+        }
+
+        public void Tick()
+        {
+            if (HasGameStarted && !IsGameOver)
+            {
+                _countdownTimer.UpdateCountdown();
+            }
+        }
+    
+        public void Reset()
+        {
+            Debug.LogError("TODO - Implement IGame.Reset");
+        }
+
+        private void SpawnCollectibles()
+        {
+            foreach (var spawner in _mazeLoader.CollectibleSpawners)
+            {
+                spawner.Spawn();
+            }
+        }
+    
+        private void SpawnHero()
+        {
+            _mazeLoader.HeroSpawner.Spawn();
+        }
+
+        private void HandleGameOver()
+        {
+            IsGameOver = true;
+            _eventDispatcher.Dispatch(new GameOverSignal());
+        }
     }
 }

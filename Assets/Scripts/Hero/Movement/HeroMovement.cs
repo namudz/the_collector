@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using EventDispatcher;
+using Game;
+using Game.Signals;
+using UnityEngine;
 
 namespace Hero.Movement
 {
@@ -11,12 +14,22 @@ namespace Hero.Movement
         [SerializeField] private float _speed;
         [SerializeField] private float _maxSpeed;
 
-        private bool _canMoveForward = true;
+        private IGame _iGame;
         private Vector2 _direction = Vector2.right;
-        
+
+        private void Awake()
+        {
+            _iGame = ServiceLocator.Instance.GetService<IGame>();
+            var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            eventDispatcher.Subscribe<GameOverSignal>(StopMoving);
+        }
+
         private void FixedUpdate()
         {
-            Move();
+            if (_iGame.HasGameStarted && !_iGame.IsGameOver)
+            {
+                Move();
+            }
         }
         
         public void AccelerateOnJump()
@@ -32,14 +45,17 @@ namespace Hero.Movement
 
         private void Move()
         {
-            if (!_canMoveForward) { return; }
-            
             _rigidbody.AddForce(_direction * _speed);
             if (Mathf.Abs(_rigidbody.velocity.x) > _maxSpeed)
             {
                 var newHorizontalSpeed = Mathf.Sign(_rigidbody.velocity.x) * _maxSpeed;
                 _rigidbody.velocity = new Vector2(newHorizontalSpeed, _rigidbody.velocity.y);
             }
+        }
+        
+        private void StopMoving(ISignal signal)
+        {
+            _rigidbody.velocity = new Vector2(0f, _rigidbody.velocity.y);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hero.Movement;
+﻿using Game;
+using Hero.Movement;
 using InputHandler;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Hero
         {
             var inputHandler = CreateHandler();
 
-            _jumpController.InjectDependencies(inputHandler);
+            _jumpController.InjectDependencies(inputHandler, ServiceLocator.Instance.GetService<IGame>());
             _collectorController.InjectDependencies(ServiceLocator.Instance.GetService<IGameScoreboard>());
         }
 

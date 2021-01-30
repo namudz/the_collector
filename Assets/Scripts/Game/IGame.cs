@@ -1,9 +1,16 @@
 ﻿using SceneLoader;
 
-public interface IGame
+namespace Game
 {
-    SceneConstants.Mazes CurrentLevel { get; }
-    void Load();
-    void Start();
-    void Reset();
+    public interface IGame
+    {
+        SceneConstants.Mazes CurrentLevel { get; }
+        bool HasGameStarted { get; }
+        bool IsGameOver { get; }
+    
+        void Load();
+        void Tick();
+        void Start();
+        void Reset();
+    }
 }
