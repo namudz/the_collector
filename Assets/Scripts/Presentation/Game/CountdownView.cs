@@ -4,11 +4,11 @@ using UnityEngine;
 public class CountdownView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timeText;
-    [SerializeField] private GameCountdownTimer _gameCountdownTimer;
 
     private void Awake()
     {
-        _gameCountdownTimer.OnCountdownUpdated += UpdateTime;
+        var countdownTimer = ServiceLocator.Instance.GetService<IGameCountdownTimer>();
+        countdownTimer.OnCountdownUpdated += UpdateTime;
     }
 
     private void UpdateTime(float timeLeft)
