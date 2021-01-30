@@ -10,8 +10,6 @@ namespace Presentation.MainScreen
         [SerializeField] private LevelEntryView[] _levelEntries;
         [SerializeField] private TextMeshProUGUI _versionText;
 
-        private ISceneLoader _sceneLoader;
-
         private void Awake()
         {
             SetGameVersion();
@@ -19,13 +17,7 @@ namespace Presentation.MainScreen
 
         private void Start()
         {
-            GetDependencies();
             UpdateLevelEntries();
-        }
-
-        private void GetDependencies()
-        {
-            _sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
         }
         
         private void UpdateLevelEntries()
@@ -35,11 +27,6 @@ namespace Presentation.MainScreen
             {
                 _levelEntries[i].SetLevelData(levelsRepository.GetLevel(i));
             }
-        }
-
-        private void PlayGame()
-        {
-            _sceneLoader.LoadScene(SceneConstants.Scene.Game);
         }
 
         private void SetGameVersion()

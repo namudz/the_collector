@@ -1,13 +1,11 @@
 ﻿using EventDispatcher;
 using Game.Signals;
-using SceneLoader;
-using UnityEngine;
 
 namespace Game
 {
     public class Game : IGame
     {
-        public string CurrentLevelIndex { get; private set; }
+        public string CurrentLevelId => _currentLevel.Id;
         public bool HasGameStarted { get; private set; }
         public bool IsGameOver { get; private set; }
     
@@ -15,6 +13,7 @@ namespace Game
         private readonly IGameCountdownTimer _countdownTimer;
         private readonly IGameScoreboard _gameScoreboard;
         private readonly IEventDispatcher _eventDispatcher;
+        private Level.Level _currentLevel;
 
         public Game(
             IMazeLoader mazeLoader, 
@@ -32,10 +31,14 @@ namespace Game
             _countdownTimer.OnCountdownFinished += HandleGameOver;
         }
 
+        public void SetCurrentLevelData(Level.Level level)
+        {
+            _currentLevel = level;
+        }
+
         public void Load()
         {
-            CurrentLevelIndex = "1";
-            _mazeLoader.Load(SceneConstants.Mazes.Level_1, Start);
+            _mazeLoader.Load(_currentLevel.SceneName, Start);
             // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
         }
     

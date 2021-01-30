@@ -15,6 +15,7 @@ namespace Presentation.MainScreen
         [SerializeField] private Button _playButton;
         
         private IGame _iGame;
+        private Level _levelData;
 
         private void Awake()
         {
@@ -23,6 +24,8 @@ namespace Presentation.MainScreen
 
         public void SetLevelData(Level level)
         {
+            _levelData = level;
+            
             _levelNameText.SetText(level.DisplayName);
             for (var i = 0; i < _entries.Length; i++)
             {
@@ -32,6 +35,9 @@ namespace Presentation.MainScreen
         
         private void PlayLevel()
         {
+            var game = ServiceLocator.Instance.GetService<IGame>();
+            game.SetCurrentLevelData(_levelData);
+            
             var sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
             sceneLoader.LoadScene(SceneConstants.Scene.Game);
         }
