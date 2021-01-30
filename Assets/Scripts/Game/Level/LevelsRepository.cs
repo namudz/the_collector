@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine.Assertions;
 
 namespace Game.Level
 {
@@ -17,6 +18,12 @@ namespace Game.Level
             {
                 _levels.Add(newLevel);
             }
+        }
+        
+        public Level GetLevel(int index)
+        {
+            Assert.IsTrue(index >= 0, "Level index can't be < 0");
+            return _levels[index];
         }
 
         public Level GetLevel(string levelId)
