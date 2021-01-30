@@ -13,12 +13,18 @@ namespace Game
     
         private readonly IMazeLoader _mazeLoader;
         private readonly IGameCountdownTimer _countdownTimer;
+        private readonly IGameScoreboard _gameScoreboard;
         private readonly IEventDispatcher _eventDispatcher;
 
-        public Game(IMazeLoader mazeLoader, IGameCountdownTimer countdownTimer, IEventDispatcher eventDispatcher)
+        public Game(
+            IMazeLoader mazeLoader, 
+            IGameCountdownTimer countdownTimer, 
+            IGameScoreboard gameScoreboard,
+            IEventDispatcher eventDispatcher)
         {
             _mazeLoader = mazeLoader;
             _countdownTimer = countdownTimer;
+            _gameScoreboard = gameScoreboard;
             _eventDispatcher = eventDispatcher;
             HasGameStarted = false;
             IsGameOver = false;
@@ -37,8 +43,9 @@ namespace Game
         {
             SpawnCollectibles();
             SpawnHero();
+            ResetComponents();
             _countdownTimer.StartCountdown();
-            HasGameStarted = true;
+
             _eventDispatcher.Dispatch(new GameStartedSignal());
         }
 
@@ -52,7 +59,14 @@ namespace Game
     
         public void Reset()
         {
-            Debug.LogError("TODO - Implement IGame.Reset");
+            Start();
+        }
+        
+        private void ResetComponents()
+        {
+            HasGameStarted = true;
+            IsGameOver = false;
+            _gameScoreboard.Reset();
         }
 
         private void SpawnCollectibles()

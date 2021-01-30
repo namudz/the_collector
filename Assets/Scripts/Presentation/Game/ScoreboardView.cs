@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace Presentation.Game
@@ -7,10 +8,17 @@ namespace Presentation.Game
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         
+        private IGameScoreboard _gameScoreboard;
+
         private void Awake()
         {
-            var gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
-            gameScoreboard.OnScoreUpdated += UpdateScore;
+            _gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
+            _gameScoreboard.OnScoreUpdated += UpdateScore;
+        }
+
+        private void OnDestroy()
+        {
+            _gameScoreboard.OnScoreUpdated -= UpdateScore;
         }
 
         private void UpdateScore(int score)
