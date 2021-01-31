@@ -12,12 +12,6 @@ namespace SceneLoader
             { SceneConstants.Scene.MainMenu, "0_MainScene" },
             { SceneConstants.Scene.Game, "1_GameScene" }
         };
-        
-        private readonly Dictionary<SceneConstants.Mazes, string> _mazes = new Dictionary<SceneConstants.Mazes,string>
-        {
-            { SceneConstants.Mazes.Level_1, "Maze_1" },
-            { SceneConstants.Mazes.Level_2, "Maze_2" }
-        };
 
         private readonly IEventDispatcher _eventDispatcher;
         private SceneConstants.Scene _sceneLoaded;
@@ -35,9 +29,9 @@ namespace SceneLoader
             LoadUnityScene(_scenes[scene], mode, DispatchSceneLoadedEvent);
         }
         
-        public void LoadMazeScene(SceneConstants.Mazes mazeScene, Action onComplete)
+        public void LoadMazeScene(string sceneName, Action onComplete)
         {
-            LoadUnityScene(_mazes[mazeScene], LoadSceneMode.Additive, onComplete);
+            LoadUnityScene(sceneName, LoadSceneMode.Additive, onComplete);
         }
 
         private void LoadUnityScene(string sceneName, LoadSceneMode mode, Action onComplete)

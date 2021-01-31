@@ -1,37 +1,32 @@
-﻿using System;
+﻿using Game.Level;
 using SceneLoader;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Presentation.MainScreen
 {
     public class MainScreenView : MonoBehaviour
     {
-        [SerializeField] private Button _playButton;
+        [SerializeField] private LevelEntryView[] _levelEntries;
         [SerializeField] private TextMeshProUGUI _versionText;
-
-        private ISceneLoader _sceneLoader;
 
         private void Awake()
         {
-            _playButton.onClick.AddListener(PlayGame);
             SetGameVersion();
         }
 
         private void Start()
         {
-            GetDependencies();
+            UpdateLevelEntries();
         }
-
-        private void GetDependencies()
+        
+        private void UpdateLevelEntries()
         {
-            _sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
-        }
-
-        private void PlayGame()
-        {
-            _sceneLoader.LoadScene(SceneConstants.Scene.Game);
+            var levelsRepository = ServiceLocator.Instance.GetService<ILevelsRepository>();
+            for (var i = 0; i < _levelEntries.Length; i++)
+            {
+                _levelEntries[i].SetLevelData(levelsRepository.GetLevel(i));
+            }
         }
 
         private void SetGameVersion()
