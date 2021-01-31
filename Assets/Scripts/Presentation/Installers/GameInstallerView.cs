@@ -1,5 +1,4 @@
-﻿using Collectibles;
-using Collectibles.Config;
+﻿using Collectibles.Config;
 using Collectibles.Spawner;
 using Game;
 using InterfaceAdapters.Installers;

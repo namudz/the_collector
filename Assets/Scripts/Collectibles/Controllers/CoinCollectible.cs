@@ -8,6 +8,7 @@ namespace Collectibles.Controllers
 
         protected override void GetDependencies()
         {
+            base.GetDependencies();
             _coin = _collectibleConfig.Collectible as Coin;
         }
 
