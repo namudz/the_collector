@@ -5,9 +5,16 @@ namespace Collectibles
     [Serializable]
     public class Collectible
     {
+        public enum CollectibleType
+        {
+            Coin,
+            Chest
+        }
+
+        public CollectibleType Type;
         public int Score;
         public RespawnCooldown RespawnTime;
-        // TODO - Spawn items based on weight
+        public float ExpirationTime;
         public int SpawnWeight;
 
         [Serializable]

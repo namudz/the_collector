@@ -1,7 +1,5 @@
-﻿using Collectibles;
-using Game;
+﻿using Game;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Hero
 {
@@ -31,11 +29,11 @@ namespace Hero
         {
             if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
             
-            var iCollectible = otherGameObject.GetComponent<ICollectible>();
+            /*var iCollectible = otherGameObject.GetComponent<ICollectible>();
             Assert.IsNotNull(iCollectible, "The Collectible item don't have an ICollectible attached!");
             
             var item = iCollectible.Collect();
-            _gameScoreboard.AddScore(item.Score);
+            _gameScoreboard.AddScore(item.Score);*/
         }
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Collectibles
 {
-    public class CollectibleController : MonoBehaviour, ICollectible
+    public class CollectibleController : MonoBehaviour
     {
         [SerializeField] private CollectibleConfig _collectibleConfig;
+
+        public Collectible.CollectibleType Type => _collectibleConfig.Collectible.Type;
 
         public Collectible Collect()
         {
