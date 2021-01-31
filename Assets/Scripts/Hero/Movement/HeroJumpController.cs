@@ -8,10 +8,11 @@ namespace Hero.Movement
     {
         [Header("Dependencies")]
         [SerializeField] private HeroCollisionsController _collisionsController;
+        [SerializeField] private HeroMovement _movementController;
+        [SerializeField] private HeroAnimatorController _animatorController;
         
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private HeroMovement _movementController;
         
         [Header("Stats - Retrieve from ScriptableObject")]
         [SerializeField] private float _jumpForce = 6f;
@@ -29,11 +30,10 @@ namespace Hero.Movement
 
         private bool CanJumpGrindingWall => _collisionsController.IsGrindingWall && !_collisionsController.IsOnGround;
 
-        public void InjectDependencies(IInputHandler inputHandler, IGame game)
+        private void Awake()
         {
-            _inputHandler = inputHandler;
-            _iGame = game;
-            
+            _inputHandler = ServiceLocator.Instance.GetService<IInputHandler>();
+            _iGame = ServiceLocator.Instance.GetService<IGame>();
             _inputHandler.OnTap += UpdateJumpTimer;
         }
         
@@ -55,6 +55,7 @@ namespace Hero.Movement
             }
 
             UpdatePhysics();
+            _animatorController.SetVelocity(_rigidbody.velocity);
         }
 
         private void UpdateJumpTimer()
