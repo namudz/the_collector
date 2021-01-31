@@ -56,11 +56,11 @@ namespace Collectibles.Spawner
 
             if (collectibleInstance != null)
             {
-                collectibleInstance.GetComponent<ACollectibleController>().OnSpawnPointIsFree += RespawnNewCollectible;
+                collectibleInstance.GetComponent<ICollectible>().OnSpawnPointIsFree += RespawnNewCollectible;
             }
         }
 
-        private void RespawnNewCollectible(ACollectibleController instanceCollected)
+        private void RespawnNewCollectible(CollectibleController instanceCollected)
         {
             instanceCollected.OnSpawnPointIsFree -= RespawnNewCollectible;
             SpawnCollectible(instanceCollected.transform.position);
