@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2304989060757408147}
   - component: {fileID: 3708278808174696281}
+  - component: {fileID: 1343598334186810493}
   m_Layer: 10
   m_Name: Collectible_Chest
   m_TagString: Untagged
@@ -49,10 +50,10 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.7804878, y: 0.7804878}
+    newSize: {x: 0.7804878, y: 0.7804878}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -71,7 +72,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8639e5a818134bc7ba7f78205a1f6854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collectibleConfig: {fileID: 11400000, guid: 1fbfc681ba80f1544aa38413ec0f8490, type: 2}
+  _collectibleConfig: {fileID: 11400000, guid: f9f4e7cc9693cbc40b29d4ece166962c, type: 2}
+  _collider2D: {fileID: 2304989060757408147}
+  _animator: {fileID: 1343598334186810493}
+--- !u!95 &1343598334186810493
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052144043600898524}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 537dcb31ab6254e4db0dd861e5eb559e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6164406511542449902
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +103,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5154960426899151566}
-  - component: {fileID: 235963402685036854}
   - component: {fileID: 8817043309602228419}
   m_Layer: 10
   m_Name: Sprite
@@ -104,25 +125,6 @@ Transform:
   m_Father: {fileID: 6437967257030631102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &235963402685036854
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6164406511542449902}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 537dcb31ab6254e4db0dd861e5eb559e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &8817043309602228419
 SpriteRenderer:
   m_ObjectHideFlags: 0

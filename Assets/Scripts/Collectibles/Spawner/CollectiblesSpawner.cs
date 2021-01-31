@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Collectibles.Config;
 using Collectibles.Controllers;
 using Collectibles.Pool;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Collectibles.Spawner
     public class CollectiblesSpawner : ICollectiblesSpawner
     {
         private IEnumerable<GameObject> _spawnPoints;
-        private IEnumerable<CollectibleConfig> _collectibleConfigs;
+        private IEnumerable<ICollectibleConfig> _collectibleConfigs;
 
         private readonly IGameObjectPool _coinPool;
         private readonly IGameObjectPool _chestPool;
@@ -21,7 +22,7 @@ namespace Collectibles.Spawner
             _chestPool = chestPool;
         }
 
-        public void SetAvailableCollectibles(IEnumerable<CollectibleConfig> collectibles)
+        public void SetAvailableCollectibles(IEnumerable<ICollectibleConfig> collectibles)
         {
             _collectibleConfigs = collectibles;
             CalcTotalSpawnWeight();
@@ -56,7 +57,9 @@ namespace Collectibles.Spawner
 
             if (collectibleInstance != null)
             {
-                collectibleInstance.GetComponent<ICollectible>().OnSpawnPointIsFree += RespawnNewCollectible;
+                var iCollectible = collectibleInstance.GetComponent<ICollectible>();
+                iCollectible.HandleSpawn();
+                iCollectible.OnSpawnPointIsFree += RespawnNewCollectible;
             }
         }
 

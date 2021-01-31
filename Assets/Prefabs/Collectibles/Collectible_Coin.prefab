@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf86c1f891c44acb5efaef7c60fa4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collectibleConfig: {fileID: 11400000, guid: 804684832362364469d24553c2007905, type: 2}
+  _collectibleConfig: {fileID: 11400000, guid: 93879cad5fcf84b4abf18ff6448b742f, type: 2}
+  _collider2D: {fileID: 2304989060757408147}
 --- !u!1 &6164406511542449902
 GameObject:
   m_ObjectHideFlags: 0

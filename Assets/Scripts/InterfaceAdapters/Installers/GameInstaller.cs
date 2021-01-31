@@ -1,5 +1,4 @@
-﻿using Collectibles;
-using Collectibles.Controllers;
+﻿using Collectibles.Controllers;
 using Collectibles.Pool;
 using Collectibles.Spawner;
 using EventDispatcher;
@@ -7,7 +6,7 @@ using Game;
 using InputHandler;
 using SceneLoader;
 using UnityEngine;
-using Collectible = Collectibles.Collectible;
+using Collectible = Collectibles.Config.Collectible;
 
 namespace InterfaceAdapters.Installers
 {

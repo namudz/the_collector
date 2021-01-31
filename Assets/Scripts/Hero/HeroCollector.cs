@@ -1,4 +1,5 @@
 ﻿using Collectibles;
+using Collectibles.Controllers;
 using Game;
 using UnityEngine;
 using UnityEngine.Assertions;
