@@ -14,13 +14,8 @@ namespace Hero.Movement
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
         
-        [Header("Stats - Retrieve from ScriptableObject")]
-        [SerializeField] private float _jumpForce = 6f;
-        [SerializeField] private float _jumpForceGrindingMultiplier = 1.1f;
-        [SerializeField] private float _jumpDelay = 0.1f;
-        [SerializeField] private float _fallMultiplier = 3f;
-        [SerializeField] private float _fallMultiplierGrindingWall = 0.33f;
-        [SerializeField] private float _gravity = 1f;
+        [Header("Stats")] 
+        [SerializeField] private HeroStatsConfig _config;
 
         private IInputHandler _inputHandler;
         private IGame _iGame;
@@ -60,21 +55,25 @@ namespace Hero.Movement
 
         private void UpdateJumpTimer()
         {
-            _jumpTimer = Time.time + _jumpDelay;
+            _jumpTimer = Time.time + _config.JumpStats.Delay;
         }
 
         private void UpdatePhysics()
         {
-            _rigidbody.gravityScale = _collisionsController.IsOnGround ? 0f : _gravity;
+            _rigidbody.gravityScale = _collisionsController.IsOnGround ? 0f : _config.JumpStats.Gravity;
             if (!_collisionsController.IsOnGround && !_collisionsController.IsGrindingWall)
             {
-                var fallMultiplier = _rigidbody.velocity.y < 0 ? _fallMultiplier : _fallMultiplier / FallMultiplierHalfFactor; 
-                _rigidbody.gravityScale = _gravity * fallMultiplier;
+                var fallMultiplier = _rigidbody.velocity.y < 0 
+                    ? _config.JumpStats.FallMultiplier 
+                    : _config.JumpStats.FallMultiplier / FallMultiplierHalfFactor; 
+                _rigidbody.gravityScale = _config.JumpStats.Gravity * fallMultiplier;
             }
 
             if (_collisionsController.IsGrindingWall)
             {
-                _rigidbody.gravityScale = _rigidbody.velocity.y > 0 ? _gravity * _fallMultiplier / FallMultiplierHalfFactor : _gravity * _fallMultiplierGrindingWall;
+                _rigidbody.gravityScale = _rigidbody.velocity.y > 0 
+                    ? _config.JumpStats.Gravity * _config.JumpStats.FallMultiplier / FallMultiplierHalfFactor 
+                    : _config.JumpStats.Gravity * _config.JumpStats.FallMultiplierGrindingWall;
             }
         }
 
@@ -96,8 +95,8 @@ namespace Hero.Movement
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
 
-            var jumpMultiplier = CanJumpGrindingWall ? _jumpForceGrindingMultiplier : 1f;
-            _rigidbody.AddForce(Vector2.up * (_jumpForce * jumpMultiplier), ForceMode2D.Impulse);
+            var jumpMultiplier = CanJumpGrindingWall ? _config.JumpStats.ForceGrindingMultiplier : 1f;
+            _rigidbody.AddForce(Vector2.up * (_config.JumpStats.Force * jumpMultiplier), ForceMode2D.Impulse);
             
             _jumpTimer = 0f;
         }
