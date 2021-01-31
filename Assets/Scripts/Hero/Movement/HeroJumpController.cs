@@ -10,6 +10,7 @@ namespace Hero.Movement
         [SerializeField] private HeroCollisionsController _collisionsController;
         [SerializeField] private HeroMovement _movementController;
         [SerializeField] private HeroAnimatorController _animatorController;
+        [SerializeField] private ParticleSystem _particles;
         
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
@@ -93,6 +94,8 @@ namespace Hero.Movement
         }
         private void ExecuteJump()
         {
+            _particles.Play();
+            
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
 
             var jumpMultiplier = CanJumpGrindingWall ? _config.JumpStats.ForceGrindingMultiplier : 1f;
