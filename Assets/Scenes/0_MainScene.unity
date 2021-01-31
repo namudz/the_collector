@@ -4875,6 +4875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e85fbf49b445b2987370bf2b447c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectiblePoolsDataConfigs:
+  - {fileID: 11400000, guid: 653fa37948bc5974c825d535abb1469a, type: 2}
+  - {fileID: 11400000, guid: 2773b7a9ffcbfa3488da56bfab921d06, type: 2}
 --- !u!4 &1765041352
 Transform:
   m_ObjectHideFlags: 0

@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using EventDispatcher;
-using Game.Signals;
+using System.Linq;
+using Collectibles.Spawner;
 using SceneLoader;
 using UnityEngine;
 
 public class MazeLoader : IMazeLoader
 {
     private readonly ISceneLoader _sceneLoader;
+    private readonly ICollectiblesSpawner _collectiblesSpawner;
+    
     private const string TagHeroSpawner = "HeroSpawner";
-    private const string TagCollectibleSpawners = "CollectibleSpawners";
+    private const string TagCollectibleSpawnPoint = "CollectibleSpawnPoint";
 
-    public ISpawner HeroSpawner { get; private set; }
-    public IEnumerable<ISpawner> CollectibleSpawners { get; private set; }
-
+    private ISpawner _heroSpawner;
     private Action _onMazeLoaded;
 
-    public MazeLoader(ISceneLoader sceneLoader)
+    public MazeLoader(ISceneLoader sceneLoader, ICollectiblesSpawner collectiblesSpawner)
     {
         _sceneLoader = sceneLoader;
+        _collectiblesSpawner = collectiblesSpawner;
+        
+        ServiceLocator.Instance.RegisterService(_collectiblesSpawner);
     }
 
     public void Load(string mazeSceneName, Action onComplete)
@@ -27,12 +29,18 @@ public class MazeLoader : IMazeLoader
         _sceneLoader.LoadMazeScene(mazeSceneName, FindSpawners);
     }
 
+    public void SpawnElements()
+    {
+        _heroSpawner.Spawn();
+        _collectiblesSpawner.Spawn();
+    }
+
     private void FindSpawners()
     {
-        HeroSpawner = GameObject.FindWithTag(TagHeroSpawner)?.GetComponent<ISpawner>();
+        _heroSpawner = GameObject.FindWithTag(TagHeroSpawner)?.GetComponent<ISpawner>();
         
-        var collectibleSpawnersParent = GameObject.FindWithTag(TagCollectibleSpawners);
-        CollectibleSpawners = collectibleSpawnersParent.GetComponentsInChildren<ISpawner>();
+        var points = GameObject.FindGameObjectsWithTag(TagCollectibleSpawnPoint);
+        _collectiblesSpawner.SetSpawnPoints(points);
         
         _onMazeLoaded?.Invoke();
     }

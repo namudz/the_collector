@@ -1,5 +1,4 @@
-﻿using System;
-using EventDispatcher;
+﻿using EventDispatcher;
 using Game.Signals;
 using UnityEngine;
 

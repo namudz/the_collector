@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Collectible_Coin_Config
   m_EditorClassIdentifier: 
   Collectible:
+    Type: 0
     Score: 1
     RespawnTime:
       MinTime: 3
       MaxTime: 7
-    SpawnWeight: 0
+    ExpirationTime: -1
+    SpawnWeight: 80
