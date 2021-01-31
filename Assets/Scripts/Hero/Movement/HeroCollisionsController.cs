@@ -5,6 +5,9 @@ namespace Hero.Movement
 {
     public class HeroCollisionsController : MonoBehaviour
     {
+        [Header("Dependencies")]
+        [SerializeField] private HeroAnimatorController _animatorController;
+        
         [Header("Collision")]
         [SerializeField] private LayerMask _floorLayerMask;
 
@@ -16,13 +19,16 @@ namespace Hero.Movement
         [Header("Raycasts")]
         [SerializeField] private float _raycastGroundLength = 0.3f;
         [SerializeField] private float _raycastLateralLength = 0.22f;
-        
+
         public bool IsOnGround { get; private set; }
         public bool IsGrindingWall  { get; private set; }
 
         private Color _defaultPositionColor = Color.yellow;
         private Color _collidingColor = Color.red;
         private IGame _iGame;
+
+        private bool _wasOnGround;
+        private bool _wasGrinding;
 
         private void Awake()
         {
@@ -32,9 +38,13 @@ namespace Hero.Movement
         private void Update()
         {
             if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
+
+            _wasOnGround = IsOnGround;
+            _wasGrinding = IsGrindingWall;
             
             CheckIsGrounded();
             CheckIsGrindingWall();
+            UpdateAnimator();
         }
 
         private void FixedUpdate()
@@ -55,15 +65,33 @@ namespace Hero.Movement
         
         private void CheckIsGrindingWall()
         {
+            var wasGrinding = IsGrindingWall;
+            
             var myPosition = transform.position;
             var isGrindingRight = Physics2D.Raycast(myPosition + _lateralTopColliderOffset , Vector2.right, _raycastLateralLength, _floorLayerMask)
                                   || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.right, _raycastLateralLength, _floorLayerMask);
             
             var isGrindingLeft = Physics2D.Raycast(myPosition + _lateralTopColliderOffset, Vector2.left, _raycastLateralLength, _floorLayerMask)
-                                 || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.left,
-                                     _raycastLateralLength, _floorLayerMask);
+                                 || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.left, _raycastLateralLength, _floorLayerMask);
 
             IsGrindingWall = isGrindingRight || isGrindingLeft;
+
+            if (!wasGrinding && IsGrindingWall)
+            {
+                _animatorController.FlipSprite();
+            }
+        }
+
+        private void UpdateAnimator()
+        {
+            _animatorController.SetIsOnGround(IsOnGround);
+            _animatorController.SetIsJumping(!IsOnGround);
+            _animatorController.SetIsGrinding(IsGrindingWall);
+
+            if (!_wasOnGround && _wasGrinding && !IsGrindingWall)
+            {
+                _animatorController.FlipSpriteIfFalling();
+            }
         }
         
         private void OnDrawGizmos()

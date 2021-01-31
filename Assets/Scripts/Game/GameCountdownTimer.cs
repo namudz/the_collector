@@ -6,7 +6,7 @@ public class GameCountdownTimer : IGameCountdownTimer
     public event Action<float> OnCountdownUpdated;
     public event Action OnCountdownFinished;
 
-    private const float InitialCountdown = 10f;
+    private const float InitialCountdown = 100f;
     private float _currentCountdown;
     private float _startTime;
 

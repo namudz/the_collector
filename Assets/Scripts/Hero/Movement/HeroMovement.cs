@@ -1,5 +1,4 @@
-﻿using System;
-using EventDispatcher;
+﻿using EventDispatcher;
 using Game;
 using Game.Signals;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Hero.Movement
     {
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
-        
+
         [Header("Stats - Retrieve from ScriptableObject")]
         [SerializeField] private float _speed;
         [SerializeField] private float _maxSpeed;
@@ -33,10 +32,9 @@ namespace Hero.Movement
 
         private void FixedUpdate()
         {
-            if (_iGame.HasGameStarted && !_iGame.IsGameOver)
-            {
-                Move();
-            }
+            if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
+            
+            Move();
         }
         
         public void AccelerateOnJump()

@@ -1,5 +1,6 @@
 ﻿using EventDispatcher;
 using Game;
+using InputHandler;
 using SceneLoader;
 
 namespace InterfaceAdapters.Installers
@@ -29,6 +30,19 @@ namespace InterfaceAdapters.Installers
                 eventDispatcher
             );
             ServiceLocator.Instance.RegisterService<IGame>(game);
+
+            InstallInputHandler();
+        }
+        
+        private void InstallInputHandler()
+        {
+            IInputHandler handler;
+#if UNITY_EDITOR || UNITY_STANDALONE
+            handler = new InputStandaloneHandler();
+#elif UNITY_ANDROID || UNITY_IOS
+            handler = new InputMobileHandler();
+#endif
+            ServiceLocator.Instance.RegisterService(handler);
         }
     }
 }
