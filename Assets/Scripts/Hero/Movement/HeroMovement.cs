@@ -10,9 +10,8 @@ namespace Hero.Movement
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
 
-        [Header("Stats - Retrieve from ScriptableObject")]
-        [SerializeField] private float _speed;
-        [SerializeField] private float _maxSpeed;
+        [Header("Stats")]
+        [SerializeField] private HeroStatsConfig _config;
 
         private IGame _iGame;
         private IEventDispatcher _eventDispatcher;
@@ -40,7 +39,7 @@ namespace Hero.Movement
         public void AccelerateOnJump()
         {
             InvertDirection();
-            _rigidbody.AddForce(_direction * _maxSpeed, ForceMode2D.Impulse);
+            _rigidbody.AddForce(_direction * _config.MovementStats.Speed, ForceMode2D.Impulse);
         }
 
         private void InvertDirection()
@@ -50,10 +49,10 @@ namespace Hero.Movement
 
         private void Move()
         {
-            _rigidbody.AddForce(_direction * _speed);
-            if (Mathf.Abs(_rigidbody.velocity.x) > _maxSpeed)
+            _rigidbody.AddForce(_direction * _config.MovementStats.Speed);
+            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeed)
             {
-                var newHorizontalSpeed = Mathf.Sign(_rigidbody.velocity.x) * _maxSpeed;
+                var newHorizontalSpeed = Mathf.Sign(_rigidbody.velocity.x) * _config.MovementStats.MaxSpeed;
                 _rigidbody.velocity = new Vector2(newHorizontalSpeed, _rigidbody.velocity.y);
             }
         }
