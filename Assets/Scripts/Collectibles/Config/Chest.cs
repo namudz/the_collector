@@ -7,5 +7,6 @@ namespace Collectibles.Config
     {
         public float ExpirationTime;
         public float AdditionalScorePercentage;
+        public int MinScore;
     }
 }
