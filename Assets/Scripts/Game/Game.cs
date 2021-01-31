@@ -62,7 +62,8 @@ namespace Game
     
         public void Reset()
         {
-            Start();
+            _eventDispatcher.Dispatch(new GameResetSignal());
+            _mazeLoader.Reset();
         }
         
         private void ResetComponents()

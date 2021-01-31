@@ -41,6 +41,11 @@ namespace Collectibles.Spawner
             }
         }
 
+        public void Reset()
+        {
+            //throw new System.NotImplementedException();
+        }
+
         private void SpawnCollectible(Vector3 position)
         {
             var collectible = GetCollectibleToSpawn();

@@ -1,4 +1,5 @@
 ﻿using Collectibles.Config;
+using EventDispatcher;
 using UnityEngine;
 
 namespace Collectibles.Controllers
@@ -14,6 +15,7 @@ namespace Collectibles.Controllers
 
         protected override void GetDependencies()
         {
+            base.GetDependencies();
             _gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
             _chestConfig = _collectibleConfig.Collectible as Chest;
         }
@@ -30,7 +32,18 @@ namespace Collectibles.Controllers
 
         protected override int GetScore()
         {
+            if (_gameScoreboard.CurrentScore == 0)
+            {
+                return _chestConfig.MinScore;
+            }
+            
             return Mathf.RoundToInt(_gameScoreboard.CurrentScore * (_chestConfig.AdditionalScorePercentage / 100f));
+        }
+
+        protected override void Reset(ISignal signal)
+        {
+            _animator.Rebind();
+            base.Reset(signal);
         }
     }
 }
