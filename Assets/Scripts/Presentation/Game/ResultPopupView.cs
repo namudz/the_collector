@@ -1,4 +1,6 @@
-﻿using Game;
+﻿using EventDispatcher;
+using Game;
+using Game.Signals;
 using SceneLoader;
 using TMPro;
 using UnityEngine;
@@ -45,10 +47,21 @@ namespace Presentation.Game
         {
             var iGame = ServiceLocator.Instance.GetService<IGame>();
             iGame.Reset();
+            // Delaying the restart of the game so pooled objects can go back to pool
+            Invoke(nameof(DelayedStartAgain), Time.deltaTime);
+        }
+
+        private void DelayedStartAgain()
+        {
+            var iGame = ServiceLocator.Instance.GetService<IGame>();
+            iGame.Start();
         }
 
         private void BackToHome()
         {
+            var dispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            dispatcher.Dispatch(new GameDestroyedSignal());
+            
             _sceneLoader.LoadScene(SceneConstants.Scene.MainMenu);
         }
     }

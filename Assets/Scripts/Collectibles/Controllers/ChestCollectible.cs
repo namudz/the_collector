@@ -32,6 +32,11 @@ namespace Collectibles.Controllers
 
         protected override int GetScore()
         {
+            if (_gameScoreboard.CurrentScore == 0)
+            {
+                return _chestConfig.MinScore;
+            }
+            
             return Mathf.RoundToInt(_gameScoreboard.CurrentScore * (_chestConfig.AdditionalScorePercentage / 100f));
         }
 

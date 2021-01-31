@@ -20,3 +20,4 @@ MonoBehaviour:
     SpawnWeight: 5
     ExpirationTime: 6
     AdditionalScorePercentage: 10
+    MinScore: 5
