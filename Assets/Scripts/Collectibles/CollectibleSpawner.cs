@@ -1,4 +1,6 @@
-﻿namespace Collectibles
+﻿using Collectibles.Controllers;
+
+namespace Collectibles
 {
     public class CollectibleSpawner : global::Spawner
     {

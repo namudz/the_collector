@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Collectibles
+namespace Collectibles.Config
 {
     [Serializable]
     public class Collectible
@@ -12,9 +12,7 @@ namespace Collectibles
         }
 
         public CollectibleType Type;
-        public int Score;
         public RespawnCooldown RespawnTime;
-        public float ExpirationTime;
         public int SpawnWeight;
 
         [Serializable]

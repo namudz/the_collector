@@ -1,4 +1,5 @@
 ﻿using Collectibles;
+using Collectibles.Config;
 using Collectibles.Spawner;
 using Game;
 using InterfaceAdapters.Installers;
@@ -21,8 +22,7 @@ namespace Presentation.Installers
             _game = ServiceLocator.Instance.GetService<IGame>();
             var collectiblesSpawner = ServiceLocator.Instance.GetService<ICollectiblesSpawner>();
             collectiblesSpawner.SetAvailableCollectibles(_collectibleConfigs);
-            
-            
+
             var gameInstaller = ServiceLocator.Instance.GetService<IGameInstaller>();
             gameInstaller.InitializePools(_poolParent);
         }
