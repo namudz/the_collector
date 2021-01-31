@@ -6,4 +6,5 @@ public abstract class Spawner : MonoBehaviour, ISpawner
     [SerializeField] protected Transform _spawnPoint;
 
     public abstract void Spawn();
+    public abstract void Reset();
 }
