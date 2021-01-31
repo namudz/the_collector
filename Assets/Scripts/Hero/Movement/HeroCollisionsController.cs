@@ -7,6 +7,7 @@ namespace Hero.Movement
     {
         [Header("Dependencies")]
         [SerializeField] private HeroAnimatorController _animatorController;
+        [SerializeField] private ParticleSystem _particles;
         
         [Header("Collision")]
         [SerializeField] private LayerMask _floorLayerMask;
@@ -39,6 +40,7 @@ namespace Hero.Movement
             CheckIsGrounded();
             CheckIsGrindingWall();
             UpdateAnimator();
+            UpdateParticles();
         }
 
         private void FixedUpdate()
@@ -85,6 +87,14 @@ namespace Hero.Movement
             if (!_wasOnGround && _wasGrinding && !IsGrindingWall)
             {
                 _animatorController.FlipSpriteIfFalling();
+            }
+        }
+
+        private void UpdateParticles()
+        {
+            if (!_wasOnGround && IsOnGround)
+            {
+                _particles.Play();
             }
         }
         
