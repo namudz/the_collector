@@ -30,7 +30,7 @@ namespace InterfaceAdapters
             for (var i = 0; i < level.Leaderboard.Entries.Count; i++)
             {
                 var entry = level.Leaderboard.Entries[i];
-                if (_gameScoreboard.CurrentScore < entry.Score) { continue;}
+                if (_gameScoreboard.CurrentScore <= entry.Score) { continue;}
                 
                 var newEntry = new LeaderboardEntry
                 {
