@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GUIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 256
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 100e36566d535b64f882ffbc81fd28c7, type: 3}
+    totalSpriteSurfaceArea: 19216
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: b5d374d1819d06c4faac965481645b44, type: 3}
+  - {fileID: 21300000, guid: c2268a336b412a74f8973a7ae466f7f4, type: 3}
+  - {fileID: 21300000, guid: 81d50944e01e4cf429efc957a5e2ca42, type: 3}
+  - {fileID: 21300000, guid: 820dbdd89c61fea4091c36d27d380dd9, type: 3}
+  - {fileID: 21300000, guid: dfbc735eb2db3104a924806d34a8119f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - icon_clock
+  - icon_save
+  - button_default
+  - icon_cancel
+  - icon_confirm
+  m_Tag: GUIAtlas
+  m_IsVariant: 0
