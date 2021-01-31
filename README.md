@@ -16,19 +16,19 @@
 - [x] the game scene has a counter for collected coins
 - [x] the game scene has a countdown timer for collecting; when time runs out the game is over
 ## Misc.:
-- [ ] the game supports just English localization
-- [ ] you could improve any aspect of the game to increase the user experience of players
-- [ ] efficiency will undoubtedly add competitiveness, but it is better to remain satisfied with your work than just be the first
+- [x] the game supports just English localization
+- [x] you could improve any aspect of the game to increase the user experience of players
+- [x] efficiency will undoubtedly add competitiveness, but it is better to remain satisfied with your work than just be the first
 ## REQUIREMENTS:
 - [x] the project should be open via the Unity 2019.2.x+
 - [x] the project should be written with C#
-- [ ] there is the possibility of using free assets but not paid
-- [ ] any external module/plugin/library/resource should be in the project
+- [x] there is the possibility of using free assets but not paid
+- [x] any external module/plugin/library/resource should be in the project
 - [ ] the game should be launchable either for iOS or Android
 - [ ] the result is a *.zip archive with everything inside
 
 ## Optional:
-- [ ] the main menu shows the best coins result which has been ever achieved on this device
+- [x] the main menu shows the best coins result which has been ever achieved on this device
 - [ ] there are rare coins chests that gives the hero 10% of his current coins amount; such chests spawn much less often and have an expiration timer
 - [ ] coins fly to the HUD after being collected
 - [ ] use different solutions (shaders, ECS/DOTS, etc.) for demonstrating knowledge in that area
