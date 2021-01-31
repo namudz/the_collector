@@ -45,8 +45,7 @@ namespace Game
     
         public void Start()
         {
-            SpawnCollectibles();
-            SpawnHero();
+            _mazeLoader.SpawnElements();
             ResetComponents();
             _countdownTimer.StartCountdown();
 
@@ -71,19 +70,6 @@ namespace Game
             HasGameStarted = true;
             IsGameOver = false;
             _gameScoreboard.Reset();
-        }
-
-        private void SpawnCollectibles()
-        {
-            foreach (var spawner in _mazeLoader.CollectibleSpawners)
-            {
-                spawner.Spawn();
-            }
-        }
-    
-        private void SpawnHero()
-        {
-            _mazeLoader.HeroSpawner.Spawn();
         }
 
         private void HandleGameOver()

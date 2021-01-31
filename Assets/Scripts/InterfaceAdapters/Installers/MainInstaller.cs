@@ -14,7 +14,7 @@ namespace InterfaceAdapters.Installers
 
         public void Register()
         {
-            ServiceLocator.Instance.RegisterService(this);
+            ServiceLocator.Instance.RegisterService<IMainInstaller>(this);
         }
 
         public void InstallDependencies()
