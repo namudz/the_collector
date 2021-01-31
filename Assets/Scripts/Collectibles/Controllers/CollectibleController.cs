@@ -47,7 +47,7 @@ namespace Collectibles.Controllers
             _objectPool = objectPool;
         }
 
-        public void HandleSpawn()
+        public virtual void HandleSpawn()
         {
             _collider2D.enabled = true;
         }
@@ -72,19 +72,22 @@ namespace Collectibles.Controllers
             HideAndRespawn();
         }
 
-        private void HandleGameOver(ISignal signal)
+        protected virtual void HandleGameOver(ISignal signal)
         {
             CancelInvoke();
         }
 
         protected virtual void Reset(ISignal signal)
         {
-            _gameObject.SetActive(false);
-            _objectPool.BackToPool(_gameObject);
+            if (_gameObject.activeSelf)
+            {
+                _gameObject.SetActive(false);
+                _objectPool.BackToPool(_gameObject);
+            }
             CancelInvoke();
         }
 
-        private void HideAndRespawn()
+        protected void HideAndRespawn()
         {
             _gameObject.SetActive(false);
             _objectPool.BackToPool(_gameObject);
