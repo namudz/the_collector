@@ -1,5 +1,4 @@
 ﻿using Game;
-using InterfaceAdapters.Installers;
 using UnityEngine;
 
 namespace Presentation.Installers
@@ -10,13 +9,6 @@ namespace Presentation.Installers
 
         private void Awake()
         {
-            if (!ServiceLocator.Instance.ServiceExist<IGameInstaller>())
-            {
-                var installer = new GameInstaller();
-                installer.Register();
-                installer.InstallDependencies();
-            }
-
             _game = ServiceLocator.Instance.GetService<IGame>();
         }
 

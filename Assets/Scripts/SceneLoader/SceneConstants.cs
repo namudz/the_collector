@@ -7,11 +7,5 @@
             MainMenu,
             Game
         }
-
-        public enum Mazes
-        {
-            Level_1,
-            Level_2
-        }
     }
 }
