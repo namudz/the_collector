@@ -58,7 +58,10 @@ namespace Collectibles.Pool
         public void BackToPool(GameObject instance)
         {
             _activeInstances.Remove(instance);
-            _inactiveInstances.Add(instance);
+            if (!_inactiveInstances.Contains(instance))
+            {
+                _inactiveInstances.Add(instance);
+            }
         }
 
         private void InstantiateElement()
