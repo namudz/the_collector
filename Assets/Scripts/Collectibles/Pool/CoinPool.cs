@@ -1,13 +1,15 @@
-﻿namespace Collectibles.Pool
+﻿using Collectibles.Controllers;
+
+namespace Collectibles.Pool
 {
-    public class CoinPool : GameObjectPool<CoinCollectible>
+    public class CoinPool : GameObjectPool<CoinCollectibleController>
     {
         public CoinPool(GameObjectPoolData data) : base(data)
         {
         }
     }
 
-    public class ChestPool : GameObjectPool<ChestCollectible>
+    public class ChestPool : GameObjectPool<ChestCollectibleController>
     {
         public ChestPool(GameObjectPoolData data) : base(data)
         {

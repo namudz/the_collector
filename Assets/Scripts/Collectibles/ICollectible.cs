@@ -2,8 +2,7 @@
 {
     public interface ICollectible
     {
-        float GetRespawnTime();
-        Collectible Collect();
-        void Spawn();
+        Collectible.CollectibleType Type { get; }
+        int Collect();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Collectibles;
+using Collectibles.Controllers;
 using Collectibles.Pool;
 using Collectibles.Spawner;
 using EventDispatcher;
@@ -50,17 +51,15 @@ namespace InterfaceAdapters.Installers
             foreach (var poolDataConfig in poolsData)
             {
                 poolDataConfig.PoolData.RootTransform = _poolsParent;
-                var controller = poolDataConfig.PoolData.Prefab.GetComponent<CollectibleController>();
+                var controller = poolDataConfig.PoolData.Prefab.GetComponent<ACollectibleController>();
                 switch (controller.Type)
                 {
                     case Collectible.CollectibleType.Coin:
                         _coinPool = new CoinPool(poolDataConfig.PoolData);
-                        ServiceLocator.Instance.RegisterService<IGameObjectPool<CoinCollectible>>(_coinPool);
                         break;
                     
                     case Collectible.CollectibleType.Chest:
                         _chestPool = new ChestPool(poolDataConfig.PoolData);
-                        ServiceLocator.Instance.RegisterService<IGameObjectPool<ChestCollectible>>(_chestPool);
                         break;
                 }
             }

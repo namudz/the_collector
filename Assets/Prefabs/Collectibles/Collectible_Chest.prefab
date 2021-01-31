@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2304989060757408147}
-  - component: {fileID: 4570088180008821360}
+  - component: {fileID: 3708278808174696281}
   m_Layer: 10
   m_Name: Collectible_Chest
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.61}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.78, y: 0.78}
   m_EdgeRadius: 0
---- !u!114 &4570088180008821360
+--- !u!114 &3708278808174696281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6052144043600898524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9a5a87702d42bba72f392945cb5d71, type: 3}
+  m_Script: {fileID: 11500000, guid: 8639e5a818134bc7ba7f78205a1f6854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _collectibleConfig: {fileID: 11400000, guid: 1fbfc681ba80f1544aa38413ec0f8490, type: 2}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6164406511542449902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6437967257030631102}

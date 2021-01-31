@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Collectibles.Controllers;
 using Collectibles.Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -35,17 +36,34 @@ namespace Collectibles.Spawner
         {
             foreach (var spawnPoint in _spawnPoints)
             {
-                var collectible = GetCollectibleToSpawn();
-                switch (collectible.Type)
-                {
-                    case Collectible.CollectibleType.Coin:
-                        _coinPool.GetInstance(spawnPoint.transform.position);
-                        break;
-                    case Collectible.CollectibleType.Chest:
-                        _chestPool.GetInstance(spawnPoint.transform.position);
-                        break;
-                }
+                SpawnCollectible(spawnPoint.transform.position);
             }
+        }
+
+        private void SpawnCollectible(Vector3 position)
+        {
+            var collectible = GetCollectibleToSpawn();
+            GameObject collectibleInstance = null;
+            switch (collectible.Type)
+            {
+                case Collectible.CollectibleType.Coin:
+                    collectibleInstance = _coinPool.GetInstance(position);
+                    break;
+                case Collectible.CollectibleType.Chest:
+                    collectibleInstance = _chestPool.GetInstance(position);
+                    break;
+            }
+
+            if (collectibleInstance != null)
+            {
+                collectibleInstance.GetComponent<ACollectibleController>().OnSpawnPointIsFree += RespawnNewCollectible;
+            }
+        }
+
+        private void RespawnNewCollectible(ACollectibleController instanceCollected)
+        {
+            instanceCollected.OnSpawnPointIsFree -= RespawnNewCollectible;
+            SpawnCollectible(instanceCollected.transform.position);
         }
 
         private void CalcTotalSpawnWeight()
