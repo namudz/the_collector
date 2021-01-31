@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Collectibles.Spawner;
 using SceneLoader;
 using UnityEngine;
@@ -33,6 +32,12 @@ public class MazeLoader : IMazeLoader
     {
         _heroSpawner.Spawn();
         _collectiblesSpawner.Spawn();
+    }
+
+    public void Reset()
+    {
+        _collectiblesSpawner.Reset();
+        _heroSpawner.Reset();
     }
 
     private void FindSpawners()

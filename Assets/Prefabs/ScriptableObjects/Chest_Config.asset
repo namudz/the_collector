@@ -17,6 +17,7 @@ MonoBehaviour:
     RespawnTime:
       MinTime: 4
       MaxTime: 7
-    SpawnWeight: 50
+    SpawnWeight: 5
     ExpirationTime: 6
-    AdditionalScorePercentage: 30
+    AdditionalScorePercentage: 10
+    MinScore: 5

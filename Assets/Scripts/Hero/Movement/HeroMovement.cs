@@ -22,11 +22,13 @@ namespace Hero.Movement
             _iGame = ServiceLocator.Instance.GetService<IGame>();
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(StopMoving);
+            _eventDispatcher.Subscribe<GameResetSignal>(Reset);
         }
 
         private void OnDestroy()
         {
             _eventDispatcher.Unsubscribe<GameOverSignal>(StopMoving);
+            _eventDispatcher.Unsubscribe<GameResetSignal>(StopMoving);
         }
 
         private void FixedUpdate()
@@ -57,9 +59,15 @@ namespace Hero.Movement
             }
         }
         
-        private void StopMoving(ISignal signal)
+        private void StopMoving(ISignal signal = null)
         {
             _rigidbody.velocity = new Vector2(0f, _rigidbody.velocity.y);
+        }
+        
+        private void Reset(ISignal signal)
+        {
+            StopMoving();
+            _direction = Vector2.right;
         }
     }
 }

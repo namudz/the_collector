@@ -18,4 +18,4 @@ MonoBehaviour:
       MinTime: 4
       MaxTime: 8
     SpawnWeight: 50
-    Score: 10
+    Score: 2

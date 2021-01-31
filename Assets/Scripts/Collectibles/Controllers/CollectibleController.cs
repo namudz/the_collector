@@ -1,6 +1,8 @@
 ﻿using System;
 using Collectibles.Config;
 using Collectibles.Pool;
+using EventDispatcher;
+using Game.Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +19,7 @@ namespace Collectibles.Controllers
 
         private IGameObjectPool _objectPool;
         private GameObject _gameObject;
+        private IEventDispatcher _eventDispatcher;
 
         private void Awake()
         {
@@ -26,11 +29,16 @@ namespace Collectibles.Controllers
 
         protected virtual void GetDependencies()
         {
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
+            _eventDispatcher.Subscribe<GameResetSignal>(Reset);
         }
 
         private void OnDestroy()
         {
             OnSpawnPointIsFree = null;
+            _eventDispatcher.Unsubscribe<GameOverSignal>(HandleGameOver);
+            _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
             CancelInvoke();
         }
 
@@ -50,7 +58,6 @@ namespace Collectibles.Controllers
             UpdateViewOnCollect();
             DefaultCollect();
             
-
             return GetScore();
         }
 
@@ -63,6 +70,18 @@ namespace Collectibles.Controllers
         protected virtual void DefaultCollect()
         {
             HideAndRespawn();
+        }
+
+        private void HandleGameOver(ISignal signal)
+        {
+            CancelInvoke();
+        }
+
+        protected virtual void Reset(ISignal signal)
+        {
+            _gameObject.SetActive(false);
+            _objectPool.BackToPool(_gameObject);
+            CancelInvoke();
         }
 
         private void HideAndRespawn()
