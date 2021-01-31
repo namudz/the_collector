@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2304989060757408147}
-  - component: {fileID: 4570088180008821360}
+  - component: {fileID: 8339718161587831336}
   m_Layer: 10
   m_Name: Collectible_Coin
   m_TagString: Untagged
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.47, y: 0.47}
   m_EdgeRadius: 0
---- !u!114 &4570088180008821360
+--- !u!114 &8339718161587831336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6052144043600898524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9a5a87702d42bba72f392945cb5d71, type: 3}
+  m_Script: {fileID: 11500000, guid: edf86c1f891c44acb5efaef7c60fa4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _collectibleConfig: {fileID: 11400000, guid: 804684832362364469d24553c2007905, type: 2}
