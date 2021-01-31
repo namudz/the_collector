@@ -20,11 +20,13 @@ public class HeroAnimatorController : MonoBehaviour
     {
         _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
         _eventDispatcher.Subscribe<GameOverSignal>(SetGameOverTrigger);
+        _eventDispatcher.Subscribe<GameResetSignal>(Reset);
     }
 
     private void OnDestroy()
     {
         _eventDispatcher.Unsubscribe<GameOverSignal>(SetGameOverTrigger);
+        _eventDispatcher.Subscribe<GameResetSignal>(Reset);
     }
 
     public void SetIsOnGround(bool isOnGround)
@@ -65,5 +67,10 @@ public class HeroAnimatorController : MonoBehaviour
     private void SetGameOverTrigger(ISignal signal)
     {
         _animator.SetTrigger(IsGameOver);
+    }
+    
+    private void Reset(ISignal signal)
+    {
+        _sprite.flipX = false;
     }
 }
