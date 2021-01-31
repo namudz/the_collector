@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Collectibles.Pool
 {
-    public abstract class GameObjectPool<T> : IGameObjectPool<T> where T : ICollectible
+    public abstract class GameObjectPool<T> : IGameObjectPool where T : ICollectible
     {
         private Transform _transform;
-        private GameObject _prefab;
-        private int _initialAmount;
+        private readonly GameObject _prefab;
+        private readonly int _initialAmount;
 
-        private Queue<GameObject> _inactiveInstances;
-        private Queue<GameObject> _activeInstances;
+        private readonly List<GameObject> _inactiveInstances;
+        private readonly List<GameObject> _activeInstances;
 
         public GameObjectPool(GameObjectPoolData data)
         {
@@ -18,8 +18,8 @@ namespace Collectibles.Pool
             _prefab = data.Prefab;
             _initialAmount = data.InitialAmount;
             
-            _inactiveInstances = new Queue<GameObject>(_initialAmount);
-            _activeInstances = new Queue<GameObject>(_initialAmount);
+            _inactiveInstances = new List<GameObject>(_initialAmount);
+            _activeInstances = new List<GameObject>(_initialAmount);
         }
         
         public void InstantiateInitialElements(Transform poolsParent)
@@ -37,20 +37,29 @@ namespace Collectibles.Pool
             {
                 InstantiateElement();
             }
+
+            var instance = _inactiveInstances[0];
+            _inactiveInstances.RemoveAt(0);
             
-            var instance = _inactiveInstances.Dequeue();
             instance.transform.position = newPosition;
-            _activeInstances.Enqueue(instance);
             instance.SetActive(true);
+            _activeInstances.Add(instance);
             
             return instance;
+        }
+
+        public void BackToPool(GameObject instance)
+        {
+            _activeInstances.Remove(instance);
+            _inactiveInstances.Add(instance);
         }
 
         private void InstantiateElement()
         {
             var instance = GameObject.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
+            instance.GetComponent<ICollectible>().SetPool(this);
             instance.SetActive(false);
-            _inactiveInstances.Enqueue(instance);
+            _inactiveInstances.Add(instance);
         }
     }
 }
