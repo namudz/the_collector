@@ -1,18 +1,12 @@
-﻿using UnityEngine;
-
-namespace Collectibles
+﻿namespace Collectibles
 {
-    public class CollectibleSpawner : Spawner
+    public class CollectibleSpawner : global::Spawner
     {
-        [Header("Components")]
-        [SerializeField] private GameObject _collectiblePrefab;
-
         private ICollectible _collectible;
         
         public override void Spawn()
         {
-            var instance = Instantiate(_collectiblePrefab, _spawnPoint.position, Quaternion.identity, transform);
-            instance.SetActive(true);
+            
         }
     }
 }

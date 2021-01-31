@@ -1,5 +1,4 @@
 ﻿using Game.Level;
-using SceneLoader;
 using TMPro;
 using UnityEngine;
 

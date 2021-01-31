@@ -1,10 +1,13 @@
-﻿using InterfaceAdapters.Installers;
+﻿using Collectibles.Pool;
+using InterfaceAdapters.Installers;
 using UnityEngine;
 
 namespace Presentation.Installers
 {
     public class MainInstallerView : MonoBehaviour
     {
+        [SerializeField] private GameObjectPoolDataConfig[] _collectiblePoolsDataConfigs;
+        
         private void Awake()
         {
             InitializeMainInstaller();
@@ -27,6 +30,7 @@ namespace Presentation.Installers
             
             var installer = new GameInstaller();
             installer.Register();
+            installer.LoadCollectibles(_collectiblePoolsDataConfigs);
             installer.InstallDependencies();
         }
     }
