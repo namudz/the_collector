@@ -4,9 +4,9 @@ using Random = UnityEngine.Random;
 
 namespace Collectibles.Controllers
 {
-    public abstract class ACollectibleController : MonoBehaviour, ICollectible
+    public abstract class CollectibleController : MonoBehaviour, ICollectible
     {
-        public event Action<ACollectibleController> OnSpawnPointIsFree;
+        public event Action<CollectibleController> OnSpawnPointIsFree;
         public Collectible.CollectibleType Type => _collectibleConfig.Collectible.Type;
         
         [SerializeField] protected CollectibleConfig _collectibleConfig;

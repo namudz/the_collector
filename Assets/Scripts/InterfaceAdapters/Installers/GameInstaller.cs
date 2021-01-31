@@ -7,6 +7,7 @@ using Game;
 using InputHandler;
 using SceneLoader;
 using UnityEngine;
+using Collectible = Collectibles.Collectible;
 
 namespace InterfaceAdapters.Installers
 {
@@ -51,7 +52,7 @@ namespace InterfaceAdapters.Installers
             foreach (var poolDataConfig in poolsData)
             {
                 poolDataConfig.PoolData.RootTransform = _poolsParent;
-                var controller = poolDataConfig.PoolData.Prefab.GetComponent<ACollectibleController>();
+                var controller = poolDataConfig.PoolData.Prefab.GetComponent<ICollectible>();
                 switch (controller.Type)
                 {
                     case Collectible.CollectibleType.Coin:
