@@ -1,4 +1,5 @@
 ﻿using System;
+using Collectibles.Pool;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,34 +8,47 @@ namespace Collectibles.Controllers
     public abstract class CollectibleController : MonoBehaviour, ICollectible
     {
         public event Action<CollectibleController> OnSpawnPointIsFree;
+        
         public Collectible.CollectibleType Type => _collectibleConfig.Collectible.Type;
         
         [SerializeField] protected CollectibleConfig _collectibleConfig;
 
-        public float GetRespawnTime()
+        private IGameObjectPool _objectPool;
+        private GameObject _gameObject;
+
+        private void Awake()
         {
-            var respawnInfo = _collectibleConfig.Collectible.RespawnTime;
-            return Random.Range(respawnInfo.MinTime, respawnInfo.MaxTime);
+            _gameObject = gameObject;
+        }
+
+        private void OnDestroy()
+        {
+            OnSpawnPointIsFree = null;
+            CancelInvoke();
+        }
+
+        public void SetPool(IGameObjectPool objectPool)
+        {
+            _objectPool = objectPool;
         }
 
         public int Collect()
         {
-            ActivateGameObject(false);
+            _gameObject.SetActive(false);
+            _objectPool.BackToPool(_gameObject);
+            
             var respawnTime = GetRespawnTime();
             Invoke(nameof(CanBeRespawned), respawnTime);
+            
             return _collectibleConfig.Collectible.Score;
         }
-
-        public void Spawn()
+        
+        protected float GetRespawnTime()
         {
-            ActivateGameObject(true);
+            var respawnInfo = _collectibleConfig.Collectible.RespawnTime;
+            return Random.Range(respawnInfo.MinTime, respawnInfo.MaxTime);
         }
         
-        protected void ActivateGameObject(bool isActive)
-        {
-            gameObject.SetActive(isActive);
-        }
-
         protected void CanBeRespawned()
         {
             OnSpawnPointIsFree?.Invoke(this);

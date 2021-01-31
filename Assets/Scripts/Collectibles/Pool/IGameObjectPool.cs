@@ -2,9 +2,10 @@
 
 namespace Collectibles.Pool
 {
-    public interface IGameObjectPool<T> where T : ICollectible
+    public interface IGameObjectPool
     {
         void InstantiateInitialElements(Transform parent);
         GameObject GetInstance(Vector3 newPosition);
+        void BackToPool(GameObject instance);
     }
 }
