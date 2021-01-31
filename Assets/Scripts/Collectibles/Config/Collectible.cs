@@ -1,13 +1,18 @@
 ﻿using System;
 
-namespace Collectibles
+namespace Collectibles.Config
 {
     [Serializable]
     public class Collectible
     {
-        public int Score;
+        public enum CollectibleType
+        {
+            Coin,
+            Chest
+        }
+
+        public CollectibleType Type;
         public RespawnCooldown RespawnTime;
-        // TODO - Spawn items based on weight
         public int SpawnWeight;
 
         [Serializable]

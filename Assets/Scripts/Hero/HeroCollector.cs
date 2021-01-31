@@ -1,4 +1,5 @@
 ﻿using Collectibles;
+using Collectibles.Controllers;
 using Game;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -34,8 +35,8 @@ namespace Hero
             var iCollectible = otherGameObject.GetComponent<ICollectible>();
             Assert.IsNotNull(iCollectible, "The Collectible item don't have an ICollectible attached!");
             
-            var item = iCollectible.Collect();
-            _gameScoreboard.AddScore(item.Score);
+            var points = iCollectible.Collect();
+            _gameScoreboard.AddScore(points);
         }
     }
 }
