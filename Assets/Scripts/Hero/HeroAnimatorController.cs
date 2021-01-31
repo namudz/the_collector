@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using EventDispatcher;
+using Game.Signals;
+using UnityEngine;
 
 public class HeroAnimatorController : MonoBehaviour
 {
@@ -10,6 +13,20 @@ public class HeroAnimatorController : MonoBehaviour
     private static readonly int IsGrinding = Animator.StringToHash("IsGrinding");
     private static readonly int VelocityX = Animator.StringToHash("VelocityX");
     private static readonly int VelocityY = Animator.StringToHash("VelocityY");
+    private static readonly int IsGameOver = Animator.StringToHash("IsGameOver");
+    
+    private IEventDispatcher _eventDispatcher;
+
+    private void Awake()
+    {
+        _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+        _eventDispatcher.Subscribe<GameOverSignal>(SetGameOverTrigger);
+    }
+
+    private void OnDestroy()
+    {
+        _eventDispatcher.Unsubscribe<GameOverSignal>(SetGameOverTrigger);
+    }
 
     public void SetIsOnGround(bool isOnGround)
     {
@@ -44,5 +61,10 @@ public class HeroAnimatorController : MonoBehaviour
         {
             FlipSprite();
         }
+    }
+    
+    private void SetGameOverTrigger(ISignal signal)
+    {
+        _animator.SetTrigger(IsGameOver);
     }
 }
