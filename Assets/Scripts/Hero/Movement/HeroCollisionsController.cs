@@ -11,14 +11,8 @@ namespace Hero.Movement
         [Header("Collision")]
         [SerializeField] private LayerMask _floorLayerMask;
 
-        [Header("Ground Collision")]
-        [SerializeField] private Vector3 _groundColliderOffset;
-        [SerializeField] private Vector3 _lateralTopColliderOffset;
-        [SerializeField] private Vector3 _lateralBottomColliderOffset;
-        
-        [Header("Raycasts")]
-        [SerializeField] private float _raycastGroundLength = 0.3f;
-        [SerializeField] private float _raycastLateralLength = 0.22f;
+        [Header("Config")]
+        [SerializeField] private HeroStatsConfig _config;
 
         public bool IsOnGround { get; private set; }
         public bool IsGrindingWall  { get; private set; }
@@ -59,8 +53,8 @@ namespace Hero.Movement
         private void CheckIsGrounded()
         {
             var myPosition = transform.position;
-            IsOnGround = Physics2D.Raycast(myPosition + _groundColliderOffset, Vector2.down, _raycastGroundLength, _floorLayerMask)
-                          || Physics2D.Raycast(myPosition - _groundColliderOffset, Vector2.down, _raycastGroundLength, _floorLayerMask);
+            IsOnGround = Physics2D.Raycast(myPosition + _config.CollisionConfig.GroundColliderOffset, Vector2.down, _config.CollisionConfig.RaycastGroundLength, _floorLayerMask)
+                          || Physics2D.Raycast(myPosition - _config.CollisionConfig.GroundColliderOffset, Vector2.down, _config.CollisionConfig.RaycastGroundLength, _floorLayerMask);
         }
         
         private void CheckIsGrindingWall()
@@ -68,11 +62,11 @@ namespace Hero.Movement
             var wasGrinding = IsGrindingWall;
             
             var myPosition = transform.position;
-            var isGrindingRight = Physics2D.Raycast(myPosition + _lateralTopColliderOffset , Vector2.right, _raycastLateralLength, _floorLayerMask)
-                                  || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.right, _raycastLateralLength, _floorLayerMask);
+            var isGrindingRight = Physics2D.Raycast(myPosition + _config.CollisionConfig.LateralTopColliderOffset , Vector2.right, _config.CollisionConfig.RaycastLateralLength, _floorLayerMask)
+                                  || Physics2D.Raycast(myPosition - _config.CollisionConfig.LateralBottomColliderOffset, Vector2.right, _config.CollisionConfig.RaycastLateralLength, _floorLayerMask);
             
-            var isGrindingLeft = Physics2D.Raycast(myPosition + _lateralTopColliderOffset, Vector2.left, _raycastLateralLength, _floorLayerMask)
-                                 || Physics2D.Raycast(myPosition - _lateralBottomColliderOffset, Vector2.left, _raycastLateralLength, _floorLayerMask);
+            var isGrindingLeft = Physics2D.Raycast(myPosition + _config.CollisionConfig.LateralTopColliderOffset, Vector2.left, _config.CollisionConfig.RaycastLateralLength, _floorLayerMask)
+                                 || Physics2D.Raycast(myPosition - _config.CollisionConfig.LateralBottomColliderOffset, Vector2.left, _config.CollisionConfig.RaycastLateralLength, _floorLayerMask);
 
             IsGrindingWall = isGrindingRight || isGrindingLeft;
 
@@ -99,15 +93,15 @@ namespace Hero.Movement
             // Ground raycast
             Gizmos.color = Color.cyan;
             var myPosition = transform.position;
-            Gizmos.DrawLine(myPosition + _groundColliderOffset, myPosition + _groundColliderOffset + Vector3.down * _raycastGroundLength);
-            Gizmos.DrawLine(myPosition - _groundColliderOffset, myPosition - _groundColliderOffset + Vector3.down * _raycastGroundLength);
+            Gizmos.DrawLine(myPosition + _config.CollisionConfig.GroundColliderOffset, myPosition + _config.CollisionConfig.GroundColliderOffset + Vector3.down * _config.CollisionConfig.RaycastGroundLength);
+            Gizmos.DrawLine(myPosition - _config.CollisionConfig.GroundColliderOffset, myPosition - _config.CollisionConfig.GroundColliderOffset + Vector3.down * _config.CollisionConfig.RaycastGroundLength);
             
             // Lateral raycast
             Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(myPosition + _lateralTopColliderOffset, myPosition + _lateralTopColliderOffset + Vector3.right * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition + _lateralTopColliderOffset, myPosition + _lateralTopColliderOffset + Vector3.left * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition - _lateralBottomColliderOffset, myPosition - _lateralBottomColliderOffset + Vector3.right * _raycastLateralLength);
-            Gizmos.DrawLine(myPosition - _lateralBottomColliderOffset, myPosition - _lateralBottomColliderOffset + Vector3.left * _raycastLateralLength);
+            Gizmos.DrawLine(myPosition + _config.CollisionConfig.LateralTopColliderOffset, myPosition + _config.CollisionConfig.LateralTopColliderOffset + Vector3.right * _config.CollisionConfig.RaycastLateralLength);
+            Gizmos.DrawLine(myPosition + _config.CollisionConfig.LateralTopColliderOffset, myPosition + _config.CollisionConfig.LateralTopColliderOffset + Vector3.left * _config.CollisionConfig.RaycastLateralLength);
+            Gizmos.DrawLine(myPosition - _config.CollisionConfig.LateralBottomColliderOffset, myPosition - _config.CollisionConfig.LateralBottomColliderOffset + Vector3.right * _config.CollisionConfig.RaycastLateralLength);
+            Gizmos.DrawLine(myPosition - _config.CollisionConfig.LateralBottomColliderOffset, myPosition - _config.CollisionConfig.LateralBottomColliderOffset + Vector3.left * _config.CollisionConfig.RaycastLateralLength);
         }
     }
 }

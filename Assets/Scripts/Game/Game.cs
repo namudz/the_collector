@@ -39,6 +39,7 @@ namespace Game
         public void Load()
         {
             _mazeLoader.Load(_currentLevel.SceneName, Start);
+            _countdownTimer.SetInitialCountdown(_currentLevel.Countdown);
             // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
         }
     

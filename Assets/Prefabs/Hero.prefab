@@ -97,10 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bcbff9735ad44fb9830bd0856c1f489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animatorController: {fileID: 9140748637117213101}
   _rigidbody: {fileID: 3269943223145688117}
-  _speed: 4
-  _maxSpeed: 3.5
+  _config: {fileID: 11400000, guid: e94cc8025ca078a46bff6b3cba8aa35a, type: 2}
 --- !u!114 &4854992563043593168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,12 +115,7 @@ MonoBehaviour:
   _movementController: {fileID: 6224100024378896545}
   _animatorController: {fileID: 9140748637117213101}
   _rigidbody: {fileID: 3269943223145688117}
-  _jumpForce: 6
-  _jumpForceGrindingMultiplier: 1.1
-  _jumpDelay: 0.1
-  _fallMultiplier: 3
-  _fallMultiplierGrindingWall: 0.33
-  _gravity: 1
+  _config: {fileID: 11400000, guid: e94cc8025ca078a46bff6b3cba8aa35a, type: 2}
 --- !u!114 &474633350763516666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,11 +132,7 @@ MonoBehaviour:
   _floorLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  _groundColliderOffset: {x: 0.11, y: 0, z: 0}
-  _lateralTopColliderOffset: {x: 0, y: 0.2, z: 0}
-  _lateralBottomColliderOffset: {x: 0, y: 0.14, z: 0}
-  _raycastGroundLength: 0.3
-  _raycastLateralLength: 0.22
+  _config: {fileID: 11400000, guid: e94cc8025ca078a46bff6b3cba8aa35a, type: 2}
 --- !u!114 &684593009524386701
 MonoBehaviour:
   m_ObjectHideFlags: 0
