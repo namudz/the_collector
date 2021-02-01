@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using Collectibles.Pool;
 using Game.Signals;
 using Services.EventDispatcher;
-using Services.Pooling;
 using UnityEngine;
 
-namespace Collectibles.Pool
+namespace Services.Pooling
 {
     public abstract class GameObjectPool<T> : IGameObjectPool<T> where T : IPoolable
     {
