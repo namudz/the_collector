@@ -1,4 +1,20 @@
 # ZeptoLab Test
+# Controls
+- On Editor press Space or Left click to jump.
+- On device (Android) just tap the screen.
+
+- Credits:
+	- Game sprites by [Kenney](https://www.kenney.nl/assets) and [Bayat Games](https://bayat.itch.io/platform-game-assets).
+	- GUI sprites by me :)
+
+I've been working on a GitHub repository while creating the game. Currently is private, if you want to access send me your GitHub username or mail and I'll add you as colaborator.
+
+If you have any doubts or problem, please contact me. 
+
+Enjoy and have fun!
+
+<details>
+  <summary>Game basics</summary>
 ## Main menu:
 - [x] The main menu is an entry point to the game
 - [x] The main menu has a play button that redirects a user to the game scene
@@ -24,11 +40,12 @@
 - [x] the project should be written with C#
 - [x] there is the possibility of using free assets but not paid
 - [x] any external module/plugin/library/resource should be in the project
-- [ ] the game should be launchable either for iOS or Android
-- [ ] the result is a *.zip archive with everything inside
+- [x] the game should be launchable either for iOS or Android
+- [x] the result is a *.zip archive with everything inside
 
 ## Optional:
 - [x] the main menu shows the best coins result which has been ever achieved on this device
-- [ ] there are rare coins chests that gives the hero 10% of his current coins amount; such chests spawn much less often and have an expiration timer
-- [ ] coins fly to the HUD after being collected
-- [ ] use different solutions (shaders, ECS/DOTS, etc.) for demonstrating knowledge in that area
+- [x] there are rare coins chests that gives the hero 10% of his current coins amount; such chests spawn much less often and have an expiration timer
+- [x] coins fly to the HUD after being collected
+- [ ] use different solutions (shaders, ECS/DOTS, etc.) for demonstrating knowledge in that area - Didn't have enough time
+<details>
