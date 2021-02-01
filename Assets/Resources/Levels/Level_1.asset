@@ -15,4 +15,4 @@ MonoBehaviour:
   Level:
     Id: 1
     DisplayName: Maze 1
-    Countdown: 10
+    Countdown: 20

@@ -15,4 +15,4 @@ MonoBehaviour:
   Level:
     Id: 3
     DisplayName: Maze 3
-    Countdown: 12
+    Countdown: 30
