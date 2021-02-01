@@ -2,6 +2,7 @@
 # Controls
 - On Editor press Space or Left click to jump.
 - On device (Android) just tap the screen.
+- Configuration files can be found under Assets > Prefabs > ScirptableObjects.
 
 - Credits:
 	- Game sprites by [Kenney](https://www.kenney.nl/assets) and [Bayat Games](https://bayat.itch.io/platform-game-assets).
