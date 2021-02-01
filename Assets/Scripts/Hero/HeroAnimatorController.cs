@@ -1,5 +1,6 @@
-﻿using EventDispatcher;
-using Game.Signals;
+﻿using Game.Signals;
+using Services;
+using Services.EventDispatcher;
 using UnityEngine;
 
 public class HeroAnimatorController : MonoBehaviour
@@ -26,7 +27,7 @@ public class HeroAnimatorController : MonoBehaviour
     private void OnDestroy()
     {
         _eventDispatcher.Unsubscribe<GameOverSignal>(SetGameOverTrigger);
-        _eventDispatcher.Subscribe<GameResetSignal>(Reset);
+        _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
     }
 
     public void SetIsOnGround(bool isOnGround)

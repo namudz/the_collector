@@ -1,7 +1,8 @@
-﻿using EventDispatcher;
-using Game.Level;
-using SceneLoader;
+﻿using Game.Level;
 using Services;
+using Services.DataPersistence;
+using Services.EventDispatcher;
+using Services.SceneLoader;
 using UnityEngine;
 
 namespace InterfaceAdapters.Installers
@@ -19,8 +20,8 @@ namespace InterfaceAdapters.Installers
 
         public void InstallDependencies()
         {
-            var eventDispatcher = new EventDispatcher.EventDispatcher();
-            var sceneLoader = new SceneLoader.SceneLoader(eventDispatcher);
+            var eventDispatcher = new Services.EventDispatcher.EventDispatcher();
+            var sceneLoader = new SceneLoader(eventDispatcher);
             _levelsRepository = new LevelsRepository();
             var jsonParser = new JsonUtilityAdapter();
             _dataPersistence = new PlayerPrefsDataPersistence(jsonParser);

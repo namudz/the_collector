@@ -1,5 +1,6 @@
-﻿using EventDispatcher;
-using Game.Signals;
+﻿using Game.Signals;
+using Services;
+using Services.EventDispatcher;
 using UnityEngine;
 
 namespace Presentation.Game
