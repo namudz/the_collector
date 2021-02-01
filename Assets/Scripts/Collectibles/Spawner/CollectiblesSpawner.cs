@@ -12,11 +12,11 @@ namespace Collectibles.Spawner
         private IEnumerable<GameObject> _spawnPoints;
         private IEnumerable<ICollectibleConfig> _collectibleConfigs;
 
-        private readonly IGameObjectPool _coinPool;
-        private readonly IGameObjectPool _chestPool;
+        private readonly IGameObjectPool<CoinCollectible> _coinPool;
+        private readonly IGameObjectPool<ChestCollectible> _chestPool;
         private float _totalSpawnWeight;
 
-        public CollectiblesSpawner(IGameObjectPool coinPool, IGameObjectPool chestPool)
+        public CollectiblesSpawner(IGameObjectPool<CoinCollectible> coinPool, IGameObjectPool<ChestCollectible> chestPool)
         {
             _coinPool = coinPool;
             _chestPool = chestPool;
