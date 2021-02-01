@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Collectibles.Controllers;
 using EventDispatcher;
 using Game.Signals;
 using UnityEngine;
 
 namespace Collectibles.Pool
 {
-    public abstract class GameObjectPool<T> : IGameObjectPool where T : ICollectible
+    public abstract class GameObjectPool<T> : IGameObjectPool<T> where T : IPoolable
     {
         private readonly IEventDispatcher _eventDispatcher;
         private Transform _transform;
@@ -67,7 +66,6 @@ namespace Collectibles.Pool
         private void InstantiateElement()
         {
             var instance = GameObject.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
-            instance.GetComponent<ICollectible>().SetPool(this);
             instance.SetActive(false);
             _inactiveInstances.Add(instance);
         }

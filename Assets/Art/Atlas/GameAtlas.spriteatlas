@@ -46,7 +46,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 0c207361f5e78044e8796220086d659c, type: 3}
     - {fileID: 102900000, guid: bc1f57dd49fe67c4fb0159853267d50a, type: 3}
     - {fileID: 2800000, guid: 551f7025c0c1fd944bab8639ec85094d, type: 3}
-    totalSpriteSurfaceArea: 2916292
+    totalSpriteSurfaceArea: 3837892
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -355,7 +355,9 @@ SpriteAtlas:
   - {fileID: 4754900187991830200, guid: 551f7025c0c1fd944bab8639ec85094d, type: 3}
   - {fileID: -7617399346793438220, guid: 551f7025c0c1fd944bab8639ec85094d, type: 3}
   - {fileID: -4813965583877568317, guid: 551f7025c0c1fd944bab8639ec85094d, type: 3}
+  - {fileID: 21300000, guid: f01f3347b1060a24288b56d00a61f9f4, type: 3}
   - {fileID: 21300000, guid: 8321ed57773366745a8663c7a113a744, type: 3}
+  - {fileID: 21300000, guid: f7df2097a62710d4f905707858710cfb, type: 3}
   - {fileID: 3342357955609549794, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
   - {fileID: -7333876965372973600, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
   - {fileID: 818323235096636213, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
@@ -368,6 +370,7 @@ SpriteAtlas:
   - {fileID: 7050019240591463535, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
   - {fileID: 7350027275981715851, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
   - {fileID: -7143408991640105546, guid: 14aec89a53cf7e545affd977c9f97b16, type: 3}
+  - {fileID: 21300000, guid: cb4243baa27785149a2eeb8887d19ff9, type: 3}
   - {fileID: 21300000, guid: b51f3ccae9c76994093d9d1566c51ffc, type: 3}
   - {fileID: 21300000, guid: 2372452b025fc9e43accaf794f8e4d90, type: 3}
   - {fileID: 21300000, guid: a40d4d3bd87f1824780f58b054e384eb, type: 3}
@@ -679,7 +682,9 @@ SpriteAtlas:
   - tilesheet_complete_81
   - tilesheet_complete_79
   - tilesheet_complete_208
+  - maze_3_tiles
   - maze_1_background_hills
+  - maze_3_background
   - hero_idle_10
   - hero_idle_11
   - hero_idle_1
@@ -692,6 +697,7 @@ SpriteAtlas:
   - hero_idle_6
   - hero_idle_9
   - hero_idle_8
+  - maze_3_hills
   - maze_2_hills
   - maze_2_background
   - maze_1_background_tiles
