@@ -3,23 +3,25 @@ using Collectibles.Config;
 using Collectibles.Pool;
 using EventDispatcher;
 using Game.Signals;
+using Presentation.Game;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Collectibles.Controllers
 {
-    public abstract class CollectibleController : MonoBehaviour, ICollectible
+    public abstract class CollectibleController : MonoBehaviour, ICollectible, IPoolable
     {
         public event Action<CollectibleController> OnSpawnPointIsFree;
+
         public Collectible.CollectibleType Type => _collectibleConfig.Collectible.Type;
         
         [Header("Base Components")]
         [SerializeField] protected CollectibleConfig _collectibleConfig;
         [SerializeField] private BoxCollider2D _collider2D;
 
-        private IGameObjectPool _objectPool;
-        private GameObject _gameObject;
+        protected GameObject _gameObject;
         private IEventDispatcher _eventDispatcher;
+        private IGameObjectPool<CoinEffectView> _coinEffectPool;
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace Collectibles.Controllers
 
         protected virtual void GetDependencies()
         {
+            _coinEffectPool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
             _eventDispatcher.Subscribe<GameResetSignal>(Reset);
@@ -42,23 +45,25 @@ namespace Collectibles.Controllers
             CancelInvoke();
         }
 
-        public void SetPool(IGameObjectPool objectPool)
-        {
-            _objectPool = objectPool;
-        }
-
-        public void HandleSpawn()
+        public virtual void HandleSpawn()
         {
             _collider2D.enabled = true;
         }
 
-        public virtual int Collect()
+        public int Collect()
         {
             _collider2D.enabled = false;
+            ShowCoinEffect();
             UpdateViewOnCollect();
             DefaultCollect();
             
             return GetScore();
+        }
+
+        private void ShowCoinEffect()
+        {
+            var effectView = _coinEffectPool.GetInstance(transform.position);
+            effectView.GetComponent<CoinEffectView>()?.Show(GetScore());
         }
 
         protected abstract int GetScore();
@@ -72,26 +77,32 @@ namespace Collectibles.Controllers
             HideAndRespawn();
         }
 
-        private void HandleGameOver(ISignal signal)
+        protected virtual void HandleGameOver(ISignal signal)
         {
             CancelInvoke();
         }
 
         protected virtual void Reset(ISignal signal)
         {
-            _gameObject.SetActive(false);
-            _objectPool.BackToPool(_gameObject);
+            if (_gameObject.activeSelf)
+            {
+                _gameObject.SetActive(false);
+                BackToPool();
+            }
+            OnSpawnPointIsFree = null;
             CancelInvoke();
         }
 
-        private void HideAndRespawn()
+        protected void HideAndRespawn()
         {
             _gameObject.SetActive(false);
-            _objectPool.BackToPool(_gameObject);
+            BackToPool();
 
             var respawnTime = GetRespawnTime();
             Invoke(nameof(CanBeRespawned), respawnTime);
         }
+        
+        protected abstract void BackToPool();
 
         private float GetRespawnTime()
         {

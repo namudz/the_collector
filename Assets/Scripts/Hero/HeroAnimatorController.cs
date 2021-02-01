@@ -26,7 +26,7 @@ public class HeroAnimatorController : MonoBehaviour
     private void OnDestroy()
     {
         _eventDispatcher.Unsubscribe<GameOverSignal>(SetGameOverTrigger);
-        _eventDispatcher.Subscribe<GameResetSignal>(Reset);
+        _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
     }
 
     public void SetIsOnGround(bool isOnGround)
