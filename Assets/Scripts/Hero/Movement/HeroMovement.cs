@@ -28,7 +28,7 @@ namespace Hero.Movement
         private void OnDestroy()
         {
             _eventDispatcher.Unsubscribe<GameOverSignal>(StopMoving);
-            _eventDispatcher.Unsubscribe<GameResetSignal>(StopMoving);
+            _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
         }
 
         private void FixedUpdate()

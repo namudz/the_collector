@@ -45,12 +45,10 @@ namespace Collectibles.Controllers
 
         protected override int GetScore()
         {
-            if (_gameScoreboard.CurrentScore == 0)
-            {
-                return _chestConfig.MinScore;
-            }
-            
-            return Mathf.RoundToInt(_gameScoreboard.CurrentScore * (_chestConfig.AdditionalScorePercentage / 100f));
+            var percentageScore =
+                Mathf.RoundToInt(_gameScoreboard.CurrentScore * (_chestConfig.AdditionalScorePercentage / 100f));
+
+            return percentageScore > _chestConfig.MinScore ? percentageScore : _chestConfig.MinScore;
         }
 
         protected override void Reset(ISignal signal)
