@@ -12,6 +12,8 @@ namespace Hero.Movement
 
         [Header("Stats")]
         [SerializeField] private HeroStatsConfig _config;
+        
+        public bool IsFalling => _rigidbody.velocity.y < 0;
 
         private IGame _iGame;
         private IEventDispatcher _eventDispatcher;
@@ -68,6 +70,12 @@ namespace Hero.Movement
         {
             StopMoving();
             _direction = Vector2.right;
+        }
+
+        public void RecoverFullSpeed()
+        {
+            var newHorizontalSpeed = Mathf.Sign(_direction.x) * _config.MovementStats.MaxSpeed;
+            _rigidbody.velocity = new Vector2(newHorizontalSpeed, _rigidbody.velocity.y);
         }
     }
 }

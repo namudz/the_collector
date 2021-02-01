@@ -6,6 +6,7 @@ namespace Hero.Movement
     public class HeroCollisionsController : MonoBehaviour
     {
         [Header("Dependencies")]
+        [SerializeField] private HeroMovement _movementController;
         [SerializeField] private HeroAnimatorController _animatorController;
         [SerializeField] private ParticleSystem _particles;
         
@@ -39,8 +40,17 @@ namespace Hero.Movement
             
             CheckIsGrounded();
             CheckIsGrindingWall();
+            CheckRecoverSpeedAfterGrinding();
             UpdateAnimator();
             UpdateParticles();
+        }
+
+        private void CheckRecoverSpeedAfterGrinding()
+        {
+            if (_wasGrinding && !IsGrindingWall && _movementController.IsFalling)
+            {
+                _movementController.RecoverFullSpeed();
+            }
         }
 
         private void FixedUpdate()
