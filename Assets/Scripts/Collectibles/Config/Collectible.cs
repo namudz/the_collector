@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Collectibles.Config
 {
@@ -13,7 +14,7 @@ namespace Collectibles.Config
 
         public CollectibleType Type;
         public RespawnCooldown RespawnTime;
-        public int SpawnWeight;
+        [Min(0)] public int SpawnWeight;
 
         [Serializable]
         public class RespawnCooldown

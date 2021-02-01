@@ -15,7 +15,7 @@ MonoBehaviour:
   _config:
     Type: 0
     RespawnTime:
-      MinTime: 4
-      MaxTime: 8
+      MinTime: 3
+      MaxTime: 5
     SpawnWeight: 50
     Score: 2
