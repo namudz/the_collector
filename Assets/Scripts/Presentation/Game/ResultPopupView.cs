@@ -1,7 +1,8 @@
-﻿using EventDispatcher;
-using Game;
+﻿using Game;
 using Game.Signals;
-using SceneLoader;
+using Services;
+using Services.EventDispatcher;
+using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,4 +1,4 @@
-namespace EventDispatcher
+namespace Services.EventDispatcher
 {
     public delegate void SignalDelegate(ISignal signal);
     

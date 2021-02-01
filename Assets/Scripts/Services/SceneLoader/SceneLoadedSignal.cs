@@ -1,6 +1,6 @@
-using EventDispatcher;
+using Services.EventDispatcher;
 
-namespace SceneLoader
+namespace Services.SceneLoader
 {
     public class SceneLoadedSignal : ISignal
     {

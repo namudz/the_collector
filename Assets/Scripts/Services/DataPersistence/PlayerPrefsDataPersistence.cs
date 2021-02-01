@@ -1,7 +1,7 @@
 ﻿using Game.Level;
 using UnityEngine;
 
-namespace Services
+namespace Services.DataPersistence
 {
     public class PlayerPrefsDataPersistence : IDataPersistence
     {

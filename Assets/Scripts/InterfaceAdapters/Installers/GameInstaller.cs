@@ -1,11 +1,13 @@
 ﻿using Collectibles.Controllers;
 using Collectibles.Pool;
 using Collectibles.Spawner;
-using EventDispatcher;
 using Game;
 using InputHandler;
 using Presentation.Game;
-using SceneLoader;
+using Services;
+using Services.EventDispatcher;
+using Services.Pooling;
+using Services.SceneLoader;
 using UnityEngine;
 using Collectible = Collectibles.Config.Collectible;
 

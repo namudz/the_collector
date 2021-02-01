@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using EventDispatcher;
+using Services.EventDispatcher;
 using UnityEngine.SceneManagement;
 
-namespace SceneLoader
+namespace Services.SceneLoader
 {
     public class SceneLoader : ISceneLoader
     {
