@@ -4878,6 +4878,7 @@ MonoBehaviour:
   _collectiblePoolsDataConfigs:
   - {fileID: 11400000, guid: 653fa37948bc5974c825d535abb1469a, type: 2}
   - {fileID: 11400000, guid: 2773b7a9ffcbfa3488da56bfab921d06, type: 2}
+  - {fileID: 11400000, guid: 55c9567ba10c53d4fbd4085232eacaab, type: 2}
 --- !u!4 &1765041352
 Transform:
   m_ObjectHideFlags: 0

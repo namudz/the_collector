@@ -31,7 +31,7 @@ namespace Hero
         {
             if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
             
-            var iCollectible = otherGameObject.GetComponent<ICollectible>();
+            var iCollectible = otherGameObject.GetComponent<CollectibleController>();
             Assert.IsNotNull(iCollectible, "The Collectible item don't have an ICollectible attached!");
             
             var points = iCollectible.Collect();
