@@ -1,5 +1,4 @@
 # ZeptoLab Test
-# Controls
 - On Editor press Space or Left click to jump.
 - On device (Android) just tap the screen.
 - Configuration files can be found under Assets > Prefabs > ScirptableObjects.
@@ -16,6 +15,7 @@ Enjoy and have fun!
 
 <details>
   <summary>Game basics</summary>
+	
 ## Main menu:
 - [x] The main menu is an entry point to the game
 - [x] The main menu has a play button that redirects a user to the game scene
@@ -49,4 +49,3 @@ Enjoy and have fun!
 - [x] there are rare coins chests that gives the hero 10% of his current coins amount; such chests spawn much less often and have an expiration timer
 - [x] coins fly to the HUD after being collected
 - [ ] use different solutions (shaders, ECS/DOTS, etc.) for demonstrating knowledge in that area - Didn't have enough time
-<details>
