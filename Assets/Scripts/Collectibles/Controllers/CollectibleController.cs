@@ -45,11 +45,6 @@ namespace Collectibles.Controllers
             CancelInvoke();
         }
 
-        public void SetPool<T>(GameObjectPool<T> gameObjectPool) where T : IPoolable
-        {
-            var x = gameObjectPool;
-        }
-
         public virtual void HandleSpawn()
         {
             _collider2D.enabled = true;
@@ -94,6 +89,7 @@ namespace Collectibles.Controllers
                 _gameObject.SetActive(false);
                 BackToPool();
             }
+            OnSpawnPointIsFree = null;
             CancelInvoke();
         }
 
