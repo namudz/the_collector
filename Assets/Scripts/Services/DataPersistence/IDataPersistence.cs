@@ -1,6 +1,6 @@
 ﻿using Game.Level;
 
-namespace Services
+namespace Services.DataPersistence
 {
     public interface IDataPersistence
     {

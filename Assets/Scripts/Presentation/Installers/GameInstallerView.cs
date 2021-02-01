@@ -2,6 +2,7 @@
 using Collectibles.Spawner;
 using Game;
 using InterfaceAdapters.Installers;
+using Services;
 using UnityEngine;
 
 namespace Presentation.Installers

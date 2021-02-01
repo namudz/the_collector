@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace EventDispatcher
+namespace Services.EventDispatcher
 {
     public class EventDispatcher : IEventDispatcher
     {

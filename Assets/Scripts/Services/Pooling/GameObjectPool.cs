@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using EventDispatcher;
 using Game.Signals;
+using Services.EventDispatcher;
+using Services.Pooling;
 using UnityEngine;
 
 namespace Collectibles.Pool

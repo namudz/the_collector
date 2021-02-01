@@ -1,4 +1,4 @@
-﻿using EventDispatcher;
+﻿using Services.EventDispatcher;
 
 namespace Game.Signals
 {

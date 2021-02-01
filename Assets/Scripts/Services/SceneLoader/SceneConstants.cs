@@ -1,4 +1,4 @@
-﻿namespace SceneLoader
+﻿namespace Services.SceneLoader
 {
     public static class  SceneConstants
     {

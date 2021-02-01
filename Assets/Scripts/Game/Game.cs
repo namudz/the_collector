@@ -1,5 +1,5 @@
-﻿using EventDispatcher;
-using Game.Signals;
+﻿using Game.Signals;
+using Services.EventDispatcher;
 
 namespace Game
 {

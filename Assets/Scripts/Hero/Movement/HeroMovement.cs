@@ -1,6 +1,7 @@
-﻿using EventDispatcher;
-using Game;
+﻿using Game;
 using Game.Signals;
+using Services;
+using Services.EventDispatcher;
 using UnityEngine;
 
 namespace Hero.Movement

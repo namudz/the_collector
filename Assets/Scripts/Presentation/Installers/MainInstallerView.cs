@@ -1,5 +1,6 @@
 ﻿using Collectibles.Pool;
 using InterfaceAdapters.Installers;
+using Services;
 using UnityEngine;
 
 namespace Presentation.Installers

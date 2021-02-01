@@ -1,6 +1,7 @@
 ﻿using Game;
 using Game.Level;
-using SceneLoader;
+using Services;
+using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

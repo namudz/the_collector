@@ -1,7 +1,9 @@
 ﻿using Collectibles.Config;
 using Collectibles.Pool;
-using EventDispatcher;
 using Presentation.Game.Collectibles;
+using Services;
+using Services.EventDispatcher;
+using Services.Pooling;
 using UnityEngine;
 
 namespace Collectibles.Controllers

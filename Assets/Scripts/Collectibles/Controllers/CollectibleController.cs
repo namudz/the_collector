@@ -1,9 +1,11 @@
 ﻿using System;
 using Collectibles.Config;
 using Collectibles.Pool;
-using EventDispatcher;
 using Game.Signals;
 using Presentation.Game;
+using Services;
+using Services.EventDispatcher;
+using Services.Pooling;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
