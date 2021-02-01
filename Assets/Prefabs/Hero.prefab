@@ -4883,6 +4883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c242d69624324464a89093bb1daff88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementController: {fileID: 6224100024378896545}
   _animatorController: {fileID: 9140748637117213101}
   _particles: {fileID: 4006341216694169252}
   _floorLayerMask:
