@@ -55,7 +55,7 @@ namespace Presentation.Game
         private void DelayedStartAgain()
         {
             var iGame = ServiceLocator.Instance.GetService<IGame>();
-            iGame.Start();
+            iGame.Start(true);
         }
 
         private void BackToHome()

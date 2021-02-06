@@ -9,7 +9,7 @@
         void SetCurrentLevelData(Level.Level level);
         void Load();
         void Tick();
-        void Start();
+        void Start(bool directStart = false);
         void Reset();
     }
 }
