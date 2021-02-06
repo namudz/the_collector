@@ -10,7 +10,8 @@ namespace Hero.Movement
     {
         [Header("Components")]
         [SerializeField] private Rigidbody2D _rigidbody;
-
+        [SerializeField] private HeroCollisionsController _collisionsController;
+        
         [Header("Stats")]
         [SerializeField] private HeroStatsConfig _config;
         
@@ -44,7 +45,7 @@ namespace Hero.Movement
         public void AccelerateOnJump()
         {
             InvertDirection();
-            _rigidbody.AddForce(_direction * _config.MovementStats.Speed, ForceMode2D.Impulse);
+            _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX, ForceMode2D.Impulse);
         }
 
         private void InvertDirection()
@@ -54,11 +55,19 @@ namespace Hero.Movement
 
         private void Move()
         {
-            _rigidbody.AddForce(_direction * _config.MovementStats.Speed);
-            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeed)
+            _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX);
+            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeedX)
             {
-                var newHorizontalSpeed = Mathf.Sign(_rigidbody.velocity.x) * _config.MovementStats.MaxSpeed;
-                _rigidbody.velocity = new Vector2(newHorizontalSpeed, _rigidbody.velocity.y);
+                var newSpeedX = Mathf.Sign(_rigidbody.velocity.x) * _config.MovementStats.MaxSpeedX;
+                _rigidbody.velocity = new Vector2(newSpeedX, _rigidbody.velocity.y);
+            }
+
+            if (_collisionsController.IsGrindingWall 
+                && _rigidbody.velocity.y < 0
+                && Mathf.Abs(_rigidbody.velocity.y) > _config.MovementStats.MaxSpeedY)
+            {
+                var newSpeedY = Mathf.Sign(_rigidbody.velocity.y) * _config.MovementStats.MaxSpeedY;
+                _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, newSpeedY);
             }
         }
         
@@ -75,7 +84,7 @@ namespace Hero.Movement
 
         public void RecoverFullSpeed()
         {
-            var newHorizontalSpeed = Mathf.Sign(_direction.x) * _config.MovementStats.MaxSpeed;
+            var newHorizontalSpeed = Mathf.Sign(_direction.x) * _config.MovementStats.MaxSpeedX;
             _rigidbody.velocity = new Vector2(newHorizontalSpeed, _rigidbody.velocity.y);
         }
     }
