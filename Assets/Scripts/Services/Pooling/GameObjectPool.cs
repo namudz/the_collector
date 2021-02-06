@@ -13,8 +13,8 @@ namespace Services.Pooling
         private readonly GameObject _prefab;
         private readonly int _initialAmount;
 
-        private readonly List<GameObject> _inactiveInstances;
-        private readonly List<GameObject> _activeInstances;
+        private readonly Queue<GameObject> _inactiveInstances;
+        private readonly Queue<GameObject> _activeInstances;
 
         public GameObjectPool(GameObjectPoolData data, IEventDispatcher eventDispatcher)
         {
@@ -23,8 +23,8 @@ namespace Services.Pooling
             _prefab = data.Prefab;
             _initialAmount = data.InitialAmount;
             
-            _inactiveInstances = new List<GameObject>(_initialAmount);
-            _activeInstances = new List<GameObject>(_initialAmount);
+            _inactiveInstances = new Queue<GameObject>(_initialAmount);
+            _activeInstances = new Queue<GameObject>(_initialAmount);
             
             _eventDispatcher.Subscribe<GameDestroyedSignal>(ResetCollections);
         }
@@ -45,30 +45,29 @@ namespace Services.Pooling
                 InstantiateElement();
             }
 
-            var instance = _inactiveInstances[0];
-            _inactiveInstances.RemoveAt(0);
+            var instance = _inactiveInstances.Dequeue();
             
             instance.transform.position = newPosition;
             instance.SetActive(true);
-            _activeInstances.Add(instance);
+            _activeInstances.Enqueue(instance);
             
             return instance;
         }
 
         public void BackToPool(GameObject instance)
         {
-            _activeInstances.Remove(instance);
+            _activeInstances.Dequeue();
             if (!_inactiveInstances.Contains(instance))
             {
-                _inactiveInstances.Add(instance);
+                _inactiveInstances.Enqueue(instance);
             }
         }
 
         private void InstantiateElement()
         {
-            var instance = GameObject.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
+            var instance = Object.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
             instance.SetActive(false);
-            _inactiveInstances.Add(instance);
+            _inactiveInstances.Enqueue(instance);
         }
 
         private void ResetCollections(ISignal signal)

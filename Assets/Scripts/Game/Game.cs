@@ -1,4 +1,5 @@
 ﻿using Game.Signals;
+using InterfaceAdapters.Signals;
 using Services.EventDispatcher;
 
 namespace Game
@@ -45,6 +46,7 @@ namespace Game
     
         public void Start()
         {
+            _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));
             _mazeLoader.SpawnElements();
             ResetComponents();
             _countdownTimer.StartCountdown();

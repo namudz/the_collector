@@ -2,7 +2,6 @@
 {
     public interface IInstaller
     {
-        void Register();
         void InstallDependencies();
     }
 }
