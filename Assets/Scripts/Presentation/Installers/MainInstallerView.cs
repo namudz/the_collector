@@ -20,7 +20,6 @@ namespace Presentation.Installers
             if (ServiceLocator.Instance.ServiceExist<IMainInstaller>()) { return; }
 
             var installer = new MainInstaller();
-            installer.Register();
             installer.InstallDependencies();
             installer.LoadLevels();
         }
