@@ -9,7 +9,7 @@ namespace Presentation.LoadingScreen
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Animator _spinnerAnimator;
-        [SerializeField] private float _minVisibleTime = 2f;
+        [SerializeField] private float _minVisibleTime = 1.5f;
         
         private IEventDispatcher _eventDispatcher;
         private float _showTime;
@@ -57,6 +57,7 @@ namespace Presentation.LoadingScreen
         private void DelayedHide()
         {
             EnableCanvas(false);
+            _eventDispatcher.Dispatch(new LoadingHideDelayedFinished());
         }
     }
 }
