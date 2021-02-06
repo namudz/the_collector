@@ -1,6 +1,8 @@
 ﻿using Game;
 using Game.Level;
+using InterfaceAdapters.Signals;
 using Services;
+using Services.EventDispatcher;
 using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
@@ -37,6 +39,9 @@ namespace Presentation.MainScreen
         {
             var game = ServiceLocator.Instance.GetService<IGame>();
             game.SetCurrentLevelData(_levelData);
+
+            var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            eventDispatcher.Dispatch(new ShowLoadingScreenSignal(true));
             
             var sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
             sceneLoader.LoadScene(SceneConstants.Scene.Game);
