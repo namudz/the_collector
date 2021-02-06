@@ -39,19 +39,22 @@ namespace Game
 
         public void Load()
         {
-            _mazeLoader.Load(_currentLevel.SceneName, Start);
+            _mazeLoader.Load(_currentLevel.SceneName, () => Start());
             _countdownTimer.SetInitialCountdown(_currentLevel.Countdown);
             // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
         }
     
-        public void Start()
+        public void Start(bool directStart = false)
         {
-            _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));
-            _mazeLoader.SpawnElements();
-            ResetComponents();
-            _countdownTimer.StartCountdown();
-
-            _eventDispatcher.Dispatch(new GameStartedSignal());
+            if (directStart)
+            {
+                StartGame(null);
+            }
+            else
+            {
+                _eventDispatcher.Subscribe<LoadingHideDelayedFinished>(StartGame);
+                _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));    
+            }
         }
 
         public void Tick()
@@ -66,6 +69,14 @@ namespace Game
         {
             _eventDispatcher.Dispatch(new GameResetSignal());
             _mazeLoader.Reset();
+        }
+
+        private void StartGame(ISignal signal)
+        {
+            _mazeLoader.SpawnElements();
+            ResetComponents();
+            _countdownTimer.StartCountdown();
+            _eventDispatcher.Dispatch(new GameStartedSignal());
         }
         
         private void ResetComponents()
