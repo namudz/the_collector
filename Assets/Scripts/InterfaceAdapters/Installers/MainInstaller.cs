@@ -7,20 +7,15 @@ using UnityEngine;
 
 namespace InterfaceAdapters.Installers
 {
-    public class MainInstaller : IMainInstaller
+    public class MainInstaller : IInstaller
     {
         private ILevelsRepository _levelsRepository;
         private IDataPersistence _dataPersistence;
         private const string LevelConfigsPath = "Levels";
 
-        public void Register()
-        {
-            ServiceLocator.Instance.RegisterService<IMainInstaller>(this);
-        }
-
         public void InstallDependencies()
         {
-            var eventDispatcher = new Services.EventDispatcher.EventDispatcher();
+            var eventDispatcher = new EventDispatcher();
             var sceneLoader = new SceneLoader(eventDispatcher);
             _levelsRepository = new LevelsRepository();
             var jsonParser = new JsonUtilityAdapter();
