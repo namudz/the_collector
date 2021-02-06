@@ -14,8 +14,9 @@ namespace Hero
     [Serializable]
     public class MovementStats
     {
-        public float Speed;
-        public float MaxSpeed;
+        public float SpeedX;
+        public float MaxSpeedX;
+        public float MaxSpeedY;
     }
     
     [Serializable]
