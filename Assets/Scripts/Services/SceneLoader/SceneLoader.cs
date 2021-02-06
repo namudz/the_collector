@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using InterfaceAdapters.Signals;
 using Services.EventDispatcher;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +26,6 @@ namespace Services.SceneLoader
         public void LoadScene(SceneConstants.Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
         {
             _sceneLoaded = scene;
-            _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(true));
             LoadUnityScene(_scenes[scene], mode, DispatchSceneLoadedEvent);
         }
         
