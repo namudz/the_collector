@@ -4852,6 +4852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 3269943223145688117}
+  _collisionsController: {fileID: 474633350763516666}
   _config: {fileID: 11400000, guid: e94cc8025ca078a46bff6b3cba8aa35a, type: 2}
 --- !u!114 &4854992563043593168
 MonoBehaviour:
