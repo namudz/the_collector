@@ -302,7 +302,7 @@ MonoBehaviour:
   m_text: The Collector
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f7d093d8f474c0a4585603c3abc3856f, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 6f5351c1229c9944abd876ecb1d6514c, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 2af1588bbe1812541922f1425ac4e3f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

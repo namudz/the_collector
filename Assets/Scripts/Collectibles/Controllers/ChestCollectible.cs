@@ -1,5 +1,5 @@
 ﻿using Collectibles.Config;
-using Collectibles.Pool;
+using Game;
 using Presentation.Game.Collectibles;
 using Services;
 using Services.EventDispatcher;
@@ -18,10 +18,12 @@ namespace Collectibles.Controllers
         private IGameScoreboard _gameScoreboard;
         private Chest _chestConfig;
         private IGameObjectPool<ChestCollectible> _pool;
+        private IGame _iGame;
 
         protected override void GetDependencies()
         {
             base.GetDependencies();
+            _iGame = ServiceLocator.Instance.GetService<IGame>();
             _gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
             _chestConfig = _collectibleConfig.Collectible as Chest;
             _pool = ServiceLocator.Instance.GetService<IGameObjectPool<ChestCollectible>>();
@@ -30,8 +32,10 @@ namespace Collectibles.Controllers
         public override void HandleSpawn()
         {
             base.HandleSpawn();
-            _countdownView.StartCountdown(_chestConfig.ExpirationTime);
-            Invoke(nameof(HideAndRespawn), _chestConfig.ExpirationTime);
+            if (_iGame.HasGameStarted)
+            {
+                StartCountdown();
+            }
         }
 
         protected override void UpdateViewOnCollect()
@@ -69,6 +73,19 @@ namespace Collectibles.Controllers
         {
             _countdownView.StopCountdown();
             base.HandleGameOver(signal);
+        }
+        
+        protected override void HandleGameStarted(ISignal signal)
+        {
+            StartCountdown();
+            base.HandleGameStarted(signal);
+        }
+
+        private void StartCountdown()
+        {
+            if (!_gameObject.activeSelf) { return; }
+            _countdownView.StartCountdown(_chestConfig.ExpirationTime);
+            Invoke(nameof(HideAndRespawn), _chestConfig.ExpirationTime);
         }
     }
 }

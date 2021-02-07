@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Presentation.Game
+namespace Presentation.Game.GUI
 {
     public class SaveScorePopupView : MonoBehaviour
     {
