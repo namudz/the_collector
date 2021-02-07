@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Presentation.Game
+namespace Presentation.Game.GUI
 {
     public class ResultPopupView : MonoBehaviour
     {
@@ -55,7 +55,7 @@ namespace Presentation.Game
         private void DelayedStartAgain()
         {
             var iGame = ServiceLocator.Instance.GetService<IGame>();
-            iGame.Start(true);
+            iGame.TryAgain();
         }
 
         private void BackToHome()
