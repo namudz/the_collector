@@ -22,7 +22,7 @@ namespace Collectibles.Controllers
         [SerializeField] private BoxCollider2D _collider2D;
 
         protected GameObject _gameObject;
-        private IEventDispatcher _eventDispatcher;
+        protected IEventDispatcher _eventDispatcher;
         private IGameObjectPool<CoinEffectView> _coinEffectPool;
 
         private void Awake()
@@ -37,6 +37,7 @@ namespace Collectibles.Controllers
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
             _eventDispatcher.Subscribe<GameResetSignal>(Reset);
+            _eventDispatcher.Subscribe<GameStartedSignal>(HandleGameStarted);
         }
 
         private void OnDestroy()
@@ -44,6 +45,7 @@ namespace Collectibles.Controllers
             OnSpawnPointIsFree = null;
             _eventDispatcher.Unsubscribe<GameOverSignal>(HandleGameOver);
             _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
+            _eventDispatcher.Unsubscribe<GameStartedSignal>(HandleGameStarted);
             CancelInvoke();
         }
 
@@ -82,6 +84,11 @@ namespace Collectibles.Controllers
         protected virtual void HandleGameOver(ISignal signal)
         {
             CancelInvoke();
+        }
+
+        protected virtual void HandleGameStarted(ISignal signal)
+        {
+            
         }
 
         protected virtual void Reset(ISignal signal)

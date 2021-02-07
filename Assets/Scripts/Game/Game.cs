@@ -15,7 +15,6 @@ namespace Game
         private readonly IGameScoreboard _gameScoreboard;
         private readonly IEventDispatcher _eventDispatcher;
         private Level.Level _currentLevel;
-        private bool _isGameReady;
 
         public Game(
             IMazeLoader mazeLoader, 
@@ -29,7 +28,6 @@ namespace Game
             _eventDispatcher = eventDispatcher;
             HasGameStarted = false;
             IsGameOver = false;
-            _isGameReady = false;
 
             _countdownTimer.OnCountdownFinished += HandleGameOver;
         }
@@ -47,19 +45,10 @@ namespace Game
 
         public void GetReady()
         {
-            _mazeLoader.SpawnElements();
             ResetComponents();
+            _mazeLoader.SpawnElements();
             _eventDispatcher.Dispatch(new GameReadySignal());
-
             _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));
-        }
-
-        public void TryAgain()
-        {
-            _mazeLoader.SpawnElements();
-            ResetComponents();
-            _eventDispatcher.Dispatch(new GameReadySignal());
-            Start();
         }
     
         public void Start()
@@ -85,6 +74,7 @@ namespace Game
         
         private void ResetComponents()
         {
+            HasGameStarted = false;
             IsGameOver = false;
             _gameScoreboard.Reset();
         }
