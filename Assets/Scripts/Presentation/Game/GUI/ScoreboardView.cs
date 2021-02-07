@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Presentation.Game
+namespace Presentation.Game.GUI
 {
     public class ScoreboardView : MonoBehaviour
     {

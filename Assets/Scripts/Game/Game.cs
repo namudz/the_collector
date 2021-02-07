@@ -15,6 +15,7 @@ namespace Game
         private readonly IGameScoreboard _gameScoreboard;
         private readonly IEventDispatcher _eventDispatcher;
         private Level.Level _currentLevel;
+        private bool _isGameReady;
 
         public Game(
             IMazeLoader mazeLoader, 
@@ -28,6 +29,7 @@ namespace Game
             _eventDispatcher = eventDispatcher;
             HasGameStarted = false;
             IsGameOver = false;
+            _isGameReady = false;
 
             _countdownTimer.OnCountdownFinished += HandleGameOver;
         }
@@ -39,22 +41,32 @@ namespace Game
 
         public void Load()
         {
-            _mazeLoader.Load(_currentLevel.SceneName, () => Start());
+            _mazeLoader.Load(_currentLevel.SceneName, GetReady);
             _countdownTimer.SetInitialCountdown(_currentLevel.Countdown);
-            // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
+        }
+
+        public void GetReady()
+        {
+            _mazeLoader.SpawnElements();
+            ResetComponents();
+            _eventDispatcher.Dispatch(new GameReadySignal());
+
+            _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));
+        }
+
+        public void TryAgain()
+        {
+            _mazeLoader.SpawnElements();
+            ResetComponents();
+            _eventDispatcher.Dispatch(new GameReadySignal());
+            Start();
         }
     
-        public void Start(bool directStart = false)
+        public void Start()
         {
-            if (directStart)
-            {
-                StartGame(null);
-            }
-            else
-            {
-                _eventDispatcher.Subscribe<LoadingHideDelayedFinished>(StartGame);
-                _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));    
-            }
+            HasGameStarted = true;
+            _countdownTimer.StartCountdown();
+            _eventDispatcher.Dispatch(new GameStartedSignal());
         }
 
         public void Tick()
@@ -70,18 +82,9 @@ namespace Game
             _eventDispatcher.Dispatch(new GameResetSignal());
             _mazeLoader.Reset();
         }
-
-        private void StartGame(ISignal signal)
-        {
-            _mazeLoader.SpawnElements();
-            ResetComponents();
-            _countdownTimer.StartCountdown();
-            _eventDispatcher.Dispatch(new GameStartedSignal());
-        }
         
         private void ResetComponents()
         {
-            HasGameStarted = true;
             IsGameOver = false;
             _gameScoreboard.Reset();
         }

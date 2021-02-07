@@ -3,7 +3,7 @@ using Services;
 using Services.EventDispatcher;
 using UnityEngine;
 
-namespace Presentation.Game
+namespace Presentation.Game.GUI
 {
     public class ResultCanvasView : MonoBehaviour
     {
