@@ -1,4 +1,5 @@
 ﻿using Game.Signals;
+using InterfaceAdapters.Signals;
 using Services;
 using Services.EventDispatcher;
 using UnityEngine;
@@ -17,14 +18,14 @@ namespace Presentation.Game.GUI
         {
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(Show);
-            _eventDispatcher.Subscribe<GameStartedSignal>(Hide);
+            _eventDispatcher.Subscribe<GameReadySignal>(Hide);
             Hide();
         }
 
         private void OnDestroy()
         {
             _eventDispatcher.Unsubscribe<GameOverSignal>(Show);
-            _eventDispatcher.Unsubscribe<GameStartedSignal>(Hide);
+            _eventDispatcher.Unsubscribe<GameReadySignal>(Hide);
         }
 
         private void Hide(ISignal signal = null)

@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2019819178790084097}
   _spinnerAnimator: {fileID: 4029208641567810347}
+  _minVisibleTime: 1.5
 --- !u!1001 &6916053402854222105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +196,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2019819178790084096}
     m_Modifications:
+    - target: {fileID: 2199418586567156033, guid: 79c90e9610839a5409afdd3d657024d5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ac76dda3d77d08348bf7a99267225486,
+        type: 3}
     - target: {fileID: 7498596751823374910, guid: 79c90e9610839a5409afdd3d657024d5,
         type: 3}
       propertyPath: m_Name

@@ -13,9 +13,6 @@ namespace Presentation.Game.GUI
         [SerializeField] private Canvas _myCanvas;
         [SerializeField] private Button _button;
 
-        private const float VisibleAlpha = 1f;
-        private const float InvisibleAlpha = 0f;
-        
         private IEventDispatcher _eventDispatcher;
         private IGame _iGame;
 
@@ -26,6 +23,11 @@ namespace Presentation.Game.GUI
             
             _eventDispatcher.Subscribe<GameReadySignal>(Show);
             _button.onClick.AddListener(StartGame);
+        }
+
+        private void OnDestroy()
+        {
+            _eventDispatcher.Unsubscribe<GameReadySignal>(Show);
         }
 
         private void Show(ISignal signal)

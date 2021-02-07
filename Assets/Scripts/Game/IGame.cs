@@ -10,7 +10,6 @@
         void Load();
         void Tick();
         void GetReady();
-        void TryAgain();
         void Start();
         void Reset();
     }

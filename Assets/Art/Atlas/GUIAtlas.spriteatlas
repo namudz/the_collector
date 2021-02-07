@@ -43,12 +43,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 100e36566d535b64f882ffbc81fd28c7, type: 3}
-    totalSpriteSurfaceArea: 36624
+    totalSpriteSurfaceArea: 45840
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: b5d374d1819d06c4faac965481645b44, type: 3}
   - {fileID: 21300000, guid: c2268a336b412a74f8973a7ae466f7f4, type: 3}
+  - {fileID: 21300000, guid: ac76dda3d77d08348bf7a99267225486, type: 3}
   - {fileID: 21300000, guid: 81d50944e01e4cf429efc957a5e2ca42, type: 3}
   - {fileID: 21300000, guid: 899c61969f841d74da0ba9855c2bf8e3, type: 3}
   - {fileID: 21300000, guid: 820dbdd89c61fea4091c36d27d380dd9, type: 3}
@@ -58,6 +59,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - icon_clock
   - icon_save
+  - icon_loading_empty
   - button_default
   - bar_fill
   - icon_cancel
