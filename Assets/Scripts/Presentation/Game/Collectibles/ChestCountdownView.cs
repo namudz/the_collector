@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,25 +13,18 @@ namespace Presentation.Game.Collectibles
         private float _expirationTime;
         private Coroutine _countdownCoroutine;
 
+        private void OnEnable()
+        {
+            Reset();
+        }
+
         public void StartCountdown(float expirationTime)
         {
-            _myCanvas.enabled = true;
-            _countdownFillImage.fillAmount = 1f;
             _expirationTime = expirationTime;
+            Reset();
             _countdownCoroutine = StartCoroutine(Countdown());
         }
 
-        private IEnumerator Countdown()
-        {
-            var elapsedTime = 0f;
-            while (_expirationTime > 0)
-            {
-                elapsedTime += Time.deltaTime;
-                _countdownFillImage.fillAmount = 1f - elapsedTime / _expirationTime;
-                yield return null;
-            }
-        }
-        
         public void StopCountdown()
         {
             if (_countdownCoroutine != null)
@@ -43,6 +37,23 @@ namespace Presentation.Game.Collectibles
         {
             StopCountdown();
             _myCanvas.enabled = false;
+        }
+        
+        private void Reset()
+        {
+            _myCanvas.enabled = true;
+            _countdownFillImage.fillAmount = 1f;
+        }
+
+        private IEnumerator Countdown()
+        {
+            var elapsedTime = 0f;
+            while (_expirationTime > 0)
+            {
+                elapsedTime += Time.deltaTime;
+                _countdownFillImage.fillAmount = 1f - elapsedTime / _expirationTime;
+                yield return null;
+            }
         }
     }
 }

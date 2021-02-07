@@ -1,4 +1,5 @@
 ﻿using Game.Signals;
+using InterfaceAdapters.Signals;
 using Services.EventDispatcher;
 
 namespace Game
@@ -38,17 +39,22 @@ namespace Game
 
         public void Load()
         {
-            _mazeLoader.Load(_currentLevel.SceneName, Start);
+            _mazeLoader.Load(_currentLevel.SceneName, GetReady);
             _countdownTimer.SetInitialCountdown(_currentLevel.Countdown);
-            // TODO - If enough time, add Loading Canvas to show when loading the level & its fully loaded
+        }
+
+        public void GetReady()
+        {
+            ResetComponents();
+            _mazeLoader.SpawnElements();
+            _eventDispatcher.Dispatch(new GameReadySignal());
+            _eventDispatcher.Dispatch(new ShowLoadingScreenSignal(false));
         }
     
         public void Start()
         {
-            _mazeLoader.SpawnElements();
-            ResetComponents();
+            HasGameStarted = true;
             _countdownTimer.StartCountdown();
-
             _eventDispatcher.Dispatch(new GameStartedSignal());
         }
 
@@ -68,7 +74,7 @@ namespace Game
         
         private void ResetComponents()
         {
-            HasGameStarted = true;
+            HasGameStarted = false;
             IsGameOver = false;
             _gameScoreboard.Reset();
         }

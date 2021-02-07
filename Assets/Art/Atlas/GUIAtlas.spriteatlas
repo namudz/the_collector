@@ -43,24 +43,30 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 100e36566d535b64f882ffbc81fd28c7, type: 3}
-    totalSpriteSurfaceArea: 27408
+    totalSpriteSurfaceArea: 48144
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: b5d374d1819d06c4faac965481645b44, type: 3}
   - {fileID: 21300000, guid: c2268a336b412a74f8973a7ae466f7f4, type: 3}
+  - {fileID: 21300000, guid: ac76dda3d77d08348bf7a99267225486, type: 3}
   - {fileID: 21300000, guid: 81d50944e01e4cf429efc957a5e2ca42, type: 3}
   - {fileID: 21300000, guid: 899c61969f841d74da0ba9855c2bf8e3, type: 3}
   - {fileID: 21300000, guid: 820dbdd89c61fea4091c36d27d380dd9, type: 3}
+  - {fileID: 21300000, guid: 89969c9ae4680e849bbb1c3567707b4b, type: 3}
   - {fileID: 21300000, guid: 975acffad3dd94e46b9e0e5fabe10bc1, type: 3}
   - {fileID: 21300000, guid: dfbc735eb2db3104a924806d34a8119f, type: 3}
+  - {fileID: 21300000, guid: fe38280ff1fe78d41b7beef15d74049f, type: 3}
   m_PackedSpriteNamesToIndex:
   - icon_clock
   - icon_save
+  - icon_loading_empty
   - button_default
   - bar_fill
   - icon_cancel
+  - icon_loading
   - gradient
   - icon_confirm
+  - icon_flag
   m_Tag: GUIAtlas
   m_IsVariant: 0

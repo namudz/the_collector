@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: HeroStats
   m_EditorClassIdentifier: 
   MovementStats:
-    Speed: 4
-    MaxSpeed: 3.5
+    SpeedX: 4
+    MaxSpeedX: 3.5
+    MaxSpeedY: 2.5
   JumpStats:
     Force: 6
     ForceGrindingMultiplier: 1.1

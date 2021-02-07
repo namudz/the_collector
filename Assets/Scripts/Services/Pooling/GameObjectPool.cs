@@ -66,7 +66,7 @@ namespace Services.Pooling
 
         private void InstantiateElement()
         {
-            var instance = GameObject.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
+            var instance = Object.Instantiate(_prefab, _transform.position, Quaternion.identity, _transform);
             instance.SetActive(false);
             _inactiveInstances.Add(instance);
         }
