@@ -1,4 +1,5 @@
 # The Collector
+![demo](/Demo/the_collector_demo.gif)
 This is a platformer game inspired by [King of Thieves](https://play.google.com/store/apps/details?id=com.zeptolab.thieves.google) I did during a one week personal game jam.
 The purpose of the project was to going back to programming gameplay and finish the main loop of the game.
 
