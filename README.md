@@ -21,7 +21,7 @@ Enjoy and have fun!
 	- GUI sprites by me :)
 
 ## Releases
-[Latest version](/releases/latest)
+[Latest version](https://github.com/namudz/the_collector/releases/latest)
 
 ## Unity Version
 Unity 2019.2.21f1
