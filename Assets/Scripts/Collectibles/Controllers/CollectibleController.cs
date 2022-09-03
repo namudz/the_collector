@@ -1,6 +1,5 @@
 ﻿using System;
 using Collectibles.Config;
-using Collectibles.Pool;
 using Game.Signals;
 using Presentation.Game;
 using Services;
