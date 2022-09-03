@@ -1,4 +1,6 @@
-﻿namespace Collectibles.Config
+﻿using DomainLayer.Collectibles;
+
+namespace Collectibles.Config
 {
     public interface ICollectibleConfig
     {

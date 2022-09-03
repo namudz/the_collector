@@ -3,13 +3,13 @@ using Collectibles.Pool;
 using Collectibles.Spawner;
 using Game;
 using InputHandler;
+using InterfaceAdapters.Services.SceneLoader;
 using Presentation.Game;
 using Services;
 using Services.EventDispatcher;
 using Services.Pooling;
-using Services.SceneLoader;
 using UnityEngine;
-using Collectible = Collectibles.Config.Collectible;
+using Collectible = DomainLayer.Collectibles.Collectible;
 
 namespace InterfaceAdapters.Installers
 {

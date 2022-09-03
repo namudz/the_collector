@@ -5,14 +5,14 @@ namespace Game.Level
 {
     public class LevelsRepository : ILevelsRepository
     {
-        private readonly List<Level> _levels;
+        private readonly List<DomainLayer.Level> _levels;
 
         public LevelsRepository()
         {
-            _levels = new List<Level>();
+            _levels = new List<DomainLayer.Level>();
         }
         
-        public void AddLevel(Level newLevel)
+        public void AddLevel(DomainLayer.Level newLevel)
         {
             if (_levels.Find(level => level.Id == newLevel.Id) == null)
             {
@@ -20,13 +20,13 @@ namespace Game.Level
             }
         }
         
-        public Level GetLevel(int index)
+        public DomainLayer.Level GetLevel(int index)
         {
             Assert.IsTrue(index >= 0, "Level index can't be < 0");
             return _levels[index];
         }
 
-        public Level GetLevel(string levelId)
+        public DomainLayer.Level GetLevel(string levelId)
         {
             return _levels.Find(level => level.Id == levelId);
         }

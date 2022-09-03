@@ -1,5 +1,6 @@
 ﻿using System;
 using Collectibles.Config;
+using DomainLayer.Collectibles;
 using Game.Signals;
 using Presentation.Game;
 using Services;

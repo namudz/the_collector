@@ -1,7 +1,7 @@
 ﻿using System;
 using Collectibles.Spawner;
+using InterfaceAdapters.Services.SceneLoader;
 using Services;
-using Services.SceneLoader;
 using UnityEngine;
 
 public class MazeLoader : IMazeLoader

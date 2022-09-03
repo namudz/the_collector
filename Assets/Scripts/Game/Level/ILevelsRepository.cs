@@ -2,8 +2,8 @@
 {
     public interface ILevelsRepository
     {
-        void AddLevel(Level level);
-        Level GetLevel(int levelIndex);
-        Level GetLevel(string levelId);
+        void AddLevel(DomainLayer.Level level);
+        DomainLayer.Level GetLevel(int levelIndex);
+        DomainLayer.Level GetLevel(string levelId);
     }
 }

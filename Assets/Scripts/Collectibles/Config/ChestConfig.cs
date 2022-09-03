@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DomainLayer.Collectibles;
+using UnityEngine;
 
 namespace Collectibles.Config
 {

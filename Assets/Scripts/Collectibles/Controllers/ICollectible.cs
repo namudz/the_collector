@@ -1,5 +1,6 @@
 ﻿using System;
 using Collectibles.Config;
+using DomainLayer.Collectibles;
 
 namespace Collectibles.Controllers
 {

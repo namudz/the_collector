@@ -1,11 +1,12 @@
-﻿using Game;
-using Game.Level;
+﻿using DomainLayer;
+using Game;
+using InterfaceAdapters.Services.SceneLoader;
 using InterfaceAdapters.Signals;
 using Services;
 using Services.EventDispatcher;
-using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Presentation.MainScreen
@@ -44,7 +45,7 @@ namespace Presentation.MainScreen
             eventDispatcher.Dispatch(new ShowLoadingScreenSignal(true));
             
             var sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
-            sceneLoader.LoadScene(SceneConstants.Scene.Game);
+            sceneLoader.LoadScene(SceneConstants.Scene.Game, LoadSceneMode.Single);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Collectibles.Config;
 using Collectibles.Controllers;
+using DomainLayer.Collectibles;
 using Services.Pooling;
 using UnityEngine;
 using Random = UnityEngine.Random;

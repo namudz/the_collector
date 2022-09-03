@@ -1,10 +1,11 @@
 ﻿using Game;
 using Game.Signals;
+using InterfaceAdapters.Services.SceneLoader;
 using Services;
 using Services.EventDispatcher;
-using Services.SceneLoader;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Presentation.Game.GUI
@@ -63,7 +64,7 @@ namespace Presentation.Game.GUI
             var dispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             dispatcher.Dispatch(new GameDestroyedSignal());
             
-            _sceneLoader.LoadScene(SceneConstants.Scene.MainMenu);
+            _sceneLoader.LoadScene(SceneConstants.Scene.MainMenu, LoadSceneMode.Single);
         }
     }
 }

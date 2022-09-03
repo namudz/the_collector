@@ -6,7 +6,7 @@
         bool HasGameStarted { get; }
         bool IsGameOver { get; }
 
-        void SetCurrentLevelData(Level.Level level);
+        void SetCurrentLevelData(DomainLayer.Level level);
         void Load();
         void Tick();
         void GetReady();

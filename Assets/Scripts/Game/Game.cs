@@ -14,7 +14,7 @@ namespace Game
         private readonly IGameCountdownTimer _countdownTimer;
         private readonly IGameScoreboard _gameScoreboard;
         private readonly IEventDispatcher _eventDispatcher;
-        private Level.Level _currentLevel;
+        private DomainLayer.Level _currentLevel;
 
         public Game(
             IMazeLoader mazeLoader, 
@@ -32,7 +32,7 @@ namespace Game
             _countdownTimer.OnCountdownFinished += HandleGameOver;
         }
 
-        public void SetCurrentLevelData(Level.Level level)
+        public void SetCurrentLevelData(DomainLayer.Level level)
         {
             _currentLevel = level;
         }

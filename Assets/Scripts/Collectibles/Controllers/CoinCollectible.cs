@@ -1,4 +1,5 @@
 ﻿using Collectibles.Config;
+using DomainLayer.Collectibles;
 using Services;
 using Services.Pooling;
 
