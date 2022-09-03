@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2304989060757408147}
   - component: {fileID: 3708278808174696281}
+  - component: {fileID: 5040246599619303232}
   - component: {fileID: 1343598334186810493}
   m_Layer: 10
   m_Name: Collectible_Chest
@@ -300,6 +301,18 @@ MonoBehaviour:
   _collider2D: {fileID: 2304989060757408147}
   _animator: {fileID: 1343598334186810493}
   _countdownView: {fileID: 1151495886181449396}
+--- !u!114 &5040246599619303232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052144043600898524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8146ebc278564bb3af257b1490cf0e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1343598334186810493
 Animator:
   serializedVersion: 3

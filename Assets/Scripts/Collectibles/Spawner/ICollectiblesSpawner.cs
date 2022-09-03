@@ -6,7 +6,7 @@ namespace Collectibles.Spawner
 {
     public interface ICollectiblesSpawner : ISpawner
     {
-        void SetAvailableCollectibles(IEnumerable<ICollectibleConfig> collectibles);
+        void SetCollectiblesConfigs(IEnumerable<ICollectibleConfig> collectibles);
         void SetSpawnPoints(IEnumerable<GameObject> points);
     }
 }

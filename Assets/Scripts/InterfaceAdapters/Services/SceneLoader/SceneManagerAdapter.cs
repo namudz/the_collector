@@ -1,17 +1,27 @@
 using System;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace InterfaceAdapters.Services.SceneLoader
 {
     public class SceneManagerAdapter : ISceneManagerAdapter
     {
+        private Action _sceneLoadedCallback;
+
+        public SceneManagerAdapter()
+        {
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+        }
+        
         public void LoadSceneAsync(string sceneName, Action onSceneLoadedCallback, LoadSceneMode mode)
         {
-            SceneManager.sceneLoaded += (arg0, sceneMode) =>
-            {
-                onSceneLoadedCallback?.Invoke();
-            };
+            _sceneLoadedCallback = onSceneLoadedCallback;
             SceneManager.LoadSceneAsync(sceneName, mode);
+        }
+
+        private void HandleSceneLoaded(Scene _, LoadSceneMode __)
+        {
+            _sceneLoadedCallback?.Invoke();
         }
     }
 }

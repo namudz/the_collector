@@ -3,6 +3,7 @@ using Game;
 using InterfaceAdapters.Services.SceneLoader;
 using InterfaceAdapters.Signals;
 using Services;
+using Services.DataPersistence;
 using Services.EventDispatcher;
 using TMPro;
 using UnityEngine;
@@ -39,7 +40,7 @@ namespace Presentation.MainScreen
         private void PlayLevel()
         {
             var game = ServiceLocator.Instance.GetService<IGame>();
-            game.SetCurrentLevelData(_levelData);
+            game.CurrentLevel = _levelData;
 
             var eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             eventDispatcher.Dispatch(new ShowLoadingScreenSignal(true));

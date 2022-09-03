@@ -1,10 +1,8 @@
-﻿using Collectibles.Config;
-using DomainLayer.Collectibles;
+﻿using DomainLayer.Collectibles;
 using Game;
 using Presentation.Game.Collectibles;
 using Services;
 using Services.EventDispatcher;
-using Services.Pooling;
 using UnityEngine;
 
 namespace Collectibles.Controllers
@@ -18,7 +16,6 @@ namespace Collectibles.Controllers
         private static readonly int Collected = Animator.StringToHash("Collected");
         private IGameScoreboard _gameScoreboard;
         private Chest _chestConfig;
-        private IGameObjectPool<ChestCollectible> _pool;
         private IGame _iGame;
 
         protected override void GetDependencies()
@@ -27,7 +24,6 @@ namespace Collectibles.Controllers
             _iGame = ServiceLocator.Instance.GetService<IGame>();
             _gameScoreboard = ServiceLocator.Instance.GetService<IGameScoreboard>();
             _chestConfig = _collectibleConfig.Collectible as Chest;
-            _pool = ServiceLocator.Instance.GetService<IGameObjectPool<ChestCollectible>>();
         }
 
         public override void HandleSpawn()
@@ -63,11 +59,6 @@ namespace Collectibles.Controllers
             _animator.Rebind();
             _countdownView.StopCountdown();
             base.Reset(signal);
-        }
-
-        protected override void BackToPool()
-        {
-            _pool.BackToPool(_gameObject);
         }
 
         protected override void HandleGameOver(ISignal signal)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cff155296949b4b83fb749d97db86f, type: 3}
+  m_Name: GameObjectPoolsDataConfig
+  m_EditorClassIdentifier: 
+  Pools:
+  - Id: Coin
+    GameObject: {fileID: 3013430193932204911, guid: 9fded731999ba0f43a175ac90c768467,
+      type: 3}
+    InitialAmount: 10
+  - Id: Chest
+    GameObject: {fileID: 5040246599619303232, guid: 2cc92f33e36e3a34199485514fc121e5,
+      type: 3}
+    InitialAmount: 5
+  - Id: CoinFx
+    GameObject: {fileID: 4693185001911522591, guid: a8588d0563184e74ab85a4cf97a34575,
+      type: 3}
+    InitialAmount: 10

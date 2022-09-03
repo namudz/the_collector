@@ -4,15 +4,8 @@ using UnityEngine;
 namespace DomainLayer.Collectibles
 {
     [Serializable]
-    public class Collectible
+    public class Collectible : Item
     {
-        public enum CollectibleType
-        {
-            Coin,
-            Chest
-        }
-
-        public CollectibleType Type;
         public RespawnCooldown RespawnTime;
         [Min(0)] public int SpawnWeight;
 

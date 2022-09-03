@@ -13,9 +13,9 @@ using Collectible = DomainLayer.Collectibles.Collectible;
 
 namespace InterfaceAdapters.Installers
 {
-    public class GameInstaller : IGameInstaller
+    public class GameInstaller
     {
-        private Transform _poolsParent;
+        /*private Transform _poolsParent;
         private IGameObjectPool<ChestCollectible> _chestPool;
         private IGameObjectPool<CoinCollectible> _coinPool;
         private IGameObjectPool<CoinEffectView> _coinEffectPool;
@@ -105,7 +105,6 @@ namespace InterfaceAdapters.Installers
             {
                 _coinEffectPool = new CoinEffectPool(poolDataConfig.PoolData);
                 ServiceLocator.Instance.RegisterService(_coinEffectPool);
-            }
-        }
+            }*/
     }
 }

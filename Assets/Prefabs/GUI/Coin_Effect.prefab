@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2429137071950722378}
   - component: {fileID: 3478947214797806292}
+  - component: {fileID: 4693185001911522591}
   m_Layer: 10
   m_Name: Coin_Effect
   m_TagString: Untagged
@@ -425,3 +426,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4693185001911522591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052144043600898524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8146ebc278564bb3af257b1490cf0e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

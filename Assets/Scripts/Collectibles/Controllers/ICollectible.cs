@@ -1,13 +1,13 @@
 ﻿using System;
-using Collectibles.Config;
 using DomainLayer.Collectibles;
+using InterfaceAdapters.Game;
 
 namespace Collectibles.Controllers
 {
     public interface ICollectible
     {
         event Action<CollectibleController> OnSpawnPointIsFree;
-        Collectible.CollectibleType Type { get; }
+        ItemType Type { get; }
         void HandleSpawn();
         int Collect();
     }

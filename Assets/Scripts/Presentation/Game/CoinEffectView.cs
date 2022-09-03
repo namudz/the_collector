@@ -15,7 +15,7 @@ namespace Presentation.Game
 
         private void Awake()
         {
-            _pool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
+            // _pool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
         }
 
         public void Show(int score)

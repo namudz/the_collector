@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6437967257030631102}
   - component: {fileID: 2304989060757408147}
   - component: {fileID: 8339718161587831336}
+  - component: {fileID: 3013430193932204911}
   m_Layer: 10
   m_Name: Collectible_Coin
   m_TagString: Untagged
@@ -73,6 +74,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectibleConfig: {fileID: 11400000, guid: 93879cad5fcf84b4abf18ff6448b742f, type: 2}
   _collider2D: {fileID: 2304989060757408147}
+--- !u!114 &3013430193932204911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052144043600898524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8146ebc278564bb3af257b1490cf0e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6164406511542449902
 GameObject:
   m_ObjectHideFlags: 0

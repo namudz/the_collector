@@ -13,17 +13,17 @@ namespace Collectibles.Spawner
         private IEnumerable<GameObject> _spawnPoints;
         private IEnumerable<ICollectibleConfig> _collectibleConfigs;
 
-        private readonly IGameObjectPool<CoinCollectible> _coinPool;
-        private readonly IGameObjectPool<ChestCollectible> _chestPool;
+        /*private readonly IGameObjectPool<CoinCollectible> _coinPool;
+        private readonly IGameObjectPool<ChestCollectible> _chestPool;*/
         private float _totalSpawnWeight;
 
-        public CollectiblesSpawner(IGameObjectPool<CoinCollectible> coinPool, IGameObjectPool<ChestCollectible> chestPool)
+        /*public CollectiblesSpawner(IGameObjectPool<CoinCollectible> coinPool, IGameObjectPool<ChestCollectible> chestPool)
         {
             _coinPool = coinPool;
             _chestPool = chestPool;
-        }
+        }*/
 
-        public void SetAvailableCollectibles(IEnumerable<ICollectibleConfig> collectibles)
+        public void SetCollectiblesConfigs(IEnumerable<ICollectibleConfig> collectibles)
         {
             _collectibleConfigs = collectibles;
             CalcTotalSpawnWeight();
@@ -51,7 +51,7 @@ namespace Collectibles.Spawner
         {
             var collectible = GetCollectibleToSpawn();
             GameObject collectibleInstance = null;
-            switch (collectible.Type)
+            /*switch (collectible.Type)
             {
                 case Collectible.CollectibleType.Coin:
                     collectibleInstance = _coinPool.GetInstance(position);
@@ -59,7 +59,7 @@ namespace Collectibles.Spawner
                 case Collectible.CollectibleType.Chest:
                     collectibleInstance = _chestPool.GetInstance(position);
                     break;
-            }
+            }*/
 
             if (collectibleInstance != null)
             {

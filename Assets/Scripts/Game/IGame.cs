@@ -2,15 +2,13 @@
 {
     public interface IGame
     {
-        string CurrentLevelId { get; }
+        DomainLayer.Level CurrentLevel { get; set; }
         bool HasGameStarted { get; }
         bool IsGameOver { get; }
 
-        void SetCurrentLevelData(DomainLayer.Level level);
-        void Load();
-        void Tick();
         void GetReady();
         void Start();
+        void Tick();
         void Reset();
     }
 }

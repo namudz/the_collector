@@ -1,4 +1,5 @@
 using System;
+using Game;
 using Game.Level;
 using InterfaceAdapters.ScriptableObjects;
 using InterfaceAdapters.Services.SceneLoader;
@@ -16,7 +17,7 @@ namespace Installers
         [SerializeField] private LevelsConfig _levelConfigs;
         
         private ILevelsRepository _levelsRepository;
-        private IDataPersistence _dataPersistence;
+        private IDataPersistence _playerPrefsDataPersistence;
         private ISceneLoader _sceneLoader;
 
         private void Awake()
@@ -32,18 +33,36 @@ namespace Installers
             _sceneLoader = new SceneLoader(eventDispatcher, new SceneManagerAdapter());
             _levelsRepository = new LevelsRepository();
             var jsonParser = new JsonUtilityAdapter();
-            _dataPersistence = new PlayerPrefsDataPersistence(jsonParser);
+            _playerPrefsDataPersistence = new PlayerPrefsDataPersistence(jsonParser);
 
             ServiceLocator.Instance.RegisterService<IEventDispatcher>(eventDispatcher);
             ServiceLocator.Instance.RegisterService(_sceneLoader);
             ServiceLocator.Instance.RegisterService(_levelsRepository);
-            ServiceLocator.Instance.RegisterService(_dataPersistence);
+            ServiceLocator.Instance.RegisterService(_playerPrefsDataPersistence);
             ServiceLocator.Instance.RegisterService<IJsonParser>(jsonParser);
+
+            InitializeGame(eventDispatcher);
+        }
+
+        private void InitializeGame(IEventDispatcher eventDispatcher)
+        {
+            // In order to avoid initialization issues when loading levels, the game is created at the splash
+            var gameCountdownTimer = new GameCountdownTimer();
+            ServiceLocator.Instance.RegisterService<IGameCountdownTimer>(gameCountdownTimer);
+            var gameScoreboard = new GameScoreboard();
+            ServiceLocator.Instance.RegisterService<IGameScoreboard>(gameScoreboard);
+            
+            var game = new global::Game.Game( 
+                gameCountdownTimer,
+                gameScoreboard,
+                eventDispatcher
+            );
+            ServiceLocator.Instance.RegisterService<IGame>(game);
         }
 
         private void LoadConfigurations(Action onComplete)
         {
-            var loadLevelsRepositoryUseCase = new LoadLevelsRepositoryUseCase(_levelsRepository, _dataPersistence);
+            var loadLevelsRepositoryUseCase = new LoadLevelsRepositoryUseCase(_levelsRepository, _playerPrefsDataPersistence);
             var useCase = new LoadConfigurationsUseCase(loadLevelsRepositoryUseCase);
             
             useCase.Load(_levelConfigs.GetLevels(), onComplete);

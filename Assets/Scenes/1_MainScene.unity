@@ -4835,7 +4835,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765041352}
-  - component: {fileID: 1765041351}
   m_Layer: 0
   m_Name: MainInstaller
   m_TagString: Untagged
@@ -4843,28 +4842,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1765041351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765041350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe107b1bf3b74438235ee34168d6d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _collectiblePoolsDataConfigs:
-  - {fileID: 11400000, guid: 653fa37948bc5974c825d535abb1469a, type: 2}
-  - {fileID: 11400000, guid: 2773b7a9ffcbfa3488da56bfab921d06, type: 2}
-  - {fileID: 11400000, guid: 55c9567ba10c53d4fbd4085232eacaab, type: 2}
-  _levelConfigs:
-  - {fileID: 11400000, guid: 2a737b2b9c916314088f2c6b38e8d036, type: 2}
-  - {fileID: 11400000, guid: 1e2b9c72a5ad281469d62d775ce44521, type: 2}
-  - {fileID: 11400000, guid: dd6c5743e2284b84eb21f98f1c28f292, type: 2}
-  - {fileID: 11400000, guid: 833f84efafaee8e499ef6403ba0ab112, type: 2}
-  - {fileID: 11400000, guid: bf4ed375eaf626448b3a965350e3c519, type: 2}
 --- !u!4 &1765041352
 Transform:
   m_ObjectHideFlags: 0

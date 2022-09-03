@@ -25,7 +25,7 @@ namespace InterfaceAdapters
         
         public void SaveScore(string userName)
         {
-            var level = _levelsRepository.GetLevel(_game.CurrentLevelId);
+            var level = _levelsRepository.GetLevel(_game.CurrentLevel.Id);
             for (var i = 0; i < level.Leaderboard.Entries.Count; i++)
             {
                 var entry = level.Leaderboard.Entries[i];

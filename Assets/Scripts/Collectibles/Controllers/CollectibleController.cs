@@ -1,7 +1,7 @@
 ﻿using System;
 using Collectibles.Config;
-using DomainLayer.Collectibles;
 using Game.Signals;
+using InterfaceAdapters.Game;
 using Presentation.Game;
 using Services;
 using Services.EventDispatcher;
@@ -11,11 +11,11 @@ using Random = UnityEngine.Random;
 
 namespace Collectibles.Controllers
 {
-    public abstract class CollectibleController : MonoBehaviour, ICollectible, IPoolable
+    public abstract class CollectibleController : MonoBehaviour, ICollectible
     {
         public event Action<CollectibleController> OnSpawnPointIsFree;
 
-        public Collectible.CollectibleType Type => _collectibleConfig.Collectible.Type;
+        public ItemType Type => _collectibleConfig.Collectible.Type;
         
         [Header("Base Components")]
         [SerializeField] protected CollectibleConfig _collectibleConfig;
@@ -33,7 +33,7 @@ namespace Collectibles.Controllers
 
         protected virtual void GetDependencies()
         {
-            _coinEffectPool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
+            // _coinEffectPool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
             _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
             _eventDispatcher.Subscribe<GameResetSignal>(Reset);
@@ -110,8 +110,10 @@ namespace Collectibles.Controllers
             var respawnTime = GetRespawnTime();
             Invoke(nameof(CanBeRespawned), respawnTime);
         }
-        
-        protected abstract void BackToPool();
+
+        private void BackToPool()
+        {
+        }
 
         private float GetRespawnTime()
         {

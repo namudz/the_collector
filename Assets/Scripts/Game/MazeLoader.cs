@@ -1,7 +1,6 @@
 ﻿using System;
 using Collectibles.Spawner;
 using InterfaceAdapters.Services.SceneLoader;
-using Services;
 using UnityEngine;
 
 public class MazeLoader : IMazeLoader
@@ -19,8 +18,6 @@ public class MazeLoader : IMazeLoader
     {
         _sceneLoader = sceneLoader;
         _collectiblesSpawner = collectiblesSpawner;
-        
-        ServiceLocator.Instance.RegisterService(_collectiblesSpawner);
     }
 
     public void Load(string mazeSceneName, Action onComplete)
