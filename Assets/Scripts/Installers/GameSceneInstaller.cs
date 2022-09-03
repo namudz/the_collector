@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Installers
 {
-    public class GameInstaller_New : MonoBehaviour
+    public class GameSceneInstaller : MonoBehaviour
     {
         [Header("Configs")]
         [SerializeField] private CollectibleConfig[] _collectibleConfigs;
