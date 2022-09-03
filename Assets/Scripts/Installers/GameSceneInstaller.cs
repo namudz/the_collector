@@ -1,4 +1,3 @@
-using Collectibles.Config;
 using Collectibles.Spawner;
 using Game;
 using InputHandler;
@@ -12,11 +11,9 @@ namespace Installers
 {
     public class GameSceneInstaller : MonoBehaviour
     {
-        [Header("Configs")]
-        [SerializeField] private CollectibleConfig[] _collectibleConfigs;
-        
         [Header("Dependencies")]
         [SerializeField] private GameController _gameController;
+        [SerializeField] private MazeController _mazeController;
         
         private IMazeLoader _mazeLoader;
         private ICollectiblesSpawner _collectiblesSpawner;
@@ -36,22 +33,13 @@ namespace Installers
             _eventDispatcher.Unsubscribe<SceneLoadedSignal>(TryLoadGame);
         }
 
-        private void TryLoadGame(ISignal iSignal)
-        {
-            var signal = (SceneLoadedSignal)iSignal;
-            if (signal.Scene != SceneConstants.Scene.Game)
-            {
-                return;
-            }
-            
-            LoadGame();
-        }
-
         private void InitializeDependencies()
         {
             _game = ServiceLocator.Instance.GetService<IGame>();
             _collectiblesSpawner = new CollectiblesSpawner();
-            _mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>(), _collectiblesSpawner);
+            ServiceLocator.Instance.RegisterService(_collectiblesSpawner);
+            
+            _mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>());
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
 
             InitializeInputHandler();
@@ -70,8 +58,19 @@ namespace Installers
         
         private void InjectDependencies()
         {
-            _gameController.InjectDependencies(_mazeLoader, _game);
-            _collectiblesSpawner.SetCollectiblesConfigs(_collectibleConfigs);
+            _gameController.InjectDependencies(_game);
+            _mazeController.InjectDependencies(_mazeLoader);
+        }
+
+        private void TryLoadGame(ISignal iSignal)
+        {
+            var signal = (SceneLoadedSignal)iSignal;
+            if (signal.Scene != SceneConstants.Scene.Game)
+            {
+                return;
+            }
+            
+            LoadGame();
         }
         
         private void LoadGame()

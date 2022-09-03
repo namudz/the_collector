@@ -4,6 +4,8 @@ namespace InterfaceAdapters.Game
     {
         Coin,
         Chest,
-        CoinFx
+        CoinFx,
+        
+        None
     }
 }

@@ -8,5 +8,6 @@ namespace Collectibles.Spawner
     {
         void SetCollectiblesConfigs(IEnumerable<ICollectibleConfig> collectibles);
         void SetSpawnPoints(IEnumerable<GameObject> points);
+        string GetRandomCollectibleTypeToSpawn();
     }
 }

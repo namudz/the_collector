@@ -2,7 +2,7 @@
 using Collectibles.Config;
 using Collectibles.Controllers;
 using DomainLayer.Collectibles;
-using Services.Pooling;
+using InterfaceAdapters.Game;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,6 +38,7 @@ namespace Collectibles.Spawner
         {
             foreach (var spawnPoint in _spawnPoints)
             {
+                var collectibleType = GetRandomCollectibleTypeToSpawn();
                 SpawnCollectible(spawnPoint.transform.position);
             }
         }
@@ -49,9 +50,8 @@ namespace Collectibles.Spawner
 
         private void SpawnCollectible(Vector3 position)
         {
-            var collectible = GetCollectibleToSpawn();
             GameObject collectibleInstance = null;
-            /*switch (collectible.Type)
+            /*switch (collectibleType)
             {
                 case Collectible.CollectibleType.Coin:
                     collectibleInstance = _coinPool.GetInstance(position);
@@ -84,7 +84,7 @@ namespace Collectibles.Spawner
             }
         }
 
-        private Collectible GetCollectibleToSpawn()
+        public string GetRandomCollectibleTypeToSpawn()
         {
             var randomValue = Random.Range(0f, 1f);
             var deltaChances = 0f;
@@ -93,13 +93,13 @@ namespace Collectibles.Spawner
                 var collectibleChance = config.Collectible.SpawnWeight / _totalSpawnWeight;
                 if (randomValue <= deltaChances + collectibleChance)
                 {
-                    return config.Collectible;
+                    return config.Collectible.Type.ToString();
                 }
 
                 deltaChances += collectibleChance;
             }
 
-            return null;
+            return string.Empty;
         }
     }
 }
