@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Collectibles.Config;
 using Collectibles.Controllers;
 using Collectibles.Spawner;
+using Game;
 using Game.Signals;
 using Services;
 using Services.EventDispatcher;
@@ -25,18 +26,26 @@ namespace Presentation.Game
         private CollectibleConfig[] _collectiblesConfig;
         private IEnumerable<GameObject> _spawnPoints;
         private IEventDispatcher _eventDispatcher;
+        private IGame _game;
 
         private void Awake()
         {
             _poolsCollection.Initialize(true);
 
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
-            _eventDispatcher.Subscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
-
             _collectiblesSpawner = ServiceLocator.Instance.GetService<ICollectiblesSpawner>();
+            _game = ServiceLocator.Instance.GetService<IGame>();
+            
             _collectiblesSpawner.SetCollectiblesConfigs(_collectibleConfigs);
+            
+            _eventDispatcher.Subscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
         }
-        
+
+        private void OnDestroy()
+        {
+            _eventDispatcher.Unsubscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
+        }
+
         public void LoadSpawnPoints()
         {
             _spawnPoints = GameObject.FindGameObjectsWithTag(TagCollectibleSpawnPoint);
@@ -52,6 +61,8 @@ namespace Presentation.Game
         
         private void SpawnCollectible(Vector3 spawnPosition)
         {
+            if (_game.IsGameOver) { return; }
+            
             var collectibleType = _collectiblesSpawner.GetRandomCollectibleTypeToSpawn();
             var instance = _poolsCollection.GetInstance(collectibleType, spawnPosition);
             

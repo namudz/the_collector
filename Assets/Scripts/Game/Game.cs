@@ -30,8 +30,6 @@ namespace Game
 
         public void GetReady()
         {
-            ResetComponents();
-            
             _countdownTimer.SetInitialCountdown(CurrentLevel.Countdown);
             
             _eventDispatcher.Dispatch(new GameReadySignal());
@@ -54,11 +52,6 @@ namespace Game
         }
     
         public void Reset()
-        {
-            _eventDispatcher.Dispatch(new GameResetSignal());
-        }
-        
-        private void ResetComponents()
         {
             HasGameStarted = false;
             IsGameOver = false;

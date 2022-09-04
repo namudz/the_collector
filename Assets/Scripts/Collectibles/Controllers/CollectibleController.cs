@@ -88,7 +88,6 @@ namespace Collectibles.Controllers
         {
             if (_gameObject.activeSelf)
             {
-                _gameObject.SetActive(false);
                 BackToPool();
             }
         }

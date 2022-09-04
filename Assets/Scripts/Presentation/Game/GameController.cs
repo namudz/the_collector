@@ -25,6 +25,7 @@ namespace Presentation.Game
 
         public void Load(string mazeSceneName)
         {
+            _game.Reset();
             _mazeController.LoadMaze(mazeSceneName, GetReady);
         }
         
@@ -37,11 +38,6 @@ namespace Presentation.Game
         private void Update()
         {
             _game.Tick();
-        }
-
-        private void Reset()
-        {
-            _game.Reset();
         }
     }
 }

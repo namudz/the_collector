@@ -1,6 +1,7 @@
 ﻿using Game;
 using Game.Signals;
 using InterfaceAdapters.Services.SceneLoader;
+using InterfaceAdapters.UseCases;
 using Services;
 using Services.EventDispatcher;
 using TMPro;
@@ -21,10 +22,16 @@ namespace Presentation.Game.GUI
         
         private IGameScoreboard _gameScoreboard;
         private ISceneLoader _sceneLoader;
+        private IRestartGameUseCase _restartGameUseCase;
 
         private void Awake()
         {
             _sceneLoader = ServiceLocator.Instance.GetService<ISceneLoader>();
+
+            _restartGameUseCase = new RestartGameUseCase(
+                ServiceLocator.Instance.GetService<IEventDispatcher>(),
+                ServiceLocator.Instance.GetService<IGame>()
+            );
         }
 
         private void Start()
@@ -47,16 +54,7 @@ namespace Presentation.Game.GUI
 
         private void PlayAgain()
         {
-            var iGame = ServiceLocator.Instance.GetService<IGame>();
-            iGame.Reset();
-            // Delaying the restart of the game so pooled objects can go back to pool
-            Invoke(nameof(DelayedStartAgain), Time.deltaTime);
-        }
-
-        private void DelayedStartAgain()
-        {
-            var iGame = ServiceLocator.Instance.GetService<IGame>();
-            iGame.GetReady();
+            _restartGameUseCase.RestartGame();
         }
 
         private void BackToHome()

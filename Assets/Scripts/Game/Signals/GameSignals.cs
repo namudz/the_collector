@@ -15,7 +15,10 @@ namespace Game.Signals
     
     public class GameResetSignal : ISignal
     {
-        
+    }
+
+    public class LoadMazeItemsToRestartSignal : ISignal
+    {
     }
     
     public class GameDestroyedSignal : ISignal

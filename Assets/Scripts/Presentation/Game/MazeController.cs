@@ -1,5 +1,8 @@
 using System;
 using Game;
+using Game.Signals;
+using Services;
+using Services.EventDispatcher;
 using UnityEngine;
 
 namespace Presentation.Game
@@ -13,6 +16,21 @@ namespace Presentation.Game
         private IMazeLoader _mazeLoader;
         private ISpawner _heroSpawner;
         private Action _onMazeFullyLoaded;
+        private IEventDispatcher _eventDispatcher;
+
+        private void Awake()
+        {
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            
+            _eventDispatcher.Subscribe<GameResetSignal>(Reset);
+            _eventDispatcher.Subscribe<LoadMazeItemsToRestartSignal>(LoadMazeItemsToRestart);
+        }
+
+        private void OnDestroy()
+        {
+            _eventDispatcher.Unsubscribe<GameResetSignal>(Reset);
+            _eventDispatcher.Unsubscribe<LoadMazeItemsToRestartSignal>(LoadMazeItemsToRestart);
+        }
 
         public void InjectDependencies(IMazeLoader mazeLoader)
         {
@@ -39,6 +57,16 @@ namespace Presentation.Game
             _heroSpawner.Spawn();
             
             _onMazeFullyLoaded?.Invoke();
+        }
+        
+        private void Reset(ISignal _)
+        {
+            _heroSpawner.Reset();
+        }
+        
+        private void LoadMazeItemsToRestart(ISignal _)
+        {
+            SpawnElements();
         }
     }
 }
