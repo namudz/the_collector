@@ -42,8 +42,9 @@ namespace Collectibles.Controllers
 
         protected override void DefaultCollect()
         {
-            // Nothing else, as the hiding will be triggered by the animation
+            // The hiding will be triggered by the animation
             _countdownView.Hide();
+            CancelInvoke();
         }
 
         protected override int GetScore()
@@ -78,6 +79,12 @@ namespace Collectibles.Controllers
             if (!_gameObject.activeSelf) { return; }
             _countdownView.StartCountdown(_chestConfig.ExpirationTime);
             Invoke(nameof(HideAndRespawn), _chestConfig.ExpirationTime);
+        }
+
+        // Called from Unity Animation
+        private void AnimationCollected()
+        {
+            HideAndRespawn();
         }
     }
 }
