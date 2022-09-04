@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Collectibles.Config;
 using Collectibles.Controllers;
-using DomainLayer.Collectibles;
-using InterfaceAdapters.Game;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -63,17 +61,17 @@ namespace Collectibles.Spawner
 
             if (collectibleInstance != null)
             {
-                var iCollectible = collectibleInstance.GetComponent<ICollectible>();
+                /*var iCollectible = collectibleInstance.GetComponent<ICollectible>();
                 iCollectible.HandleSpawn();
-                iCollectible.OnSpawnPointIsFree += RespawnNewCollectible;
+                iCollectible.OnSpawnPointIsFree += RespawnNewCollectible;*/
             }
         }
 
-        private void RespawnNewCollectible(CollectibleController instanceCollected)
+        /*private void RespawnNewCollectible(CollectibleController instanceCollected)
         {
             instanceCollected.OnSpawnPointIsFree -= RespawnNewCollectible;
             SpawnCollectible(instanceCollected.transform.position);
-        }
+        }*/
 
         private void CalcTotalSpawnWeight()
         {

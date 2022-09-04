@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Collectibles.Pool;
 using UnityEngine;
 
 namespace Services.GameObjectPooling

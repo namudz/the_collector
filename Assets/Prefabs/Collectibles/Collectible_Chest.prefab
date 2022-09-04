@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectibleConfig: {fileID: 11400000, guid: f9f4e7cc9693cbc40b29d4ece166962c, type: 2}
   _collider2D: {fileID: 2304989060757408147}
+  _poolableController: {fileID: 5040246599619303232}
   _animator: {fileID: 1343598334186810493}
   _countdownView: {fileID: 1151495886181449396}
 --- !u!114 &5040246599619303232

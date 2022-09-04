@@ -1,7 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using Collectibles.Config;
+using Collectibles.Controllers;
 using Collectibles.Spawner;
+using Game.Signals;
 using Services;
+using Services.EventDispatcher;
 using Services.GameObjectPooling;
 using UnityEngine;
 
@@ -20,10 +24,14 @@ namespace Presentation.Game
         private ICollectiblesSpawner _collectiblesSpawner;
         private CollectibleConfig[] _collectiblesConfig;
         private IEnumerable<GameObject> _spawnPoints;
+        private IEventDispatcher _eventDispatcher;
 
         private void Awake()
         {
             _poolsCollection.Initialize(true);
+
+            _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
+            _eventDispatcher.Subscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
 
             _collectiblesSpawner = ServiceLocator.Instance.GetService<ICollectiblesSpawner>();
             _collectiblesSpawner.SetCollectiblesConfigs(_collectibleConfigs);
@@ -38,9 +46,30 @@ namespace Presentation.Game
         {
             foreach (var spawnPoint in _spawnPoints)
             {
-                var collectibleType = _collectiblesSpawner.GetRandomCollectibleTypeToSpawn();
-                _poolsCollection.GetInstance(collectibleType, spawnPoint.transform.position);
+                SpawnCollectible(spawnPoint.transform.position);
             }
+        }
+        
+        private void SpawnCollectible(Vector3 spawnPosition)
+        {
+            var collectibleType = _collectiblesSpawner.GetRandomCollectibleTypeToSpawn();
+            var instance = _poolsCollection.GetInstance(collectibleType, spawnPosition);
+            
+            var iCollectible = instance.GetComponent<ICollectible>();
+            iCollectible.HandleSpawn();
+        }
+
+        private void SpawnNewCollectible(ISignal iSignal)
+        {
+            var signal = (RespawnCollectibleSignal)iSignal;
+            StartCoroutine(DelaySpawnCollectible(signal.RespawnTime, signal.Position));
+        }
+
+        private IEnumerator DelaySpawnCollectible(float respawnTime, Vector3 position)
+        {
+            yield return new WaitForSeconds(respawnTime);
+            
+            SpawnCollectible(position);
         }
     }
 }

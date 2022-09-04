@@ -1,32 +1,26 @@
-﻿using Services;
-using Services.Pooling;
+﻿using Services.GameObjectPooling;
 using TMPro;
 using UnityEngine;
 
 namespace Presentation.Game
 {
-    public class CoinEffectView : MonoBehaviour, IPoolable
+    public class CoinEffectView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
-        
-        private IGameObjectPool<CoinEffectView> _pool;
+        [SerializeField] private PoolableGameObject _poolableController;
 
         private const string ScoreFormat = "+{0}";
 
-        private void Awake()
-        {
-            // _pool = ServiceLocator.Instance.GetService<IGameObjectPool<CoinEffectView>>();
-        }
 
         public void Show(int score)
         {
             _scoreText.SetText(string.Format(ScoreFormat, score));
         }
 
-        private void BackToPool()
+        // Called from Unity Animation
+        private void AnimationBackToPool()
         {
-            gameObject.SetActive(false);
-            _pool.BackToPool(gameObject);
+            _poolableController.BackToPool();
         }
     }
 }

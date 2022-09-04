@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collectibleConfig: {fileID: 11400000, guid: 93879cad5fcf84b4abf18ff6448b742f, type: 2}
   _collider2D: {fileID: 2304989060757408147}
+  _poolableController: {fileID: 3013430193932204911}
 --- !u!114 &3013430193932204911
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 5708406791650566075}
+  _poolableController: {fileID: 4693185001911522591}
 --- !u!95 &3478947214797806292
 Animator:
   serializedVersion: 3
