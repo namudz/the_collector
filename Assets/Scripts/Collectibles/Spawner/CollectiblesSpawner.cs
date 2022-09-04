@@ -1,77 +1,28 @@
 ﻿using System.Collections.Generic;
 using Collectibles.Config;
-using Collectibles.Controllers;
-using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Collectibles.Spawner
 {
     public class CollectiblesSpawner : ICollectiblesSpawner
     {
-        private IEnumerable<GameObject> _spawnPoints;
         private IEnumerable<ICollectibleConfig> _collectibleConfigs;
 
-        /*private readonly IGameObjectPool<CoinCollectible> _coinPool;
-        private readonly IGameObjectPool<ChestCollectible> _chestPool;*/
         private float _totalSpawnWeight;
-
-        /*public CollectiblesSpawner(IGameObjectPool<CoinCollectible> coinPool, IGameObjectPool<ChestCollectible> chestPool)
-        {
-            _coinPool = coinPool;
-            _chestPool = chestPool;
-        }*/
 
         public void SetCollectiblesConfigs(IEnumerable<ICollectibleConfig> collectibles)
         {
             _collectibleConfigs = collectibles;
             CalcTotalSpawnWeight();
         }
-
-        public void SetSpawnPoints(IEnumerable<GameObject> points)
-        {
-            _spawnPoints = points;
-        }
         
         public void Spawn()
         {
-            foreach (var spawnPoint in _spawnPoints)
-            {
-                var collectibleType = GetRandomCollectibleTypeToSpawn();
-                SpawnCollectible(spawnPoint.transform.position);
-            }
         }
 
         public void Reset()
         {
-            //throw new System.NotImplementedException();
         }
-
-        private void SpawnCollectible(Vector3 position)
-        {
-            GameObject collectibleInstance = null;
-            /*switch (collectibleType)
-            {
-                case Collectible.CollectibleType.Coin:
-                    collectibleInstance = _coinPool.GetInstance(position);
-                    break;
-                case Collectible.CollectibleType.Chest:
-                    collectibleInstance = _chestPool.GetInstance(position);
-                    break;
-            }*/
-
-            if (collectibleInstance != null)
-            {
-                /*var iCollectible = collectibleInstance.GetComponent<ICollectible>();
-                iCollectible.HandleSpawn();
-                iCollectible.OnSpawnPointIsFree += RespawnNewCollectible;*/
-            }
-        }
-
-        /*private void RespawnNewCollectible(CollectibleController instanceCollected)
-        {
-            instanceCollected.OnSpawnPointIsFree -= RespawnNewCollectible;
-            SpawnCollectible(instanceCollected.transform.position);
-        }*/
 
         private void CalcTotalSpawnWeight()
         {
