@@ -75,16 +75,16 @@ namespace Collectibles.Controllers
             HideAndRespawn();
         }
 
-        protected virtual void HandleGameOver(ISignal signal)
+        protected virtual void HandleGameOver(ISignal _)
         {
             CancelInvoke();
         }
 
-        protected virtual void HandleGameStarted(ISignal signal)
+        protected virtual void HandleGameStarted(ISignal _)
         {
         }
 
-        protected virtual void Reset(ISignal signal)
+        protected virtual void Reset(ISignal _)
         {
             if (_gameObject.activeSelf)
             {

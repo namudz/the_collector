@@ -5,40 +5,71 @@ namespace Services.EventDispatcher
 {
     public class EventDispatcher : IEventDispatcher
     {
-        private readonly Dictionary<Type, SignalDelegate> _events;
-
-        public EventDispatcher()
+        private static class Repository<T> where T : ISignal
         {
-            _events = new Dictionary<Type, SignalDelegate>();
-        }
+            private static readonly IDictionary<IEventDispatcher, IDictionary<Type, SignalDelegate<T>>> _events =
+                new Dictionary<IEventDispatcher, IDictionary<Type, SignalDelegate<T>>>();
 
-        public void Subscribe<T>(SignalDelegate callback) where T : ISignal
-        {
-            var type = typeof(T);
-            if (!_events.ContainsKey(type))
+            public static void Subscribe(IEventDispatcher owner, SignalDelegate<T> signalDelegate)
             {
-                _events.Add(type, null);
+                _events.TryGetValue(owner, out IDictionary<Type, SignalDelegate<T>> dispatcher);
+                if (dispatcher == null)
+                {
+                    _events.Add(owner, new Dictionary<Type, SignalDelegate<T>>());
+                    dispatcher = _events[owner];
+                }
+
+                var type = typeof(T);
+                if (!dispatcher.ContainsKey(type))
+                {
+                    dispatcher.Add(type, null);
+                }
+
+                dispatcher[type] += signalDelegate;
             }
 
-            _events[type] += callback;
+            public static void Unsubscribe(IEventDispatcher owner, SignalDelegate<T> signalDelegate)
+            {
+                if(!TryGetEventDispatcher(owner, out var dispatcher)) { return; }
+
+                var type = typeof(T);
+                if (dispatcher.ContainsKey(type))
+                {
+                    dispatcher[type] -= signalDelegate;
+                }
+            }
+
+            public static void Dispatch(IEventDispatcher owner, T signal)
+            {
+                if(!TryGetEventDispatcher(owner, out var dispatcher)) { return; }
+                
+                var type = typeof(T);
+                if (dispatcher.ContainsKey(type))
+                {
+                    dispatcher[type](signal);
+                }
+            }
+
+            private static bool TryGetEventDispatcher(IEventDispatcher owner, out IDictionary<Type, SignalDelegate<T>> dispatcher)
+            {
+                _events.TryGetValue(owner, out dispatcher);
+                return dispatcher != null;
+            }
+        }
+        
+        public void Subscribe<T>(SignalDelegate<T> callback) where T : ISignal
+        {
+            Repository<T>.Subscribe(this, callback);
         }
 
-        public void Unsubscribe<T>(SignalDelegate callback) where T : ISignal
+        public void Unsubscribe<T>(SignalDelegate<T> callback) where T : ISignal
         {
-            var type = typeof(T);
-            if (_events.ContainsKey(type))
-            {
-                _events[type] -= callback;
-            }
+            Repository<T>.Unsubscribe(this, callback);
         }
 
         public void Dispatch<T>(T signal) where T : ISignal
         {
-            var type = typeof(T);
-            if (_events.ContainsKey(type) && _events[type] != null)
-            {
-                _events[type](signal);
-            }
+            Repository<T>.Dispatch(this, signal);
         }
     }
 }

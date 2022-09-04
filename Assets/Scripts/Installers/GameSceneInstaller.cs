@@ -62,9 +62,8 @@ namespace Installers
             _mazeController.InjectDependencies(_mazeLoader);
         }
 
-        private void TryLoadGame(ISignal iSignal)
+        private void TryLoadGame(SceneLoadedSignal signal)
         {
-            var signal = (SceneLoadedSignal)iSignal;
             if (signal.Scene != SceneConstants.Scene.Game)
             {
                 return;

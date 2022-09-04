@@ -28,12 +28,12 @@ namespace Presentation.Game.GUI
             _eventDispatcher.Unsubscribe<GameReadySignal>(Hide);
         }
 
-        private void Hide(ISignal signal = null)
+        private void Hide(ISignal _ = null)
         {
             EnableCanvas(false);
         }
 
-        private void Show(ISignal signal)
+        private void Show(ISignal _)
         {
             EnableCanvas(true);
             _resultPopup.UpdateData();

@@ -29,7 +29,7 @@ namespace Presentation.Game.GUI
             _eventDispatcher.Unsubscribe<GameReadySignal>(Show);
         }
 
-        private void Show(ISignal signal)
+        private void Show(ISignal _)
         {
             EnableCanvas(true);
         }

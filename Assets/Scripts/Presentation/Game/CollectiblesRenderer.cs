@@ -70,9 +70,8 @@ namespace Presentation.Game
             iCollectible.HandleSpawn();
         }
 
-        private void SpawnNewCollectible(ISignal iSignal)
+        private void SpawnNewCollectible(RespawnCollectibleSignal signal)
         {
-            var signal = (RespawnCollectibleSignal)iSignal;
             StartCoroutine(DelaySpawnCollectible(signal.RespawnTime, signal.Position));
         }
 

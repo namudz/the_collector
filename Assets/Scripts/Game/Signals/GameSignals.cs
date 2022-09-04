@@ -5,12 +5,10 @@ namespace Game.Signals
 {
     public class GameStartedSignal : ISignal
     {
-        
     }
     
     public class GameOverSignal : ISignal
     {
-        
     }
     
     public class GameResetSignal : ISignal
@@ -23,7 +21,6 @@ namespace Game.Signals
     
     public class GameDestroyedSignal : ISignal
     {
-        
     }
 
     public class ShowCoinFxSignal : ISignal

@@ -42,10 +42,8 @@ namespace Presentation.Game
             _eventDispatcher.Unsubscribe<ShowCoinFxSignal>(SpawnCoinFx);
         }
         
-        private void SpawnCoinFx(ISignal iSignal)
+        private void SpawnCoinFx(ShowCoinFxSignal signal)
         {
-            var signal = (ShowCoinFxSignal)iSignal;
-
             var instance = _poolsCollection.GetInstance(FxTypes.CoinFx, signal.SpawnPosition);
             instance.GetComponent<CoinEffectView>()?.Show(signal.Amount);
         }

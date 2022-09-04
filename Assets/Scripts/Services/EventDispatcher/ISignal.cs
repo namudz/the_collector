@@ -1,6 +1,6 @@
 namespace Services.EventDispatcher
 {
-    public delegate void SignalDelegate(ISignal signal);
+    public delegate void SignalDelegate<in T>(T signal) where T : ISignal;
     
     public interface ISignal
     {

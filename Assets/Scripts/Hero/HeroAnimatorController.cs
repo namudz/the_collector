@@ -65,12 +65,12 @@ public class HeroAnimatorController : MonoBehaviour
         }
     }
     
-    private void SetGameOverTrigger(ISignal signal)
+    private void SetGameOverTrigger(ISignal _)
     {
         _animator.SetTrigger(IsGameOver);
     }
     
-    private void Reset(ISignal signal)
+    private void Reset(ISignal _)
     {
         _sprite.flipX = false;
     }

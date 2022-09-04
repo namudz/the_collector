@@ -76,7 +76,7 @@ namespace Hero.Movement
             _rigidbody.velocity = new Vector2(0f, _rigidbody.velocity.y);
         }
         
-        private void Reset(ISignal signal)
+        private void Reset(ISignal _)
         {
             StopMoving();
             _direction = Vector2.right;

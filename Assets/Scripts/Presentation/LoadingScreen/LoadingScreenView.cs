@@ -27,10 +27,8 @@ namespace Presentation.LoadingScreen
             _eventDispatcher.Unsubscribe<ShowLoadingScreenSignal>(HandleSignal);
         }
 
-        private void HandleSignal(ISignal iSignal)
+        private void HandleSignal(ShowLoadingScreenSignal signal)
         {
-            var signal = iSignal as ShowLoadingScreenSignal;
-            
             if (signal.IsVisible)
             {
                 _showTime = Time.time;
