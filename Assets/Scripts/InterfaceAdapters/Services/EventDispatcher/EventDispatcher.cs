@@ -44,7 +44,7 @@ namespace InterfaceAdapters.Services.EventDispatcher
                 if(!TryGetEventDispatcher(owner, out var dispatcher)) { return; }
                 
                 var type = typeof(T);
-                if (dispatcher.ContainsKey(type))
+                if (dispatcher.ContainsKey(type) && dispatcher[type] != null)
                 {
                     dispatcher[type](signal);
                 }

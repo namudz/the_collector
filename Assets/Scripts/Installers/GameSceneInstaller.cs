@@ -17,8 +17,6 @@ namespace Installers
 
         private void Awake()
         {
-            DontDestroyOnLoad(this);
-            
             InitializeDependencies();
             
             _eventDispatcher.Subscribe<SceneLoadedSignal>(TryLoadGame);
