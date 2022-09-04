@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Game.Level;
+using InterfaceAdapters.Game.Level;
 
-namespace Tests
+namespace Editor.Tests
 {
     public class LeaderboardBuilder
     {

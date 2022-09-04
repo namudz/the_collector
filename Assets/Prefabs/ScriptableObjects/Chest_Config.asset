@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Chest_Config
   m_EditorClassIdentifier: 
   _config:
-    Type: 1
+    ItemType: 1
     RespawnTime:
       MinTime: 4
       MaxTime: 6
-    SpawnWeight: 8
+    SpawnWeight: 15
     ExpirationTime: 6
     AdditionalScorePercentage: 10
     MinScore: 2
