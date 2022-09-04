@@ -38,11 +38,13 @@ namespace PresentationLayer.Game
             _collectiblesSpawner.SetCollectiblesConfigs(_collectibleConfigs);
             
             _eventDispatcher.Subscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
+            _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
         }
 
         private void OnDestroy()
         {
             _eventDispatcher.Unsubscribe<RespawnCollectibleSignal>(SpawnNewCollectible);
+            _eventDispatcher.Subscribe<GameOverSignal>(HandleGameOver);
         }
 
         public void LoadSpawnPoints()
@@ -73,10 +75,16 @@ namespace PresentationLayer.Game
         {
             StartCoroutine(DelaySpawnCollectible(signal.RespawnTime, signal.Position));
         }
+        
+        private void HandleGameOver(GameOverSignal _)
+        {
+            StopAllCoroutines();
+        }
 
         private IEnumerator DelaySpawnCollectible(float respawnTime, Vector3 position)
         {
             yield return new WaitForSeconds(respawnTime);
+            if (_game.IsGameOver) { yield break; }
             
             SpawnCollectible(position);
         }
