@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Services.EventDispatcher;
+using InterfaceAdapters.Services.EventDispatcher;
 using UnityEngine.SceneManagement;
 
 namespace InterfaceAdapters.Services.SceneLoader

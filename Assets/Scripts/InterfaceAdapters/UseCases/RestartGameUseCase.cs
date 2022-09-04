@@ -1,6 +1,6 @@
-using Game;
-using Game.Signals;
-using Services.EventDispatcher;
+using InterfaceAdapters.Game;
+using InterfaceAdapters.Services.EventDispatcher;
+using InterfaceAdapters.Signals;
 
 namespace InterfaceAdapters.UseCases
 {

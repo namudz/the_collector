@@ -1,29 +1,25 @@
-using Collectibles.Spawner;
-using Game;
-using InputHandler;
+using InterfaceAdapters.Game;
+using InterfaceAdapters.Services;
+using InterfaceAdapters.Services.EventDispatcher;
+using InterfaceAdapters.Services.InputHandler;
 using InterfaceAdapters.Services.SceneLoader;
-using Presentation.Game;
-using Services;
-using Services.EventDispatcher;
+using InterfaceAdapters.Signals;
+using PresentationLayer.Game.Collectibles;
 using UnityEngine;
 
 namespace Installers
 {
     public class GameSceneInstaller : MonoBehaviour
     {
-        [Header("Dependencies")]
-        [SerializeField] private GameController _gameController;
-        [SerializeField] private MazeController _mazeController;
-        
         private IMazeLoader _mazeLoader;
         private ICollectiblesSpawner _collectiblesSpawner;
         private IEventDispatcher _eventDispatcher;
-        private IGame _game;
 
         private void Awake()
         {
+            DontDestroyOnLoad(this);
+            
             InitializeDependencies();
-            InjectDependencies();
             
             _eventDispatcher.Subscribe<SceneLoadedSignal>(TryLoadGame);
         }
@@ -35,11 +31,11 @@ namespace Installers
 
         private void InitializeDependencies()
         {
-            _game = ServiceLocator.Instance.GetService<IGame>();
             _collectiblesSpawner = new CollectiblesSpawner();
             ServiceLocator.Instance.RegisterService(_collectiblesSpawner);
             
             _mazeLoader = new MazeLoader(ServiceLocator.Instance.GetService<ISceneLoader>());
+            ServiceLocator.Instance.RegisterService(_mazeLoader);
             _eventDispatcher = ServiceLocator.Instance.GetService<IEventDispatcher>();
 
             InitializeInputHandler();
@@ -55,12 +51,6 @@ namespace Installers
 #endif
             ServiceLocator.Instance.RegisterService(handler);
         }
-        
-        private void InjectDependencies()
-        {
-            _gameController.InjectDependencies(_game);
-            _mazeController.InjectDependencies(_mazeLoader);
-        }
 
         private void TryLoadGame(SceneLoadedSignal signal)
         {
@@ -69,12 +59,7 @@ namespace Installers
                 return;
             }
             
-            LoadGame();
-        }
-        
-        private void LoadGame()
-        {
-            _gameController.Load(_game.CurrentLevel.SceneName);
+            _eventDispatcher.Dispatch(new GameSceneLoadedSignal());
         }
     }
 }
