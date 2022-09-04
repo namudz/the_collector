@@ -1,4 +1,4 @@
-﻿using Services.EventDispatcher;
+﻿using InterfaceAdapters.Services.EventDispatcher;
 
 namespace InterfaceAdapters.Signals
 {

@@ -1,7 +1,6 @@
-﻿using Game;
-using Game.Level;
-using Services;
-using Services.DataPersistence;
+﻿using InterfaceAdapters.Game;
+using InterfaceAdapters.Game.Level;
+using InterfaceAdapters.Services.DataPersistence;
 
 namespace InterfaceAdapters
 {
@@ -26,7 +25,7 @@ namespace InterfaceAdapters
         
         public void SaveScore(string userName)
         {
-            var level = _levelsRepository.GetLevel(_game.CurrentLevelId);
+            var level = _levelsRepository.GetLevel(_game.CurrentLevel.Id);
             for (var i = 0; i < level.Leaderboard.Entries.Count; i++)
             {
                 var entry = level.Leaderboard.Entries[i];
