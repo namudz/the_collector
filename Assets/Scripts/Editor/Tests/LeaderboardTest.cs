@@ -1,7 +1,7 @@
-﻿using Game.Level;
+﻿using InterfaceAdapters.Game.Level;
 using NUnit.Framework;
 
-namespace Tests
+namespace Editor.Tests
 {
     public class LeaderboardTest
     {

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DomainLayer;
-using Game.Level;
-using Services.DataPersistence;
+using InterfaceAdapters.Game.Level;
+using InterfaceAdapters.Services.DataPersistence;
 
 namespace InterfaceAdapters.UseCases
 {

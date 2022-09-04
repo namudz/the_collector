@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using DomainLayer;
-using Game.Level;
+using InterfaceAdapters.Game.Level;
 using UnityEngine;
 
 namespace InterfaceAdapters.ScriptableObjects
@@ -10,7 +11,7 @@ namespace InterfaceAdapters.ScriptableObjects
     {
         public LevelConfig[] Configurations;
 
-        public Level[] GetLevels()
+        public IEnumerable<Level> GetLevels()
         {
             return Configurations.Select(config => config.Level).ToArray();
         }

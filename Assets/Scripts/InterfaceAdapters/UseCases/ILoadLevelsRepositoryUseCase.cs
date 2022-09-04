@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DomainLayer;
+using InterfaceAdapters.Game.Level;
 
 namespace InterfaceAdapters.UseCases
 {

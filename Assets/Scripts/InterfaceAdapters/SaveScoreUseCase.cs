@@ -1,6 +1,6 @@
-﻿using Game;
-using Game.Level;
-using Services.DataPersistence;
+﻿using InterfaceAdapters.Game;
+using InterfaceAdapters.Game.Level;
+using InterfaceAdapters.Services.DataPersistence;
 
 namespace InterfaceAdapters
 {

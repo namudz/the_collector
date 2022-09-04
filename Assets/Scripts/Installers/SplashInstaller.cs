@@ -1,12 +1,12 @@
 using System;
-using Game;
-using Game.Level;
+using InterfaceAdapters.Game;
+using InterfaceAdapters.Game.Level;
 using InterfaceAdapters.ScriptableObjects;
+using InterfaceAdapters.Services;
+using InterfaceAdapters.Services.DataPersistence;
+using InterfaceAdapters.Services.EventDispatcher;
 using InterfaceAdapters.Services.SceneLoader;
 using InterfaceAdapters.UseCases;
-using Services;
-using Services.DataPersistence;
-using Services.EventDispatcher;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -52,7 +52,7 @@ namespace Installers
             var gameScoreboard = new GameScoreboard();
             ServiceLocator.Instance.RegisterService<IGameScoreboard>(gameScoreboard);
             
-            var game = new global::Game.Game( 
+            var game = new Game( 
                 gameCountdownTimer,
                 gameScoreboard,
                 eventDispatcher
