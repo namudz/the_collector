@@ -12,6 +12,8 @@ namespace InterfaceAdapters.Game.Level
         public float Countdown;
         public LevelLeaderboard Leaderboard { get; set; }
 
+        public bool IsNew;
+
         public void InitializeLevelLeaderboard(string levelId)
         {
             Leaderboard = new LevelLeaderboard

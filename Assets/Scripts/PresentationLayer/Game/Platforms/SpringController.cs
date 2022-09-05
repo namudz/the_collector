@@ -1,12 +1,27 @@
-﻿using UnityEngine;
+﻿using PresentationLayer.ScriptableObjects;
+using UnityEngine;
 
 namespace PresentationLayer.Game.Platforms
 {
     public class SpringController : MonoBehaviour
     {
+        [Header("Config")]
+        [SerializeField] private SpringPlatformConfig _configDto;
+        
+        [Header("Dependencies")]
         [SerializeField] private LayerMask _heroLayerMask;
         [SerializeField] private SpringAnimatorController _animatorController;
         
+        private Quaternion _myRotation;
+        private bool _isVertical;
+
+        private void Awake()
+        {
+            _myRotation = transform.rotation;
+            _isVertical = _myRotation.eulerAngles.z == 0 || _myRotation.eulerAngles.z == 180;
+        }
+
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if(!_animatorController.IsReadyToBounce){ return; }
@@ -24,11 +39,16 @@ namespace PresentationLayer.Game.Platforms
 
         private void MakeHeroBounce(Rigidbody2D otherRigidbody)
         {
-            // TODO: set bounce force through scriptable object config
-            const float BounceForce = 11f;
+            var currentVelocity = otherRigidbody.velocity;
+            otherRigidbody.velocity = _isVertical
+                ? new Vector2(currentVelocity.x, 0)
+                : new Vector2(0, currentVelocity.y);
+
+            var force = (Vector2.up * _configDto.BounceForce).Rotate(_myRotation);
+            otherRigidbody.AddForce(force, ForceMode2D.Impulse);
             
-            otherRigidbody.velocity = new Vector2(otherRigidbody.velocity.x, 0);
-            otherRigidbody.AddForce(Vector2.up * BounceForce, ForceMode2D.Impulse);
+            // TODO: should invert hero movement direction & flip sprite for horizontal bounces
+            // Also check if the hero is grinding the wall
         }
     }
 }
