@@ -1,4 +1,5 @@
-﻿using PresentationLayer.ScriptableObjects;
+﻿using PresentationLayer.Game.Hero.Movement;
+using PresentationLayer.ScriptableObjects;
 using UnityEngine;
 
 namespace PresentationLayer.Game.Platforms
@@ -44,8 +45,13 @@ namespace PresentationLayer.Game.Platforms
                 ? new Vector2(currentVelocity.x, 0)
                 : new Vector2(0, currentVelocity.y);
 
+            var heroMovementController = otherRigidbody.GetComponent<HeroMovement>();
+            heroMovementController.HandleSpringBounce(_isVertical);
+
             var force = (Vector2.up * _configDto.BounceForce).Rotate(_myRotation);
             otherRigidbody.AddForce(force, ForceMode2D.Impulse);
+
+            
             
             // TODO: should invert hero movement direction & flip sprite for horizontal bounces
             // Also check if the hero is grinding the wall

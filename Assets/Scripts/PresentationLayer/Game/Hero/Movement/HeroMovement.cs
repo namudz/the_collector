@@ -22,6 +22,9 @@ namespace PresentationLayer.Game.Hero.Movement
         private IEventDispatcher _eventDispatcher;
         private Vector2 _direction = Vector2.right;
 
+        private bool _isJumpingOnCurrentFrame;
+        private bool _isAffectedBySpring;
+
         private void Awake()
         {
             _iGame = ServiceLocator.Instance.GetService<IGame>();
@@ -41,12 +44,31 @@ namespace PresentationLayer.Game.Hero.Movement
             if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
             
             Move();
+            
+            _isAffectedBySpring = false;
+            TryResetIsJumping();
         }
         
         public void AccelerateOnJump()
         {
+            _isJumpingOnCurrentFrame = true;
             InvertDirection();
             _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX, ForceMode2D.Impulse);
+        }
+
+        public void HandleSpringBounce(bool isVerticalBounce)
+        {
+            if (isVerticalBounce) { return; }
+
+            _isAffectedBySpring = true;
+
+            // TODO: fix when player grinding wall, jumps & given the collider also applies the spring bounce
+            if (!_isJumpingOnCurrentFrame)
+            {
+                InvertDirection();
+            }
+            
+            _collisionsController.HandleSpringBounce(isVerticalBounce);
         }
 
         private void InvertDirection()
@@ -57,7 +79,7 @@ namespace PresentationLayer.Game.Hero.Movement
         private void Move()
         {
             _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX);
-            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeedX)
+            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeedX && !_isAffectedBySpring)
             {
                 var newSpeedX = Mathf.Sign(_rigidbody.velocity.x) * _config.MovementStats.MaxSpeedX;
                 _rigidbody.velocity = new Vector2(newSpeedX, _rigidbody.velocity.y);
@@ -81,6 +103,16 @@ namespace PresentationLayer.Game.Hero.Movement
         {
             StopMoving();
             _direction = Vector2.right;
+            _isJumpingOnCurrentFrame = false;
+            _isAffectedBySpring = false;
+        }
+
+        private void TryResetIsJumping()
+        {
+            if (_isJumpingOnCurrentFrame && !_collisionsController.IsGrindingWall && _collisionsController.IsOnGround)
+            {
+                _isJumpingOnCurrentFrame = false;
+            }
         }
 
         public void RecoverFullSpeed()

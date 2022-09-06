@@ -20,6 +20,7 @@ namespace PresentationLayer.Game.Hero.Movement
 
         public bool IsOnGround { get; private set; }
         public bool IsGrindingWall  { get; private set; }
+        public bool IsAffectedBySpring  { get; private set; }
 
         private Color _defaultPositionColor = Color.yellow;
         private Color _collidingColor = Color.red;
@@ -27,6 +28,7 @@ namespace PresentationLayer.Game.Hero.Movement
 
         private bool _wasOnGround;
         private bool _wasGrinding;
+        private bool _wasAffectedBySpring;
 
         private void Awake()
         {
@@ -39,12 +41,25 @@ namespace PresentationLayer.Game.Hero.Movement
 
             _wasOnGround = IsOnGround;
             _wasGrinding = IsGrindingWall;
+            _wasAffectedBySpring = IsAffectedBySpring;
             
             CheckIsGrounded();
             CheckIsGrindingWall();
             CheckRecoverSpeedAfterGrinding();
+            CheckIsAffectedBySpringBounce();
             UpdateAnimator();
             UpdateParticles();
+        }
+
+        public void HandleSpringBounce(bool isVerticalBounce)
+        {
+            IsAffectedBySpring = true;
+            if (isVerticalBounce) { return; }
+
+            if (!IsGrindingWall)
+            {
+                _animatorController.FlipSprite();
+            }
         }
 
         private void CheckRecoverSpeedAfterGrinding()
@@ -52,6 +67,14 @@ namespace PresentationLayer.Game.Hero.Movement
             if (_wasGrinding && !IsGrindingWall && _movementController.IsFalling)
             {
                 _movementController.RecoverFullSpeed();
+            }
+        }
+
+        private void CheckIsAffectedBySpringBounce()
+        {
+            if (IsAffectedBySpring && IsOnGround)
+            {
+                IsAffectedBySpring = false;
             }
         }
 
@@ -96,7 +119,7 @@ namespace PresentationLayer.Game.Hero.Movement
             _animatorController.SetIsJumping(!IsOnGround);
             _animatorController.SetIsGrinding(IsGrindingWall);
 
-            if (!_wasOnGround && _wasGrinding && !IsGrindingWall)
+            if (!_wasOnGround && _wasGrinding && !IsGrindingWall && !IsAffectedBySpring)
             {
                 _animatorController.FlipSpriteIfFalling();
             }
