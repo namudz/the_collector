@@ -4,7 +4,7 @@ using PresentationLayer.Game.Collectibles;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Hero
+namespace PresentationLayer.Game.Hero
 {
     public class HeroCollector : MonoBehaviour
     {

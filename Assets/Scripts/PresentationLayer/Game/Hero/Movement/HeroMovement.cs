@@ -5,7 +5,7 @@ using InterfaceAdapters.Signals;
 using PresentationLayer.ScriptableObjects;
 using UnityEngine;
 
-namespace Hero.Movement
+namespace PresentationLayer.Game.Hero.Movement
 {
     public class HeroMovement : MonoBehaviour
     {
