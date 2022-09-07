@@ -17,6 +17,10 @@ namespace PresentationLayer.MainScreen
         [SerializeField] private TextMeshProUGUI _levelNameText;
         [SerializeField] private LeaderboardEntryView[] _entries;
         [SerializeField] private Button _playButton;
+        [SerializeField] private CanvasGroup _newTagCanvasGroup;
+        
+        private const float AlphaVisible = 1f;
+        private const float AlphaInvisible = 0f;
         
         private IGame _iGame;
         private Level _levelData;
@@ -35,8 +39,10 @@ namespace PresentationLayer.MainScreen
             {
                 _entries[i].SetEntryData(i, level.Leaderboard.Entries[i]);
             }
+
+            _newTagCanvasGroup.alpha = _levelData.IsNew ? AlphaVisible : AlphaInvisible;
         }
-        
+
         private void PlayLevel()
         {
             var game = ServiceLocator.Instance.GetService<IGame>();

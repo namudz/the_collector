@@ -5,7 +5,7 @@ using InterfaceAdapters.Signals;
 using PresentationLayer.ScriptableObjects;
 using UnityEngine;
 
-namespace Hero.Movement
+namespace PresentationLayer.Game.Hero.Movement
 {
     public class HeroMovement : MonoBehaviour
     {
@@ -21,6 +21,9 @@ namespace Hero.Movement
         private IGame _iGame;
         private IEventDispatcher _eventDispatcher;
         private Vector2 _direction = Vector2.right;
+
+        private bool _isJumpingOnCurrentFrame;
+        private bool _isAffectedBySpring;
 
         private void Awake()
         {
@@ -41,12 +44,30 @@ namespace Hero.Movement
             if (!_iGame.HasGameStarted || _iGame.IsGameOver) { return; }
             
             Move();
+            
+            _isAffectedBySpring = _collisionsController.IsAffectedBySpring;
+            TryResetIsJumping();
         }
         
         public void AccelerateOnJump()
         {
+            _isJumpingOnCurrentFrame = true;
             InvertDirection();
             _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX, ForceMode2D.Impulse);
+        }
+
+        public void HandleSpringBounce(bool isVerticalBounce)
+        {
+            if (isVerticalBounce) { return; }
+
+            _isAffectedBySpring = true;
+
+            if (!_isJumpingOnCurrentFrame)
+            {
+                InvertDirection();
+            }
+            
+            _collisionsController.HandleSpringBounce(isVerticalBounce);
         }
 
         private void InvertDirection()
@@ -57,7 +78,7 @@ namespace Hero.Movement
         private void Move()
         {
             _rigidbody.AddForce(_direction * _config.MovementStats.SpeedX);
-            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeedX)
+            if (Mathf.Abs(_rigidbody.velocity.x) > _config.MovementStats.MaxSpeedX && !_isAffectedBySpring)
             {
                 var newSpeedX = Mathf.Sign(_rigidbody.velocity.x) * _config.MovementStats.MaxSpeedX;
                 _rigidbody.velocity = new Vector2(newSpeedX, _rigidbody.velocity.y);
@@ -81,6 +102,16 @@ namespace Hero.Movement
         {
             StopMoving();
             _direction = Vector2.right;
+            _isJumpingOnCurrentFrame = false;
+            _isAffectedBySpring = false;
+        }
+
+        private void TryResetIsJumping()
+        {
+            if (_isJumpingOnCurrentFrame && !_collisionsController.IsGrindingWall && _collisionsController.IsOnGround)
+            {
+                _isJumpingOnCurrentFrame = false;
+            }
         }
 
         public void RecoverFullSpeed()
