@@ -1,24 +1,33 @@
-﻿using InterfaceAdapters.Game.Level;
+﻿using System;
+using InterfaceAdapters.Game.Level;
 using InterfaceAdapters.Services;
+using PresentationLayer.ScriptableObjects;
 using UnityEngine;
 
 namespace PresentationLayer.MainScreen
 {
     public class MainScreenView : MonoBehaviour
     {
-        [SerializeField] private LevelEntryView[] _levelEntries;
-
-        private void Start()
-        {
-            UpdateLevelEntries();
-        }
+        [SerializeField] private Transform _layoutParent;
+        [SerializeField] private LevelEntryView _levelEntryPrefab;
         
-        private void UpdateLevelEntries()
+        private ILevelsRepository _levelsRepository;
+
+        private void Awake()
         {
-            var levelsRepository = ServiceLocator.Instance.GetService<ILevelsRepository>();
-            for (var i = 0; i < _levelEntries.Length; i++)
+            _levelsRepository = ServiceLocator.Instance.GetService<ILevelsRepository>();
+            
+            LoadLevelEntries();
+        }
+
+        private void LoadLevelEntries()
+        {
+            var count = _levelsRepository.LevelsCount;
+            
+            for (var i = 0; i < count; i++)
             {
-                _levelEntries[i].SetLevelData(levelsRepository.GetLevel(i));
+                var instance = Instantiate(_levelEntryPrefab, _layoutParent);
+                instance.SetLevelData(_levelsRepository.GetLevel(i));
             }
         }
     }

@@ -4,7 +4,7 @@ using InterfaceAdapters.Services.InputHandler;
 using PresentationLayer.ScriptableObjects;
 using UnityEngine;
 
-namespace Hero.Movement
+namespace PresentationLayer.Game.Hero.Movement
 {
     public class HeroJumpController : MonoBehaviour
     {

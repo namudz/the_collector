@@ -19,7 +19,9 @@ namespace InterfaceAdapters.Game.Level
                 _levels.Add(newLevel);
             }
         }
-        
+
+        public int LevelsCount => _levels.Count;
+
         public Level GetLevel(int index)
         {
             Assert.IsTrue(index >= 0, "Level index can't be < 0");
