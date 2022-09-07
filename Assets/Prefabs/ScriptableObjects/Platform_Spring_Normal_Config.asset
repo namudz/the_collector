@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Platform_Spring_Normal_Config
   m_EditorClassIdentifier: 
   _config:
-    BounceForce: 11
+    BounceForce: 14

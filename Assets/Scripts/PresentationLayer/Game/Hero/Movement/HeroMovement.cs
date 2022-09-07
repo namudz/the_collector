@@ -45,7 +45,7 @@ namespace PresentationLayer.Game.Hero.Movement
             
             Move();
             
-            _isAffectedBySpring = false;
+            _isAffectedBySpring = _collisionsController.IsAffectedBySpring;
             TryResetIsJumping();
         }
         
@@ -62,7 +62,6 @@ namespace PresentationLayer.Game.Hero.Movement
 
             _isAffectedBySpring = true;
 
-            // TODO: fix when player grinding wall, jumps & given the collider also applies the spring bounce
             if (!_isJumpingOnCurrentFrame)
             {
                 InvertDirection();

@@ -72,7 +72,7 @@ namespace PresentationLayer.Game.Hero.Movement
 
         private void CheckIsAffectedBySpringBounce()
         {
-            if (IsAffectedBySpring && IsOnGround)
+            if (IsAffectedBySpring && (IsOnGround || IsGrindingWall))
             {
                 IsAffectedBySpring = false;
             }
